@@ -3912,3 +3912,2008 @@ notifying browser that file changed:  /kushana/core.js
 [0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
 [32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.081 seconds.[0m
 notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.069 seconds.[0m
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.086 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.088 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.085 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.085 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/cljs_deps.js
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.087 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/cljs_deps.js
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: First argument to def must be a Symbol, compiling:(kushana/scene.clj:4:3)
+ at clojure.lang.Compiler.analyzeSeq (Compiler.java:6730)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.analyze (Compiler.java:6485)
+    clojure.lang.Compiler$BodyExpr$Parser.parse (Compiler.java:5861)
+    clojure.lang.Compiler$FnMethod.parse (Compiler.java:5296)
+    clojure.lang.Compiler$FnExpr.parse (Compiler.java:3925)
+    clojure.lang.Compiler.analyzeSeq (Compiler.java:6721)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.analyzeSeq (Compiler.java:6711)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.access$300 (Compiler.java:38)
+    clojure.lang.Compiler$DefExpr$Parser.parse (Compiler.java:577)
+    clojure.lang.Compiler.analyzeSeq (Compiler.java:6723)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.analyze (Compiler.java:6485)
+    clojure.lang.Compiler.eval (Compiler.java:6786)
+    clojure.lang.Compiler.eval (Compiler.java:6771)
+    clojure.lang.Compiler.load (Compiler.java:7227)
+    clojure.lang.RT.loadResourceScript (RT.java:371)
+    clojure.lang.RT.loadResourceScript (RT.java:362)
+    clojure.lang.RT.load (RT.java:446)
+    clojure.lang.RT.load (RT.java:412)
+    clojure.core$load$fn__5448.invoke (core.clj:5866)
+    clojure.core$load.doInvoke (core.clj:5865)
+    clojure.lang.RestFn.invoke (RestFn.java:408)
+    clojurescript_build.core$reload_lib.invoke (core.clj:46)
+    clojurescript_build.core$handle_source_reloading_STAR_.invoke (core.clj:139)
+    clojurescript_build.core$handle_source_reloading.invoke (core.clj:145)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:158)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: First argument to def must be a Symbol, compiling:(kushana/scene.clj:4:3)
+ at clojure.lang.Compiler.analyzeSeq (Compiler.java:6730)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.analyze (Compiler.java:6485)
+    clojure.lang.Compiler$BodyExpr$Parser.parse (Compiler.java:5861)
+    clojure.lang.Compiler$FnMethod.parse (Compiler.java:5296)
+    clojure.lang.Compiler$FnExpr.parse (Compiler.java:3925)
+    clojure.lang.Compiler.analyzeSeq (Compiler.java:6721)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.analyzeSeq (Compiler.java:6711)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.access$300 (Compiler.java:38)
+    clojure.lang.Compiler$DefExpr$Parser.parse (Compiler.java:577)
+    clojure.lang.Compiler.analyzeSeq (Compiler.java:6723)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.analyze (Compiler.java:6485)
+    clojure.lang.Compiler.eval (Compiler.java:6786)
+    clojure.lang.Compiler.eval (Compiler.java:6771)
+    clojure.lang.Compiler.load (Compiler.java:7227)
+    clojure.lang.RT.loadResourceScript (RT.java:371)
+    clojure.lang.RT.loadResourceScript (RT.java:362)
+    clojure.lang.RT.load (RT.java:446)
+    clojure.lang.RT.load (RT.java:412)
+    clojure.core$load$fn__5448.invoke (core.clj:5866)
+    clojure.core$load.doInvoke (core.clj:5865)
+    clojure.lang.RestFn.invoke (RestFn.java:408)
+    clojurescript_build.core$reload_lib.invoke (core.clj:46)
+    clojurescript_build.core$handle_source_reloading_STAR_.invoke (core.clj:139)
+    clojurescript_build.core$handle_source_reloading.invoke (core.clj:145)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:158)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: First argument to def must be a Symbol, compiling:(kushana/scene.clj:4:3)
+ at clojure.lang.Compiler.analyzeSeq (Compiler.java:6730)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.analyze (Compiler.java:6485)
+    clojure.lang.Compiler$BodyExpr$Parser.parse (Compiler.java:5861)
+    clojure.lang.Compiler$FnMethod.parse (Compiler.java:5296)
+    clojure.lang.Compiler$FnExpr.parse (Compiler.java:3925)
+    clojure.lang.Compiler.analyzeSeq (Compiler.java:6721)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.analyzeSeq (Compiler.java:6711)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.access$300 (Compiler.java:38)
+    clojure.lang.Compiler$DefExpr$Parser.parse (Compiler.java:577)
+    clojure.lang.Compiler.analyzeSeq (Compiler.java:6723)
+    clojure.lang.Compiler.analyze (Compiler.java:6524)
+    clojure.lang.Compiler.analyze (Compiler.java:6485)
+    clojure.lang.Compiler.eval (Compiler.java:6786)
+    clojure.lang.Compiler.eval (Compiler.java:6771)
+    clojure.lang.Compiler.load (Compiler.java:7227)
+    clojure.lang.RT.loadResourceScript (RT.java:371)
+    clojure.lang.RT.loadResourceScript (RT.java:362)
+    clojure.lang.RT.load (RT.java:446)
+    clojure.lang.RT.load (RT.java:412)
+    clojure.core$load$fn__5448.invoke (core.clj:5866)
+    clojure.core$load.doInvoke (core.clj:5865)
+    clojure.lang.RestFn.invoke (RestFn.java:408)
+    clojurescript_build.core$reload_lib.invoke (core.clj:46)
+    clojurescript_build.core$handle_source_reloading_STAR_.invoke (core.clj:139)
+    clojurescript_build.core$handle_source_reloading.invoke (core.clj:145)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:158)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.092 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.085 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.079 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.077 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/cljs_deps.js
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.core/engine at line 12 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/engine at line 14 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/canvas at line 22 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/engine at line 25 src/kushana/core.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.132 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.068 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/cljs_deps.js
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.065 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: canvas at line 5 is being replaced at line 11 src/kushana/engine.cljs
+WARNING: engine at line 6 is being replaced at line 13 src/kushana/engine.cljs
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/engine.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: canvas at line 5 is being replaced at line 11 src/kushana/engine.cljs
+WARNING: engine at line 6 is being replaced at line 13 src/kushana/engine.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.097 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/engine.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.09 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.082 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.082 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.081 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.081 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.083 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+ERROR: Invalid token: : on file /Users/salbecker/Git/kushana/src/kushana/core.cljs, line 14, column 24
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+ERROR: Invalid token: : on file /Users/salbecker/Git/kushana/src/kushana/core.cljs, line 14, column 24
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Wrong number of args (1) passed to kushana.engine/engine at line 14 src/kushana/core.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.115 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.073 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.075 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.085 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.077 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.077 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.075 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.084 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.engine/game-engine at line 19 src/kushana/engine.cljs
+WARNING: Use of undeclared Var kushana.engine/hello-world at line 19 src/kushana/engine.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.123 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.core/render-scene at line 26 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/render-scene at line 27 src/kushana/core.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.104 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.core/render-scene at line 26 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/render-scene at line 27 src/kushana/core.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.111 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.076 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.076 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.075 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.076 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.08 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.074 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+Figwheel: focusing on build-ids (dev)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.151 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/goog/deps.js
+notifying browser that file changed:  resources/public/js/compiled/out/cljs_deps.js
+notifying browser that file changed:  /kushana/engine.js
+notifying browser that file changed:  /babylon.js
+notifying browser that file changed:  /kushana/scene.js
+notifying browser that file changed:  /kushana/color.js
+notifying browser that file changed:  /kushana/camera.js
+notifying browser that file changed:  /kushana/texture.js
+notifying browser that file changed:  /kushana/helpers.js
+notifying browser that file changed:  /kushana/core.js
+notifying browser that file changed:  /kushana/mesh.js
+notifying browser that file changed:  /kushana/light.js
+notifying browser that file changed:  /kushana/vector.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.146 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.144 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.107 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.115 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.095 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: Only :refer-clojure, :require, :require-macros, :use, :use-macros, and :import libspecs supported at line 1 src/kushana/core.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.analyzer$error.invoke (analyzer.cljc:543)
+    cljs.analyzer$error.invoke (analyzer.cljc:541)
+    cljs.analyzer$eval1840$fn__1842$fn__1847.invoke (analyzer.cljc:1905)
+    clojure.core.protocols/fn (protocols.clj:167)
+    clojure.core.protocols$fn__6478$G__6473__6487.invoke (protocols.clj:19)
+    clojure.core.protocols$seq_reduce.invoke (protocols.clj:31)
+    clojure.core.protocols/fn (protocols.clj:101)
+    clojure.core.protocols$fn__6452$G__6447__6465.invoke (protocols.clj:13)
+    clojure.core$reduce.invoke (core.clj:6519)
+    cljs.analyzer$eval1840$fn__1842.invoke (analyzer.cljc:1902)
+    clojure.lang.MultiFn.invoke (MultiFn.java:251)
+    cljs.analyzer$analyze_seq_STAR_.invoke (analyzer.cljc:2383)
+    cljs.analyzer$analyze_seq_STAR__wrap.invoke (analyzer.cljc:2388)
+    cljs.analyzer$analyze_seq.invoke (analyzer.cljc:2409)
+    cljs.analyzer$analyze_form.invoke (analyzer.cljc:2518)
+    cljs.analyzer$analyze_STAR_.invoke (analyzer.cljc:2565)
+    cljs.analyzer$analyze.invoke (analyzer.cljc:2581)
+    cljs.analyzer$parse_ns$fn__2113$fn__2114.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns$fn__2113.invoke (analyzer.cljc:2694)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2675)
+    cljs.analyzer$parse_ns.invoke (analyzer.cljc:2666)
+    cljs.compiler$compile_root$fn__3162.invoke (compiler.cljc:1374)
+    clojure.core$map$fn__4553.invoke (core.clj:2624)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+    clojure.lang.LazySeq.seq (LazySeq.java:49)
+    clojure.lang.RT.seq (RT.java:507)
+    clojure.core/seq (core.clj:137)
+    clojure.core$map$fn__4553.invoke (core.clj:2616)
+    clojure.lang.LazySeq.sval (LazySeq.java:40)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/vector.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.engine/game-engine at line 20 src/kushana/engine.cljs
+WARNING: Use of undeclared Var kushana.engine/hello-world at line 20 src/kushana/engine.cljs
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/color.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[31mCompiling "resources/public/js/compiled/kushana.js" failed.[0m
+clojure.lang.ExceptionInfo: failed compiling file:src/kushana/color.cljs
+ at clojure.core$ex_info.invoke (core.clj:4593)
+    cljs.compiler$compile_file$fn__3138.invoke (compiler.cljc:1344)
+    cljs.compiler$compile_file.invoke (compiler.cljc:1306)
+    cljs.compiler$compile_root.invoke (compiler.cljc:1381)
+    cljs.closure$compile_dir.invoke (closure.clj:438)
+    cljs.closure$eval3582$fn__3583.invoke (closure.clj:478)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    cljs.closure$eval3595$fn__3596.invoke (closure.clj:492)
+    cljs.closure$eval3534$fn__3535$G__3525__3542.invoke (closure.clj:383)
+    clojurescript_build.core.CompilableSourcePaths/fn (core.clj:20)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojurescript_build.core.CompilableSourcePaths._compile (core.clj:19)
+    cljs.closure$build.invoke (closure.clj:1674)
+    clojurescript_build.core$build_source_paths_STAR_.invoke (core.clj:160)
+    figwheel_sidecar.auto_builder$default_build_options$fn__15772.invoke (auto_builder.clj:61)
+    figwheel_sidecar.auto_builder$insert_figwheel_connect_script$fn__15818.invoke (auto_builder.clj:201)
+    figwheel_sidecar.auto_builder$warning$fn__15769.invoke (auto_builder.clj:57)
+    clojurescript_build.auto$time_build$fn__15572.invoke (auto.clj:56)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$after$fn__15578.invoke (auto.clj:65)
+    clojurescript_build.auto$error$fn__15581.invoke (auto.clj:72)
+    clojurescript_build.auto$before$fn__15575.invoke (auto.clj:61)
+    clojurescript_build.auto$make_conditional_builder$fn__15593.invoke (auto.clj:104)
+    clojure.core$mapv$fn__6727.invoke (core.clj:6616)
+    clojure.lang.PersistentVector.reduce (PersistentVector.java:333)
+    clojure.core$reduce.invoke (core.clj:6518)
+    clojure.core$mapv.invoke (core.clj:6616)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680$fn__15685.invoke (auto.clj:187)
+    clojurescript_build.auto$autobuild_STAR_$fn__15679$state_machine__9517__auto____15680.invoke (auto.clj:178)
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.color/-3 at line 18 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.vector/-3 at line 19 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.vector/-3 at line 23 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.vector/-3-zero at line 24 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/game-canvas at line 25 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/render-scene at line 27 src/kushana/core.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.223 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/cljs_deps.js
+notifying browser that file changed:  /kushana/color.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.081 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/cljs_deps.js
+notifying browser that file changed:  /kushana/color.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.088 seconds.[0m
+notifying browser that file changed:  /kushana/vector.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.core/color3 at line 18 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/vector3 at line 19 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/vector3 at line 23 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/vector3-zero at line 24 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/game-canvas at line 25 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/render-scene at line 27 src/kushana/core.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.183 seconds.[0m
+notifying browser that file changed:  resources/public/js/compiled/out/cljs_deps.js
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.core/vector3 at line 19 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/vector3 at line 23 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/vector3-zero at line 24 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/game-canvas at line 25 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/render-scene at line 27 src/kushana/core.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.154 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.core/game-canvas at line 25 src/kushana/core.cljs
+WARNING: Use of undeclared Var kushana.core/render-scene at line 27 src/kushana/core.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.143 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.core/render-scene at line 27 src/kushana/core.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.106 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.087 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.096 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.091 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.087 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.engine/hello-world at line 20 src/kushana/engine.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.12 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+WARNING: Use of undeclared Var kushana.engine/hello-world at line 20 src/kushana/engine.cljs
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.122 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.097 seconds.[0m
+notifying browser that file changed:  /kushana/engine.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.108 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.086 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.118 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.094 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.136 seconds.[0m
+notifying browser that file changed:  /kushana/camera.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.092 seconds.[0m
+notifying browser that file changed:  /kushana/camera.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.088 seconds.[0m
+notifying browser that file changed:  /kushana/camera.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.096 seconds.[0m
+notifying browser that file changed:  /kushana/camera.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.085 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.089 seconds.[0m
+notifying browser that file changed:  /kushana/camera.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.1 seconds.[0m
+notifying browser that file changed:  /kushana/camera.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.094 seconds.[0m
+notifying browser that file changed:  /kushana/camera.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.099 seconds.[0m
+notifying browser that file changed:  /kushana/camera.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.094 seconds.[0m
+notifying browser that file changed:  /kushana/camera.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.09 seconds.[0m
+notifying browser that file changed:  /kushana/camera.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.097 seconds.[0m
+notifying browser that file changed:  /kushana/camera.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.09 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
+[0mCompiling "resources/public/js/compiled/kushana.js" from ["src"]...
+[32mSuccessfully compiled "resources/public/js/compiled/kushana.js" in 0.086 seconds.[0m
+notifying browser that file changed:  /kushana/core.js
