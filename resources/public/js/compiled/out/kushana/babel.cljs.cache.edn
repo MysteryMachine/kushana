@@ -1,2 +1,0 @@
-;; Analyzed by ClojureScript 1.7.122
-{:name kushana.babel, :doc nil, :excludes #{}, :use-macros nil, :require-macros nil, :uses nil, :requires {babylon babylon}, :imports nil}
