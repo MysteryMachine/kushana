@@ -2,5 +2,5 @@
   (:require babylon))
 (def babel js/BABYLON)
 
-(defn color3 [r g b] (babel.Color3. r g b))
-(def c3 color3)
+(defrecord Color3 [r g b])
+(defn -c3 [{:keys [r g b]}] (babel.Color3. r g b))

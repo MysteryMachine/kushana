@@ -1,7 +1,7 @@
 (ns ^:figwheel-always kushana.core
     (:require [kushana.scene :as scene]
               [kushana.vector :refer [Vector3 v3zero]]
-              [kushana.color :refer [color3]]
+              [kushana.color :refer [Color3]]
               [kushana.camera :as camera]
               [kushana.light :as light]
               [kushana.mesh :as mesh]
@@ -12,14 +12,16 @@
 
 (def canvas (engine/canvas "renderCanvas"))
 (def engine (engine/new canvas true :resize true))
+(defonce game-state (atom {}))
 
-(defscene scene
-  (scene/new engine
-    :clear-color (color3 0.8 0.8 0.8)) 
+
+(defscene scene 
+  (scene/new engine game-state
+    :clear-color (Color3. 0.8 0.8 0.8)) 
   (light/hemispheric "light1" 
     :direction (Vector3. 0 1 0)
     :intensity 1)
-  (mesh/sphere "Sphere1"
+  (mesh/sphere "sphere1"
     :segments 16
     :diameter 2
     :position (Vector3. 0 1 0))

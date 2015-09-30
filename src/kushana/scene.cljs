@@ -8,6 +8,9 @@
       (set! scene.clearColor clear-color)))
    scene)
 
-(defn scene [engine & {:as options}] 
-  (set-options! (babel.Scene. engine) options))
+(defrecord Scene [engine state js-obj])
+
+(defn scene [engine state & {:as options}] 
+  (let [js-obj (set-options! (babel.Scene. engine) options)]
+    (Scene. engine state js-obj)))
 (def new scene)

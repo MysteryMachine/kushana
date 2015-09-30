@@ -4,5 +4,5 @@
             [kushana.component :refer [set-options!]]))
 (def babel js/BABYLON)
 
-(defn free [scene name & {:as options}] 
+(defn free [{state :state scene :js-obj} name & {:as options}] 
   (set-options! (babel.FreeCamera. name (-v3 {:x 0 :y 0 :z 0}) scene) options))

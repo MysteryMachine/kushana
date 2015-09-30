@@ -16,5 +16,5 @@
 
 (defn canvas [name] (.getElementById js/document name))
 
-(defn render-scene [game-engine scene]
+(defn render-scene [game-engine {scene :js-obj}]
   (.runRenderLoop game-engine (fn [] (.render scene))))
