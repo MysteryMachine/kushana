@@ -1,23 +1,19 @@
-(ns kushana.component)
+(ns kushana.component
+  (:require [kushana.vector :refer [-v2 -v3 -v4 Vector2 Vector3 Vector4]]))
 
-(defn- set-vec-map! [vec options]
-  (if options
-    (let [{:keys [x y z]} options]
-      (when x (aset vec "x" x))
-      (when y (aset vec "y" y))
-      (when z (aset vec "z" z)))))
+(defn transform [arg]
+  (cond
+    (= (type arg) Vector2) (-v2 arg)
+    (= (type arg) Vector3) (-v3 arg)
+    (= (type arg) Vector4) (-v4 arg)
+    :else arg))
 
-(defn set-particular! [obj field options]
-  (when-let [arg (get options (keyword field))] 
-    (if (map? arg) 
-      (set-vec-map! (aget obj field) arg)
-      (aset obj field arg))))
+(defn key->atr [k] (apply str (rest (str k))))
 
-(def standard-fields ["position" "rotation" "scale"])
-
-(defn set-vectors! [obj options fields]
-  (doseq [field fields]
-    (set-particular! obj field options))) 
-
-(defn set-standard-vectors! [obj options]
-  (set-vectors! obj options standard-fields))
+(defn set-options! [object args]
+  (doseq [[key arg] args]
+    (cond
+     (= :set-target key) (.setTarget object (transform arg))
+     (= :attach-control key) (.attachControl object (first arg) (second arg))
+     :else (aset object (key->atr key) (transform arg)))))
+ 
