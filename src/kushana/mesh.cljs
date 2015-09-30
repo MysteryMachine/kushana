@@ -1,24 +1,16 @@
 (ns kushana.mesh
-  (:require babylon))
+  (:require babylon
+            [kushana.component :refer [set-standard-vectors!]]))
 (def babel js/BABYLON)
-
-(defn- set-vec! [vec options]
-  (if options
-    (let [{:keys [x y z]} options]
-      (when x (set! vec.x x))
-      (when y (set! vec.y y))
-      (when z (set! vec.z z)))))
 
 (defn- set-options! [mesh options]
   (when options
-    (set-vec! mesh.position (:position options))
-    (set-vec! mesh.rotation (:rotation options))
-    (set-vec! mesh.scaling  (:scaling options))
+    (set-standard-vectors! mesh options)
     (when-let [parent (:parent options)] (set! mesh.parent parent)))
   mesh)
 
-(defn sphere [scene name w h & {:as options}] 
-  (set-options! (babel.Mesh.CreateSphere. name w h scene) options))
+(defn sphere [scene name & {:as options}] 
+  (set-options! (babel.Mesh.CreateSphere. name 0 0 scene) options))
 
 (defn ground [scene name x y z & {:as options}] 
-  (set-options! (babel.Mesh.CreateGround. name x y z scene) options))
+  (set-options! (babel.Mesh.CreateGround. name 0 0 0 scene) options)) 

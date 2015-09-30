@@ -16,12 +16,21 @@
 (defscene scene
   (scene/new engine
     :clear-color (color3 0.5 0.5 0.5)) 
-  (light/hemispheric "light1" (vector3 0 1 0))
-  (mesh/sphere "Sphere1" 16 2
+  (light/hemispheric "light1" 
+    :direction (vector3 0 1 0))
+  (mesh/sphere "Sphere1"
+    :segments 16
+    :diameter 2
     :position {:y 1})
-  (mesh/ground "ground1" 6 6 2)  
-  (camera/free "camera1" (vector3 0 5 -10)
-    :set-target vector3-zero
-    :attach-control [canvas false]))
+  (mesh/ground "ground1" 
+    :width 6 
+    :height 6 
+    :subdivisions 2)
+  (camera/free "camera1"
+    :set-target vector3-zero 
+    :position (vector3 0 5 -10)
+    :attach-control [canvas false])) 
 
-(defn on-js-reload [] (engine/render-scene engine scene))
+(engine/render-scene engine scene)
+
+(defn on-js-load [])

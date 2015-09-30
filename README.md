@@ -3,34 +3,27 @@
 An immutable-friendly front end game library written in Clojurescript.
 This is alpha software, and experimental software at that. I wouldn't
 recommend writing anything important in it, as the experiment can fail
-and thus could be abandoned. At any time.
+and thus could be abandoned at any time.
 
 ## Research Notes
 
 Research notes kept here pertain to the implmentation details of the
 library.
 
-**Overall**
+**State**
+
+How should I be building scene graphs? Do I explicitly pass in an atom?
+And after things get passed in, what happens next? How do you represent
+that data? Simplest way I can think is to keep track of constructor
+arguments, and to re-call the set-whatever! function of the object on
+the diffs of whatever object is returned in the state function.
 
 ```clojure
-  ;; How do you rig the scene?
+  (mesh/sphere scene atom ...)
 
-  ;; How do you handle the explicit scene rigging implicity?
-
-  ;; Maybe all these functions that take scenes return functions,
-  ;; And you map over them to load everything in one fell swoop?
-  ;; How do you handle nested structures, then?
-
-  ;; Should it be a macro?
-  (defmacro texture [expr]
-    (apply texture-internal (cons 'scene expr)))  
-
-  ;; Maybe you leave all of this inside a scene macro, that generates
-  ;; seeded versions of these functions for use inside the macro
-  (defmacro scene [scene-def & exprs]
-   `(let [scene# ~scene-def
-          ~'texture (seed-texture scene#)] 
-      ~@exprs))
+  (...;; inside game logic fn
+   (let [new-state (assoc-in (get-id 1 @game-state) [:position :x] 1)])
+   ...)
 ```
 
 **Meshes**
@@ -78,11 +71,11 @@ library.
 ```clojure
   ;; What should creating textures look like?
 
-  (material
+  (material scene
     "myMaterial"
     :alpha 1
     :diffuse-color (rgb 1. 0.2 0.7)
-    :diffuse-texture (texture
+    :diffuse-texture (texture scene
                        "grass.png"
                        :u-offset 1.5
                        :v-scale 5.0)
