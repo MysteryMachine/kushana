@@ -1,21 +1,15 @@
 (ns kushana.mesh
-  (:require babylon
+  (:require [kushana.impl.mesh :as impl]
             [kushana.component :refer [set-options!]]))
-(def babel js/BABYLON)
 
-(defn sphere [{state :state scene :js-obj} name & {:as options}] 
+(defn sphere [{state :state scene :js-obj} name & 
+              {:keys [diameter segments] :as options}] 
   (set-options! 
-   (babel.Mesh.CreateSphere. name 
-                             (:segments options)
-                             (:diameter options)
-                             scene) 
+   (impl/sphere name segments diameter scene) 
    options))
 
-(defn ground [{state :state scene :js-obj} name & {:as options}] 
+(defn ground [{state :state scene :js-obj} name 
+              & {:keys [width height subdivisions] :as options}] 
   (set-options! 
-   (babel.Mesh.CreateGround. name 
-                             (:width options)
-                             (:height options)
-                             (:subdivisions options)
-                             scene) 
+   (impl/ground name width height subdivisions scene) 
    options))  

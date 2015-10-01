@@ -1,8 +1,7 @@
 (ns kushana.camera
-  (:require babylon
-            [kushana.vector :refer [-v3]]
+  (:require [kushana.impl.camera :as impl]
+            [kushana.vector :refer [vector3]]
             [kushana.component :refer [set-options!]]))
-(def babel js/BABYLON)
 
 (defn free [{state :state scene :js-obj} name & {:as options}] 
-  (set-options! (babel.FreeCamera. name (-v3 {:x 0 :y 0 :z 0}) scene) options))
+  (set-options! (impl/free name (vector3 0 0 0) scene) options))

@@ -1,6 +1,4 @@
 (ns kushana.color
-  (:require babylon))
-(def babel js/BABYLON)
+  (:require [kushana.impl.color :as impl]))
 
-(defrecord Color3 [r g b])
-(defn -c3 [{:keys [r g b]}] (babel.Color3. r g b))
+(defn color3 [r g b] (impl/color3 r g b))
