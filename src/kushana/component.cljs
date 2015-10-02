@@ -26,17 +26,19 @@
       :else (aset object (key->atr key) (transform key arg)))))
 
 (defn build-scene! [{:keys [scene entities]}]
-  (fn [[_ [new edit delete]]]
-    (doseq [[name & args :as obj] new]
-      (-> name
-          (case
-            :camera/free        impl/free-camera
-            :light/hemispheric  impl/hemispheric-light
-            :mesh/sphere        impl/sphere
-            :mesh/ground        impl/ground)
-          #(% args)
-          (set-options! args)))
-    (doseq [[id [name & args :as obj]] edit]
-      (set-options! (get entities id) args))
+  (fn [[scene-graph [new edit delete]]]
+    (doseq [id new]
+      (let [[component & {:as args}] (get scene-graph id)]
+       (-> component
+            (case
+                :camera/free        impl/free-camera
+                :light/hemispheric  impl/hemispheric-light
+                :mesh/sphere        impl/sphere
+                :mesh/ground        impl/ground)
+            #(% args)
+            (set-options! args))))
+    (doseq [id edit]
+      (let [[component & {:as args}] (get scene-graph id)]
+        (set-options! (get entities id) args)))
     (doseq [id delete]
       (impl/dispose (get entities id)))))

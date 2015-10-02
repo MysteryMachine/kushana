@@ -5,25 +5,26 @@
 (enable-console-print!)
 
 (defscene scene
-  [[:light/hemispheric
-    :name "light1"
-    :direction [0 1 0]
-    :intensity 1]
-   [:mesh/sphere
-    :name "sphere1"
-    :segments 16
-    :diameter 2
-    :position [0 1 0]]
-   [:mesh/ground
-    :name "ground1"
-    :width 6
-    :height 6
-    :subdivisions 2]
-   [:camera/free
-    :name "camera1"
-    :set-target [0 0 0]
-    :position [0 5 -10]
-    :attach-control ["renderCanvas" false]]]
+  (engine/with-ids
+    [[:light/hemispheric
+      :name "light1"
+      :direction [0 1 0]
+      :intensity 1]
+     [:mesh/sphere
+      :name "sphere1"
+      :segments 16
+      :diameter 2
+      :position [0 1 0]]
+     [:mesh/ground
+      :name "ground1"
+      :width 6
+      :height 6
+      :subdivisions 2]
+     [:camera/free
+      :name "camera1"
+      :set-target [0 0 0]
+      :position [0 5 -10]
+      :attach-control ["renderCanvas" false]]])
   identity
   :clear-color [0.8 0.8 0.8])
 
