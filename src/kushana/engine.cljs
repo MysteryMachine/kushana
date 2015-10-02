@@ -19,8 +19,12 @@
          (z/input (chan->input :input input dt))
          (z/sample-on dt)
          (z/reductions (:update @scene-graph) @scene-graph))
+        diff-signal
+        (z/reductions scene-graph-signal diff @scene-graph)
         js-scene-signal
-        (z/map scene-graph-signal (build-scene! js-scene-atom) @js-scene-atom)]
+        (z/map diff-signal
+               (build-scene! js-scene-atom)
+               @js-scene-atom)]
     (z/pipe-to-atom scene-graph-signal scene-graph)
     (z/pipe-to-atom js-scene-signal js-scene-atom)
     (impl/draw js-engine js-engine)))

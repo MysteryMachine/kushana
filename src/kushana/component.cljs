@@ -16,7 +16,7 @@
   (assoc scene-graph (new-id) component))
 (defn with-ids [components] (reduce id-assoc {} components))
 
-(defn- set-options! [object args]
+(defn- set-options! [[object args]]
   (doseq [[key arg] args]
     (cond
       (= :set-target key) (.setTarget object arg)
@@ -25,8 +25,18 @@
                                               (apply impl/v3 (second arg)))
       :else (aset object (key->atr key) (transform key arg)))))
 
-(defn build-scene! [js-scene-atom]
-  (fn [scene-graph input]
-    (doseq [[name & args :as obj] scene-graph]
-      (cond-> obj
-          ))))
+(defn build-scene! [{:keys [scene entities]}]
+  (fn [[_ [new edit delete]]]
+    (doseq [[name & args :as obj] new]
+      (-> name
+          (case
+            :camera/free        impl/free-camera
+            :light/hemispheric  impl/hemispheric-light
+            :mesh/sphere        impl/sphere
+            :mesh/ground        impl/ground)
+          #(% args)
+          (set-options! args)))
+    (doseq [[id [name & args :as obj]] edit]
+      (set-options! (get entities id) args))
+    (doseq [id delete]
+      (impl/dispose (get entities id)))))
