@@ -16,7 +16,6 @@
 (defn v2 [[x y]] (b.Vector2. x y))
 (defn v3 [[x y z]] (b.Vector3. x y z))
 (defn v4 [[x y z w]] (b.Vector4. x y z w))
-
 (defn c3 [[r g _b]] (b.Color3. r g _b))
 
 (defn dispose [obj] (.dispose obj))
