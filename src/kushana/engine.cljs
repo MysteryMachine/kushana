@@ -1,20 +1,26 @@
 (ns kushana.engine
-  (:require babylon))
-(def babel js/BABYLON)
+  (:require [cljs.core.async :refer [chan]]
+            [jamesmacaulay.zelkova.signal :as z]
+            [jamesmacaulay.zelkova.time :as time]
+            [kushana.impl.component :refer [build-scene!]]
+            [kushana.impl.engine :as impl]))
 
-(defn- engine-options! [engine options]
-  (when options
-    (when (:resize options)
-      (.addEventListener js/window "resize" #(.resize engine)))
-    (when-let [resize-fn (:resize-fn options)]
-      (.addEventListener js/window "resize" (resize-fn engine))))
-  engine)
+(defn- chan->input [k chan dt]
+  (z/merge (z/input k identity chan)
+           (z/sample-on dt (z/constant [:none]))))
 
-(defn engine [canvas antialias & {:as options}]
-  (engine-options! (babel.Engine. canvas antialias) options))
-(def new engine)
-
-(defn canvas [name] (.getElementById js/document name))
-
-(defn render-scene [game-engine {scene :js-obj}]
-  (.runRenderLoop game-engine (fn [] (.render scene))))
+(defn new [scene-graph & { :as options}]
+  (let [js-engine (impl/engine options)
+        js-scene-atom (atom nil)
+        input (chan)
+        dt (time/fps 30)
+        scene-graph-signal
+        (->
+         (z/input (chan->input :input input dt))
+         (z/sample-on dt)
+         (z/reductions (:update @scene-graph) @scene-graph))
+        js-scene-signal
+        (z/map scene-graph-signal (build-scene! js-scene-atom) @js-scene-atom)]
+    (z/pipe-to-atom scene-graph-signal scene-graph)
+    (z/pipe-to-atom js-scene-signal js-scene-atom)
+    (impl/draw js-engine js-engine)))
