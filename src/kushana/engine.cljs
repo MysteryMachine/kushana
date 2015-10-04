@@ -3,8 +3,10 @@
             [clojure.set :refer [difference intersection]]
             [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
-            [kushana.impl.component :refer [build-scene!]]
+            [kushana.component :refer [build-scene!]]
             [kushana.impl.engine :as impl]))
+
+(enable-console-print!)
 
 (defn- chan->input [k chan dt]
   (z/merge (z/input k identity chan)
@@ -12,32 +14,34 @@
 
 (defn- diff [new-scene old-scene]
   ;; Obscenely slow! Just a sloppy implementation for now.
-  (let [new-scene-keys (set (keys new-scene))
-        old-scene-keys (set (keys old-scene))
-        new-keys (difference new-scene-keys old-scene-keys)
-        deleted-keys (difference old-scene-keys new-scene-keys)
-        edited-keys (intersection old-scene-keys new-scene-keys)]
-      [new-keys edited-keys deleted-keys]))
+  (if (= (:id new-scene) (:id old-scene))
+    (let [new-scene-graph (:scene-graph new-scene)
+          old-scene-graph (:scene-graph old-scene)
+          new-scene-keys (set (keys new-scene-graph))
+          old-scene-keys (set (keys old-scene-graph))
+          new-keys (difference new-scene-keys old-scene-keys)
+          deleted-keys (difference old-scene-keys new-scene-keys)
+          edited-keys (intersection old-scene-keys new-scene-keys)]
+      [new-keys edited-keys deleted-keys])
+    new-scene))
 
 (defn differ [new-scene [old-scene _]]
   [new-scene (diff new-scene old-scene)])
 
-(defn new [scene-graph & { :as options}]
+(defn new [scene-atom & { :as options}]
   (let [js-engine (impl/engine options)
-        js-scene-atom (atom nil)
         input (chan)
         dt (time/fps 30)
-        scene-graph-signal
+        input-signal
         (->
          (z/input (chan->input :input input dt))
-         (z/sample-on dt)
-         (z/reductions (:update @scene-graph) @scene-graph))
+         (z/sample-on dt))
+        scene-graph-signal
+        (z/reductions (:update-fn @scene-atom) (:scene-graph @scene-atom) input-signal)
         diff-signal
-        (z/reductions scene-graph-signal differ @scene-graph)
+        (z/reductions differ @scene-atom scene-graph-signal)
         js-scene-signal
-        (z/map diff-signal
-               (build-scene! js-scene-atom)
-               @js-scene-atom)]
-    (z/pipe-to-atom scene-graph-signal scene-graph)
-    (z/pipe-to-atom js-scene-signal js-scene-atom)
-    (impl/draw js-engine js-engine)))
+        (z/reductions (build-scene! js-engine) nil diff-signal)]
+    (z/pipe-to-atom scene-graph-signal scene-atom)
+    (impl/draw js-engine (z/pipe-to-atom js-scene-signal))))
+

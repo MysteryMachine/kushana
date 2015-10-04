@@ -17,4 +17,9 @@
                    (-> options (dissoc :antialias) (dissoc :canvas))))
 
 (defn draw [game-engine js-scene-atom]
-  (.runRenderLoop game-engine (fn [] (.render @js-scene-atom))))
+  (.runRenderLoop
+   game-engine
+   (fn []
+     (when-let [scene @js-scene-atom]
+       (.render scene)))))
+

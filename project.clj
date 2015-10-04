@@ -1,6 +1,6 @@
-(defproject kushana "0.1.0-SNAPSHOT"
-  :description "FIXME: write this!"
-  :url "http://example.com/FIXME"
+(defproject kushana "0.1.0"
+  :description "An immutable friendly, declarative, reactive, and data driven Clojure game engine."
+  :url "https://github.com/MysteryMachine/kushana"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 

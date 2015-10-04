@@ -1,11 +1,12 @@
 (ns ^:figwheel-always kushana.core
-    (:require [kushana.engine :as engine])
-    (:use-macros [kushana.engine :only [defscene]]))
+  (:require [kushana.engine :as engine]
+            [kushana.component :refer [with-ids]])
+  (:use-macros [kushana.engine :only [defscene]]))
 
 (enable-console-print!)
 
 (defscene scene
-  (engine/with-ids
+  (with-ids
     [[:light/hemispheric
       :name "light1"
       :direction [0 1 0]
@@ -29,7 +30,7 @@
   :clear-color [0.8 0.8 0.8])
 
 (defonce game-state (atom scene))
-
+ 
 (defonce engine
   (engine/new
    game-state
