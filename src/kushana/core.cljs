@@ -26,7 +26,10 @@
       :set-target [0 0 0]
       :position [0 5 -10]
       :attach-control ["renderCanvas" false]]])
-  identity
+  (fn [scene-graph]
+    (println "update-fn")
+    (println scene-graph)
+    scene-graph)
   :clear-color [0.8 0.8 0.8])
 
 (defonce game-state (atom scene))

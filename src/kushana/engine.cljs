@@ -14,7 +14,8 @@
 
 (defn- diff [new-scene old-scene]
   ;; Obscenely slow! Just a sloppy implementation for now.
-  (if (= (:id new-scene) (:id old-scene))
+  (if (or (not (= new-scene old-scene))
+          (= (:id new-scene) (:id old-scene)))
     (let [new-scene-graph (:scene-graph new-scene)
           old-scene-graph (:scene-graph old-scene)
           new-scene-keys (set (keys new-scene-graph))
@@ -28,18 +29,21 @@
 (defn differ [new-scene [old-scene _]]
   [new-scene (diff new-scene old-scene)])
 
+(defn act [{:keys [update-fn scene-graph] :as scene}]
+  (assoc scene :scene-graph (update-fn scene-graph)))
+
 (defn new [scene-atom & { :as options}]
   (let [js-engine (impl/engine options)
         input (chan)
         dt (time/fps 30)
         input-signal
-        (->
+        (->>
          (z/input (chan->input :input input dt))
          (z/sample-on dt))
         scene-graph-signal
-        (z/reductions (:update-fn @scene-atom) (:scene-graph @scene-atom) input-signal)
+        (z/reductions act @scene-atom input-signal)
         diff-signal
-        (z/reductions differ @scene-atom scene-graph-signal)
+        (z/reductions differ [@scene-atom [@scene-atom nil]] scene-graph-signal)
         js-scene-signal
         (z/reductions (build-scene! js-engine) nil diff-signal)]
     (z/pipe-to-atom scene-graph-signal scene-atom)
