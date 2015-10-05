@@ -25,7 +25,7 @@
       :name "camera1"
       :set-target [0 0 0]
       :direction [0 5 -10]
-      :attach-control ["renderCanvas" false]]])
+      :attach-control ["renderCanvas" true]]])
   (fn [scene-graph]
     scene-graph)
   :clear-color [0.8 0.8 0.8])

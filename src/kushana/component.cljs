@@ -32,14 +32,14 @@
   object)
 
 (defn build-scene! [js-engine]
-  (fn build-inner [js-scene new-scene [scene diff-args]]
-    (if new-scene
-      (build-inner (set-options! (impl/scene js-engine) (:options diff-args))
-                   false
-                   diff-args)
-      (let [[new edit delete] diff-args
-            scene-graph (:scene-graph scene)]
-        (doseq [id new]
+  (fn build-inner
+    [js-scene {:keys [scene new? new-ids edit-ids delete-ids] :as diff}]
+    (if new?
+      (build-inner
+       (set-options! (impl/scene js-engine) (:options scene))
+       (assoc diff :new? false))
+      (let [scene-graph (:scene-graph scene)]
+        (doseq [id new-ids]
           (let [[component & {:as args}] (get scene-graph id)]
             (-> component
                 (case
@@ -49,9 +49,9 @@
                     :mesh/ground        impl/ground)
                 (apply [js-scene args])
                 (set-options! args))))
-        (doseq [id edit]
+        (doseq [id edit-ids]
           (let [[component & {:as args}] (get scene-graph id)]
             (set-options! (get scene-graph id) args)))
-        (doseq [id delete]
+        (doseq [id delete-ids]
           (impl/dispose (get scene-graph id)))
         js-scene))))
