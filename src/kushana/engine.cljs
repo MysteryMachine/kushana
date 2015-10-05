@@ -3,7 +3,7 @@
             [clojure.set :refer [difference intersection]]
             [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
-            [kushana.component :refer [build-scene!]]
+            [kushana.scene :as scene]
             [kushana.impl.engine :as impl]))
 
 (enable-console-print!)
@@ -15,7 +15,6 @@
            (z/sample-on dt (z/constant [:none]))))
 
 (defn- new-scene-diff [scene]
-  (println scene)
   (let [scene-graph (:scene-graph scene)
         ids (keys scene-graph)]
     (Diff. scene true ids [] [])))
@@ -37,7 +36,7 @@
     (normal-diff new-scene old-scene)
     (new-scene-diff new-scene)))
 
-(defn act [{:keys [update-fn scene-graph] :as scene}]
+(defn act [{:keys [update-fn scene-graph] :as scene} input]
   (assoc scene :scene-graph (update-fn scene-graph)))
 
 (defn new [scene-atom & { :as options}]
@@ -54,7 +53,7 @@
         (z/reductions
          diff (Diff. nil nil [] [] []) scene-graph-signal)
         js-scene-signal
-        (z/reductions (build-scene! js-engine) nil diff-signal)]
+        (z/reductions (scene/update-js! js-engine) nil diff-signal)]
     (z/pipe-to-atom scene-graph-signal scene-atom)
     (impl/draw js-engine (z/pipe-to-atom js-scene-signal))))
 

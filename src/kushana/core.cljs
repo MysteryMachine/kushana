@@ -1,7 +1,7 @@
 (ns ^:figwheel-always kushana.core
   (:require [kushana.engine :as engine]
-            [kushana.component :refer [with-ids]])
-  (:use-macros [kushana.engine :only [defscene]]))
+            [kushana.scene :refer [with-ids]])
+  (:use-macros [kushana.scene :only [defscene]]))
 
 (enable-console-print!)
 
