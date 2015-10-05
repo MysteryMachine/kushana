@@ -24,11 +24,9 @@
      [:camera/free
       :name "camera1"
       :set-target [0 0 0]
-      :position [0 5 -10]
+      :direction [0 5 -10]
       :attach-control ["renderCanvas" false]]])
   (fn [scene-graph]
-    (println "update-fn")
-    (println scene-graph)
     scene-graph)
   :clear-color [0.8 0.8 0.8])
 

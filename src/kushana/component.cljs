@@ -2,13 +2,19 @@
   (:require [kushana.impl.component :as impl]
             [kushana.scene :refer [Scene]]))
 
+(enable-console-print!)
+
+(defn else-threader [question]
+  (fn [predicate] (or (= :else predicate) (question predicate))))
+
 (defn- key->atr [k] (apply str (rest (str k))))
 (defn- transform [key arg]
-  (condp contains? key
+  (condp (else-threader contains?) key
     #{:position :direction
       :rotation :scale
       :set-target} (impl/v3 arg)
-    #{:color :clear-color} (impl/c3 arg)))
+    #{:color :clear-color} (impl/c3 arg)
+    :else arg))
 
 (let [counter (atom 0)]
   (defn latest-id [] @counter)
@@ -20,18 +26,18 @@
 (defn- set-options! [object args]
   (doseq [[key arg] args]
     (cond
-      (= :set-target key) (.setTarget object arg)
-      (= :attach-control key) (.attachControl object
-                                              (first arg)
-                                              (apply impl/v3 (second arg)))
-      :else (aset object (key->atr key) (transform key arg)))))
+      (= :set-target key) (.setTarget object (impl/v3 arg))
+      (= :attach-control key) (impl/attach-control key arg)
+      :else (aset object (key->atr key) (transform key arg))))
+  object)
 
 (defn build-scene! [js-engine]
-  (fn build-inner [js-scene diff-args]
-    (if (= Scene (type diff-args))
+  (fn build-inner [js-scene new-scene [scene diff-args]]
+    (if new-scene
       (build-inner (set-options! (impl/scene js-engine) (:options diff-args))
-                   [[(:scene-graph diff-args)] [] []])
-      (let [[scene [new edit delete]] diff-args
+                   false
+                   diff-args)
+      (let [[new edit delete] diff-args
             scene-graph (:scene-graph scene)]
         (doseq [id new]
           (let [[component & {:as args}] (get scene-graph id)]
