@@ -15,17 +15,18 @@
 (defn hemispheric-light [scene {:keys [name direction]}]
   (b.HemisphericLight. name (v3 direction) scene))
 
-(defn sphere [scene { :keys [name segments diameter]}]
+(defn sphere [scene {:keys [name segments diameter] :as args}]
   (b.Mesh.CreateSphere. name segments diameter scene))
 (defn ground [scene {:keys [name width height subdivisions]}]
   (b.Mesh.CreateGround. name width height subdivisions scene))
 
 (defn dispose [obj] (.dispose obj))
 
-(defn attach-control [object args]'
-  (.attachControl object
-                  (.getElementById js/document (first arg))
-                  (second arg)))
+(defn attach-control [object [canvas-name arg]]
+  (.attachControl object (.getElementById js/document canvas-name) arg))
+
+(defn set-target [object arg]
+  (.setTarget object (v3 arg)))
 
 (defn else-threader [question]
   (fn [subject predicate]
@@ -34,19 +35,17 @@
 (defn- transform [key arg]
   (condp (else-threader contains?) key
     #{:position :direction
-      :rotation :scale
-      :set-target} (v3 arg)
-    #{:color :clear-color} (c3 arg)
+      :rotation :scale} (v3 arg)
+    #{:color :clearColor} (c3 arg)
     :else arg))
 
 (defn- key->atr [k] (apply str (rest (str k))))
 
 (defn set-options! [object args]
-  (println args)
   (doseq [[key arg] args]
     (cond
-      (= :set-target key) (.setTarget object (v3 arg))
-      (= :attach-control key) (attach-control key arg)
+      (= :set-target key) (set-target object arg)
+      (= :attach-control key) (attach-control object arg)
       :else (aset object (key->atr key) (transform key arg))))
   object)
 

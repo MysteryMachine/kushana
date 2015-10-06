@@ -4,9 +4,12 @@
 
 (defrecord Scene [id scene-graph update-fn options])
 
-(let [counter (atom 0)]
-  (defn latest-id [] @counter)
-  (defn new-id [] (swap! counter inc) @counter))
+(defonce id-fns
+  (let [counter (atom 0)]
+    [(fn latest-id [] @counter)
+     (fn new-id [] (swap! counter inc) @counter)]))
+(def latest-id (first id-fns))
+(def new-id (second id-fns))
 (defn id-assoc [scene-graph component]
   (assoc scene-graph (new-id) component))
 (defn with-ids [components] (reduce id-assoc {} components))

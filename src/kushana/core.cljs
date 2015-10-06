@@ -1,6 +1,7 @@
 (ns ^:figwheel-always kushana.core
   (:require [kushana.engine :as engine]
-            [kushana.scene :refer [with-ids]])
+            [kushana.scene :refer [with-ids]]
+            [cljs.core.async :refer [put!]])
   (:use-macros [kushana.scene :only [defscene]]))
 
 (enable-console-print!)
@@ -20,23 +21,28 @@
       :name "ground1"
       :width 6
       :height 6
+      :rotation [0.2 0.2 0.2]
       :subdivisions 2]
      [:camera/free
-      :name "camera1"
+      :name "camera2"
       :set-target [0 0 0]
       :direction [0 5 -10]
       :attach-control ["renderCanvas" true]]])
-  (fn [scene-graph]
-    scene-graph)
-  :clear-color [0.8 0.8 0.8])
+  (fn [scene-graph input]
+    (if (= (first input) :new-scene)
+        (second input)
+        scene-graph))
+  :clearColor [0.2 0.3 0.4])
 
-(defonce game-state (atom scene))
- 
 (defonce engine
   (engine/new
-   game-state
+   scene
    :canvas "renderCanvas"
    :antialias true
    :resize true))
 
-(defn on-js-load [])
+(put! engine "Hi!")
+
+(defn on-js-reload []
+  (println "this is borked :c") 
+  (put! engine [:new-scene scene]))

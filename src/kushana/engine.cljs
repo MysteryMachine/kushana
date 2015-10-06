@@ -6,8 +6,6 @@
             [kushana.scene :as scene]
             [kushana.impl.engine :as impl]))
 
-(enable-console-print!)
-
 (defrecord Diff [scene new? new-ids edit-ids delete-ids])
 
 (defn- chan->input [k chan dt]
@@ -30,17 +28,17 @@
         edited-keys (intersection old-scene-keys new-scene-keys)]
     (Diff. new-scene false new-keys edited-keys deleted-keys)))
 
-(defn- diff [{old-scene :scene :as a} new-scene] 
-  (if (and (not (== new-scene old-scene))
-          (= (:id new-scene) (:id old-scene)))
+(defn- diff [{old-scene :scene} new-scene]
+  (if (= (:id new-scene) (:id old-scene))
     (normal-diff new-scene old-scene)
     (new-scene-diff new-scene)))
 
 (defn act [{:keys [update-fn scene-graph] :as scene} input]
-  (assoc scene :scene-graph (update-fn scene-graph)))
+  (update-fn scene input))
 
-(defn new [scene-atom & { :as options}]
-  (let [js-engine (impl/engine options)
+(defn new [scene & { :as options}]
+  (let [scene-atom (atom scene)
+        js-engine (impl/engine options)
         input (chan)
         dt (time/fps 30)
         input-signal
@@ -48,12 +46,13 @@
          (z/input (chan->input :input input dt))
          (z/sample-on dt))
         scene-graph-signal
-        (z/reductions act @scene-atom input-signal)
+        (z/reductions act scene input-signal)
         diff-signal
         (z/reductions
          diff (Diff. nil nil [] [] []) scene-graph-signal)
         js-scene-signal
         (z/reductions (scene/update-js! js-engine) nil diff-signal)]
     (z/pipe-to-atom scene-graph-signal scene-atom)
-    (impl/draw js-engine (z/pipe-to-atom js-scene-signal))))
+    (impl/draw js-engine (z/pipe-to-atom js-scene-signal))
+    input))
 
