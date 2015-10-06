@@ -2,8 +2,6 @@
   (:require babylon))
 (def b js/BABYLON)
 
-(enable-console-print!)
-
 (defn get-canvas [name] (.getElementById js/document name))
 
 (defn- engine-options! [engine options]
@@ -19,7 +17,6 @@
                    (-> options (dissoc :antialias) (dissoc :canvas))))
 
 (defn draw [game-engine js-scene-atom]
-  (.log js/console game-engine)
   (.runRenderLoop
    game-engine
    (fn []

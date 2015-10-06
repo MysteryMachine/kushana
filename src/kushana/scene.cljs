@@ -7,7 +7,7 @@
 (defonce id-fns
   (let [counter (atom 0)]
     [(fn latest-id [] @counter)
-     (fn new-id [] (swap! counter inc) @counter)]))
+     (fn new-id [] (swap! counter inc))]))
 (def latest-id (first id-fns))
 (def new-id (second id-fns))
 (defn id-assoc [scene-graph component]

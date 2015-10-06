@@ -4,7 +4,9 @@
             [cljs.core.async :refer [put!]])
   (:use-macros [kushana.scene :only [defscene]]))
 
-(defscene scene
+(enable-console-print!)
+
+(defscene scene 
   (with-ids
     [[:light/hemispheric
       :name "light1"
@@ -12,7 +14,7 @@
       :intensity 1]
      [:mesh/sphere
       :name "sphere1"
-      :segments 16
+      :segments 16 
       :diameter 2
       :position [0 1 0]]
      [:mesh/ground
@@ -27,17 +29,18 @@
       :position [0 5 -10]
       :attach-control ["renderCanvas" true]]])
   (fn [scene-graph input]
-    (if (= (first input) :new-scene)
+    (if (not= :none input)
       (second input)
       scene-graph))
-  :clearColor [0.2 0.3 0.4])
+  :clearColor [0.2 0.4 0.1])
+
+(defonce scene-atom (atom scene))
 
 (defonce engine
   (engine/new
-   scene
+   scene-atom
    :canvas "renderCanvas"
    :antialias true
    :resize true))
 
-(defn on-js-reload [] 
-  (put! engine [:new-scene scene]))
+(defn on-jsload [] (put! engine [:new-scene scene]))

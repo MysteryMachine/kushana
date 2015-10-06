@@ -3,16 +3,19 @@
             [clojure.set :refer [difference intersection]]
             [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
+            [jamesmacaulay.zelkova.mouse :as mouse]
             [kushana.scene :as scene]
             [kushana.impl.engine :as impl]))
 
 (defrecord Diff [scene new? new-ids edit-ids delete-ids])
 
-(defn- chan->input [k chan dt]
-  (z/merge (z/input k identity chan)
-           (z/sample-on dt (z/constant [:none]))))
-
-(defn- new-scene-diff [scene]
+(defn- chan->input [init filter chan dt]
+  (z/sample-on
+   dt
+   (z/merge (z/drop-repeats (z/sample-on dt (z/input init filter chan)))
+            (z/sample-on dt (z/constant init)))))
+ 
+(defn- new-scene-diff [scene] 
   (let [scene-graph (:scene-graph scene)
         ids (keys scene-graph)]
     (Diff. scene true ids [] [])))
@@ -33,23 +36,20 @@
     (normal-diff new-scene old-scene)
     (new-scene-diff new-scene)))
 
-(defn act [{:keys [update-fn scene-graph] :as scene} input]
+(defn act [{:keys [update-fn] :as scene} input]
   (update-fn scene input))
 
-(defn new [scene & { :as options}]
-  (let [scene-atom (atom scene)
-        js-engine (impl/engine options)
+(defn new [scene-atom & { :as options}]
+  (let [js-engine (impl/engine options)
+        scene @scene-atom
         input (chan)
         dt (time/fps 30)
         input-signal
-        (->>
-         (z/input (chan->input :input input dt))
-         (z/sample-on dt))
+        (chan->input :none identity input dt)
         scene-graph-signal
         (z/reductions act scene input-signal)
         diff-signal
-        (z/reductions
-         diff (Diff. nil nil [] [] []) scene-graph-signal)
+        (z/reductions diff (Diff. nil nil [] [] []) scene-graph-signal)
         js-scene-signal
         (z/reductions (scene/update-js! js-engine) nil diff-signal)]
     (z/pipe-to-atom scene-graph-signal scene-atom)

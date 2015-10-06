@@ -20,7 +20,7 @@
     :builds [{:id "dev"
               :source-paths ["src"]
 
-              :figwheel { :on-js-load "kushana.core/on-js-reload" }
+              :figwheel { :on-jsload "kushana.core/on-jsload" }
 
               :compiler {:main kushana.core
                          :asset-path "js/compiled/out"
