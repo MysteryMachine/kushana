@@ -4,8 +4,6 @@
             [cljs.core.async :refer [put!]])
   (:use-macros [kushana.scene :only [defscene]]))
 
-(enable-console-print!)
-
 (defscene scene
   (with-ids
     [[:light/hemispheric
@@ -21,17 +19,17 @@
       :name "ground1"
       :width 6
       :height 6
-      :rotation [0.2 0.2 0.2]
+      :rotation [0 0 0]
       :subdivisions 2]
      [:camera/free
-      :name "camera2"
+      :name "camera1"
       :set-target [0 0 0]
-      :direction [0 5 -10]
+      :position [0 5 -10]
       :attach-control ["renderCanvas" true]]])
   (fn [scene-graph input]
     (if (= (first input) :new-scene)
-        (second input)
-        scene-graph))
+      (second input)
+      scene-graph))
   :clearColor [0.2 0.3 0.4])
 
 (defonce engine
@@ -41,8 +39,5 @@
    :antialias true
    :resize true))
 
-(put! engine "Hi!")
-
-(defn on-js-reload []
-  (println "this is borked :c") 
+(defn on-js-reload [] 
   (put! engine [:new-scene scene]))
