@@ -45,7 +45,7 @@
         input (chan)
         dt (time/fps 30)
         input-signal
-        (chan->input :none identity input dt)
+        (chan->input [:none] identity input dt)
         scene-graph-signal
         (z/reductions act scene input-signal)
         diff-signal
@@ -54,5 +54,5 @@
         (z/reductions (scene/update-js! js-engine) nil diff-signal)]
     (z/pipe-to-atom scene-graph-signal scene-atom)
     (impl/draw js-engine (z/pipe-to-atom js-scene-signal))
-    input))
+    (when (:debug options) input)))
 

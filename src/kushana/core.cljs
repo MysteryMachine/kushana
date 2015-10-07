@@ -28,10 +28,12 @@
       :set-target [0 0 0]
       :position [0 5 -10]
       :attach-control ["renderCanvas" true]]])
-  (fn [scene-graph input]
-    (if (not= :none input)
-      (second input)
-      scene-graph))
+  (fn [scene-graph [input-key input-args]]
+    (case input-key
+      :reload-scene input-args
+      :reload-logic (assoc scene-graph :update-fn  input-args)
+      :none         (let []
+                      scene-graph)))
   :clearColor [0.2 0.4 0.1])
 
 (defonce scene-atom (atom scene))
@@ -39,8 +41,10 @@
 (defonce engine
   (engine/new
    scene-atom
-   :canvas "renderCanvas"
+   :canvas    "renderCanvas"
+   :debug     true
    :antialias true
-   :resize true))
+   :resize    true))
 
-(defn on-jsload [] (put! engine [:new-scene scene]))
+(defn on-jsload [] (put! engine [:reload-logic (:update-fn scene)]))
+
