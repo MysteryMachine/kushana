@@ -17,10 +17,12 @@
 (defn new [scene-graph update-fn & {:as options}]
   (Scene. (new-id) scene-graph update-fn options))
 
-(defn ->name [scene-graph name]
-  (some (fn [[id {next-name :name} :as obj]]
-          (when (= name next-name) obj))
-        scene-graph))
+(defn ->name [scene-* name]
+  (if (= (type scene-*) Scene)
+    (->name (:scene-graph scene-*) name)
+    (some (fn [[id {next-name :name} :as obj]]
+                 (when (= name next-name) obj))
+               scene-*)))
 
 (defn update-js! [js-engine object-graph]
   (fn build-inner
@@ -33,6 +35,7 @@
       (let [scene-graph (:scene-graph scene)]
         (doseq [id new-ids]
           (let [args (scene-graph id)]
+            (println scene-graph)
             (->component js-scene object-graph id args)))
         (doseq [id edit-ids]
           (let [{:keys [component] :as args} (scene-graph id)]
