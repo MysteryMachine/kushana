@@ -4,10 +4,10 @@
 
 (enable-console-print!)
 
-(defn v2 [[x y]]  (b.Vector2. x y))
-(defn v3 [[x y z]] (b.Vector3. x y z))
-(defn v4 [[x y z w]] (b.Vector4. x y z w))
-(defn c3 [[r g _b]] (b.Color3. r g _b))
+(defn v2 [{:keys [x y]}] (b.Vector2. x y))
+(defn v3 [{:keys [x y z]}] (b.Vector3. x y z))
+(defn v4 [{:keys [x y z w]}] (b.Vector4. x y z w))
+(defn c3 [{:keys [r g _b]}] (b.Color3. r g _b))
 
 (defn free-camera [scene {:keys [name position]}]
   (b.FreeCamera. name (v3 position) scene))
@@ -53,13 +53,15 @@
   (set-options! (b.Scene. engine) (:options scene)))
 
 (defn ->component
-  ([object args] (set-options! object args))
-  ([js-scene component args]
-   (-> component
-       (case
-           :camera/free        free-camera
-           :light/hemispheric  hemispheric-light
-           :mesh/sphere        sphere
-           :mesh/ground        ground)
-       (apply [js-scene args])
-       (set-options! args))))
+  ([object-graph id args] (set-options! (@object-graph id) args))
+  ([js-scene object-graph id {:keys [component] :as args}]
+   (let [obj (-> component
+                 (case
+                     :camera/free        free-camera
+                     :light/hemispheric  hemispheric-light
+                     :mesh/sphere        sphere
+                     :mesh/ground        ground)
+                 (apply [js-scene args])
+                 (set-options! args))]
+     (swap! object-graph #(assoc % id obj))
+     obj))) 

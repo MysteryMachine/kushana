@@ -41,6 +41,7 @@
 
 (defn new [scene-atom & { :as options}]
   (let [js-engine (impl/engine options)
+        object-graph (atom {})
         scene @scene-atom
         input (chan)
         dt (time/fps 30)
@@ -51,7 +52,7 @@
         diff-signal
         (z/reductions diff (Diff. nil nil [] [] []) scene-graph-signal)
         js-scene-signal
-        (z/reductions (scene/update-js! js-engine) nil diff-signal)]
+        (z/reductions (scene/update-js! js-engine object-graph) nil diff-signal)]
     (z/pipe-to-atom scene-graph-signal scene-atom)
     (impl/draw js-engine (z/pipe-to-atom js-scene-signal))
     (when (:debug options) input)))

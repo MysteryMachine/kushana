@@ -12,3 +12,4 @@ pom.xml.asc
 .nrepl-port
 resources/public/js/compiled/*
 figwheel_server.log
+/out/*
