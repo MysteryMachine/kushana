@@ -14,8 +14,8 @@
    dt
    (z/merge (z/drop-repeats (z/sample-on dt (z/input init filter chan)))
             (z/sample-on dt (z/constant init)))))
- 
-(defn- new-scene-diff [scene] 
+
+(defn- new-scene-diff [scene]
   (let [scene-graph (:scene-graph scene)
         ids (keys scene-graph)]
     (Diff. scene true ids [] [])))

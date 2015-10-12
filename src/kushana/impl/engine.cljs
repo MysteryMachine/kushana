@@ -1,5 +1,5 @@
 (ns kushana.impl.engine
-  (:require babylon))
+  (:require cljsjs.babylon))
 (def b js/BABYLON)
 
 (defn get-canvas [name] (.getElementById js/document name))

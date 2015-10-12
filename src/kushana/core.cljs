@@ -8,7 +8,17 @@
 
 (enable-console-print!)
 
-(defscene scene
+(def update-fn
+  (middleware/reload
+   (fn [scene [input-key input-args]]
+     (let [[sid {t :timer {y :y} :position}] (->name scene "sphere1")]
+       (-> scene
+           (assoc-in
+            [:scene-graph sid :position]
+            (v3 (sin t 4 10) y (cos t 4 10)))
+           (assoc-in [:scene-graph sid :timer] (inc t)))))))
+
+(defscene initial-scene
   (with-ids
     [{:component :light/hemispheric
       :name "light1"
@@ -31,17 +41,10 @@
       :set-target (v3 0 0 0)
       :position (v3 0 5 -10)
       :attach-control ["renderCanvas" true]}])
-  (middleware/reload
-   (fn [scene [input-key input-args]]
-     (let [[sid {t :timer {y :y} :position}] (->name scene "sphere1")]
-       (-> scene
-           (assoc-in
-            [:scene-graph sid :position]
-            (v3 (sin t 4 10) y (cos t 4 10)))
-           (assoc-in [:scene-graph sid :timer] (inc t))))))
+  update-fn
   :clearColor (c3 0.2 0.4 0.5))
 
-(defonce scene-atom (atom scene))
+(defonce scene-atom (atom initial-scene))
 
 (defonce engine
   (engine/new
@@ -51,5 +54,12 @@
    :antialias true
    :resize    true))
 
-(defn on-jsload [] (put! engine [:reload-logic (:update-fn scene)]))
+(defn comm! [type arg]
+  (put! engine [type arg]))
+
+(defn inspect [scene]
+  (map (fn [[id obj]] [id (:name obj)]) (:scene-graph scene)))
+
+(defn on-jsload []
+  (comm! :reload-logic update-fn))
 

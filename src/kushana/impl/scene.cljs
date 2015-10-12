@@ -1,8 +1,6 @@
 (ns kushana.impl.scene
-  (:require babylon))
-(def b js/BABYLON)
-
-(enable-console-print!)
+  (:require cljsjs.babylon))
+(def b js/BABYLON) 
 
 (defn v2 [{:keys [x y]}] (b.Vector2. x y))
 (defn v3 [{:keys [x y z]}] (b.Vector3. x y z))

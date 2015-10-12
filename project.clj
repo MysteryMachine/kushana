@@ -7,7 +7,8 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.122"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
-                 [jamesmacaulay/zelkova "0.4.0"]]
+                 [jamesmacaulay/zelkova "0.4.0"]
+                 [cljsjs/babylon "2.2.0-0"]]
 
   :plugins [[lein-cljsbuild "1.1.0"]
             [lein-figwheel "0.4.0"]]
@@ -26,10 +27,7 @@
                          :asset-path "js/compiled/out"
                          :output-to "resources/public/js/compiled/kushana.js"
                          :output-dir "resources/public/js/compiled/out"
-                         :source-map-timestamp true 
-                         :externs ["resources/cljsjs/babylon/common/babylon.ext.js"]
-                         :foreign-libs [{:file "resources/cljsjs/babylon/common/babylon.js"
-                                         :provides ["babylon"]}]}}
+                         :source-map-timestamp true }}
              {:id "min"
               :source-paths ["src"]
               :compiler {:output-to "resources/public/js/compiled/kushana.js"
