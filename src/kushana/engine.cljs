@@ -1,5 +1,5 @@
 (ns kushana.engine
-  (:require [cljs.core.async :refer [chan]]
+  (:require [cljs.core.async :refer [chan put!]]
             [clojure.set :refer [difference intersection]]
             [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
@@ -8,12 +8,6 @@
             [kushana.impl.engine :as impl]))
 
 (defrecord Diff [scene new? new-ids edit-ids delete-ids])
-
-(defn- chan->input [init filter chan dt]
-  (z/sample-on
-   dt
-   (z/merge (z/drop-repeats (z/sample-on dt (z/input init filter chan)))
-            (z/sample-on dt (z/constant init)))))
 
 (defn- new-scene-diff [scene]
   (let [scene-graph (:scene-graph scene)
@@ -36,6 +30,8 @@
     (normal-diff new-scene old-scene)
     (new-scene-diff new-scene)))
 
+(def hack (atom false))
+
 (defn act [{:keys [update-fn] :as scene} input]
   (update-fn scene input))
 
@@ -44,9 +40,11 @@
         object-graph (atom {})
         scene @scene-atom
         input (chan)
-        dt (time/fps 30)
+        dt (time/fps 25)
         input-signal
-        (chan->input [:none] identity input dt)
+        (z/merge
+         (z/input [:none] identity input)
+         (z/map vector (z/constant :tick) dt))
         scene-graph-signal
         (z/reductions act scene input-signal)
         diff-signal

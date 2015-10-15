@@ -5,7 +5,7 @@
 (defn v2 [{:keys [x y]}] (b.Vector2. x y))
 (defn v3 [{:keys [x y z]}] (b.Vector3. x y z))
 (defn v4 [{:keys [x y z w]}] (b.Vector4. x y z w))
-(defn c3 [{:keys [r g _b]}] (b.Color3. r g _b))
+(defn c3 [{:keys [r g] _b :b}] (b.Color3. r g _b))
 
 (defn free-camera [scene {:keys [name position]}]
   (b.FreeCamera. name (v3 position) scene))
@@ -17,6 +17,14 @@
   (b.Mesh.CreateSphere. name segments diameter scene))
 (defn ground [scene {:keys [name width height subdivisions]}]
   (b.Mesh.CreateGround. name width height subdivisions scene))
+
+(defn box [scene {:keys [name size]}]
+  (b.Mesh.CreateBox. name size scene))
+
+(defn lines [scene {:keys [name points]}]
+  (b.Mesh.CreateLines. name
+                       (apply array (map v3 points))
+                       scene))
 
 (defn dispose [obj] (.dispose obj))
 
@@ -34,7 +42,8 @@
   (condp (else-threader contains?) key
     #{:position :direction
       :rotation :scale} (v3 arg)
-    #{:color :clearColor} (c3 arg)
+    #{:color :clearColor
+      :groundColor} (c3 arg)
     :else arg))
 
 (defn- key->atr [k] (apply str (rest (str k))))
@@ -51,15 +60,22 @@
   (set-options! (b.Scene. engine) (:options scene)))
 
 (defn ->component
-  ([object-graph id args] (set-options! (@object-graph id) args))
+  ([object-graph id {:keys [component] :as args}]
+   (if (= component :data)
+     nil
+     (set-options! (@object-graph id) args)))
   ([js-scene object-graph id {:keys [component] :as args}]
-   (let [obj (-> component
-                 (case
-                     :camera/free        free-camera
-                     :light/hemispheric  hemispheric-light
-                     :mesh/sphere        sphere
-                     :mesh/ground        ground)
-                 (apply [js-scene args])
-                 (set-options! args))]
-     (swap! object-graph #(assoc % id obj))
-     obj))) 
+   (if (= component :data)
+     nil
+     (let [obj (-> component
+                   (case
+                       :camera/free        free-camera
+                       :light/hemispheric  hemispheric-light
+                       :mesh/sphere        sphere
+                       :mesh/ground        ground
+                       :mesh/box           box
+                       :mesh/lines         lines)
+                   (apply [js-scene args])
+                   (set-options! args))]
+       (swap! object-graph #(assoc % id obj))
+       obj))))

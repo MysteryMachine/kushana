@@ -35,11 +35,10 @@
       (let [scene-graph (:scene-graph scene)]
         (doseq [id new-ids]
           (let [args (scene-graph id)]
-            (println scene-graph)
             (->component js-scene object-graph id args)))
         (doseq [id edit-ids]
           (let [{:keys [component] :as args} (scene-graph id)]
             (->component object-graph id args)))
-        #_(doseq [id delete-ids]
+        (doseq [id delete-ids]
             (dispose (get object-graph id)))
-        js-scene))))
+       js-scene))))

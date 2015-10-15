@@ -13,3 +13,13 @@
        :reload/merge (reload-obj scene input-args)
        scene)
      input)))
+
+(defn debug [update-fn]
+  (fn [scene [input-key input-args :as input]]
+    (when (= input-key :debug/ping) (println input-args))
+    (update-fn scene input)))
+
+(defn stack [& fns]
+  (if (empty? fns)
+    identity
+    ((first fns) (apply stack (rest fns)))))
