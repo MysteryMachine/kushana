@@ -22,4 +22,3 @@
    (fn []
      (when-let [scene @js-scene-atom]
        (.render scene)))))
-

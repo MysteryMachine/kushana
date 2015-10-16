@@ -1,6 +1,7 @@
 (ns kushana.engine
   (:require [cljs.core.async :refer [chan put!]]
             [clojure.set :refer [difference intersection]]
+            [clojure.data :refer [diff]]
             [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
             [jamesmacaulay.zelkova.mouse :as mouse]
@@ -25,12 +26,16 @@
         edited-keys (intersection old-scene-keys new-scene-keys)]
     (Diff. new-scene false new-keys edited-keys deleted-keys)))
 
-(defn- diff [{old-scene :scene} new-scene]
+(defn- better-diff [{old-scene :scene} new-scene]
+  (let [[del new edit] (diff (keys (:scene-graph old-scene))
+                             (keys (:scene-graph new-scene)))]
+    (println del new edit)
+    (Diff. new-scene false new edit del)))
+
+(defn- diffo [{old-scene :scene} new-scene]
   (if (= (:id new-scene) (:id old-scene))
     (normal-diff new-scene old-scene)
     (new-scene-diff new-scene)))
-
-(def hack (atom false))
 
 (defn act [{:keys [update-fn] :as scene} input]
   (update-fn scene input))
@@ -48,10 +53,9 @@
         scene-graph-signal
         (z/reductions act scene input-signal)
         diff-signal
-        (z/reductions diff (Diff. nil nil [] [] []) scene-graph-signal)
+        (z/reductions diffo (Diff. nil nil [] [] []) scene-graph-signal)
         js-scene-signal
         (z/reductions (scene/update-js! js-engine object-graph) nil diff-signal)]
     (z/pipe-to-atom scene-graph-signal scene-atom)
     (impl/draw js-engine (z/pipe-to-atom js-scene-signal))
     (when (:debug options) input)))
-
