@@ -39,7 +39,7 @@
 
 (defn take-turn [board-id scene [x z :as position]]
   (let [board (get-in scene [:scene-graph board-id])
-        player (:turn board)y
+        player (:turn board)
         new-board (-> board
                       (assoc position player)
                       (assoc :turn (if (= :x player) :o :x)))

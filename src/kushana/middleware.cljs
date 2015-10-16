@@ -11,6 +11,7 @@
   (if (empty? fns)
     identity
     ((first fns) (apply lay (rest fns)))))
+(def μ lay)
 
 (defn- reload-obj [scene [id changes]]
   (let [path [:scene-graph id]]
@@ -24,6 +25,6 @@
     scene))
 
 (defmiddleware debug [scene inputs]
-  (when (:debug/ping inputs)     (:debug/ping inputs))
+  (when (:debug/ping inputs)     (println (:debug/ping inputs)))
   (when (:debug/overview inputs) (println (overview scene)))
   scene)

@@ -6,7 +6,6 @@
 (enable-console-print!)
 
 (defonce scene-atom (atom scene))
-
 (defonce engine
   (engine/new
    scene-atom
@@ -16,5 +15,7 @@
    :resize    true))
 
 (defn comm! [arg] (put! engine arg))
-(defn on-jsload [] (comm! {:debug/overview true
-                           :reload/logic   update-fn}))
+(defn on-jsload []
+  (comm!
+   {:debug/overview true
+    :reload/logic   update-fn}))
