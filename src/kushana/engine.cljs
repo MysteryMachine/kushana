@@ -14,7 +14,7 @@
 
 (defn- δscene
   [{osg :scene-graph :as old-scene} {nsg :scene-graph :as new-scene}]
-  (let [i-f  (scene/latest-id)
+  (let [i-f        (scene/latest-id)
         transition (when (not= (:id old-scene) (:id new-scene)) new-scene)]
     (loop [i 0
            new  (transient [])

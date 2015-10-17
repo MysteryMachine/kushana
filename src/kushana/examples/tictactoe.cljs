@@ -25,37 +25,37 @@
 
 (defn x-at [scene-graph x z]
   (let [[top-left top-right bottom-left bottom-right] (corners x z)]
-    (-> scene-graph
-        (assoc (new-id) (line [top-left bottom-right]))
-        (assoc (new-id) (line [top-right bottom-left])))))
+    (with-ids scene-graph
+      (line [top-left bottom-right])
+      (line [top-right bottom-left]))))
 
 (defn o-at [scene-graph x z]
   (let [[top-left top-right bottom-left bottom-right] (corners x z)]
-    (-> scene-graph
-        (assoc (new-id) (line [top-left top-right]))
-        (assoc (new-id) (line [top-right bottom-right]))
-        (assoc (new-id) (line [bottom-right bottom-left]))
-        (assoc (new-id) (line [bottom-left top-left])))))
+    (with-ids scene-graph
+      (line [top-left top-right])
+      (line [top-right bottom-right])
+      (line [bottom-right bottom-left])
+      (line [bottom-left top-left]))))
 
 (defn take-turn [board-id scene [x z :as position]]
   (let [board (get-in scene [:scene-graph board-id])
         player (:turn board)
-        new-board (-> board
-                      (assoc position player)
-                      (assoc :turn (if (= :x player) :o :x)))
-        sg (:scene-graph scene)
-        new-sg (assoc sg board-id new-board)
-        new-sg (if (= :x player)
-                 (x-at new-sg x z)
-                 (o-at new-sg x z))
-        new-scene (assoc scene :scene-graph new-sg)]
+        board' (assoc board
+                     position player
+                     :turn (if (= :x player) :o :x))
+        sg  (:scene-graph scene)
+        sg' (assoc sg board-id board')
+        sg' (if (= :x player)
+              (x-at sg' x z)
+              (o-at sg' x z))
+        new-scene (assoc scene :scene-graph sg')]
     new-scene))
 
 (defn color-board [scene winner]
-  (let [new-color (cond (= :x winner) (c3 1 0 0)
-                        (= :o winner) (c3 0 0 1))
+  (let [new-color   (cond (= :x winner) (c3 1 0 0)
+                          (= :o winner) (c3 0 0 1))
         [lid light] (->name scene "light")
-        new-light (assoc light :groundColor new-color)]
+        new-light   (assoc light :groundColor new-color)]
     (assoc-in scene [:scene-graph lid] new-light)))
 
 (defn three-in-row [key
@@ -99,29 +99,29 @@
 (def update-fn (lay debug reload game-logic))
 
 (defscene scene
-  (with-ids
-    [{:turn :x :name "state"}
-     {:scene/component :camera/free
-      :name "camera"
-      :set-target (v3 0 0 0)
-      :position (v3 0 9 0.001)
-      :attach-control ["renderCanvas" true]}
-     {:scene/component :light/hemispheric
-      :name "light"
-      :intensity 1 
-      :direction (v3 0 -1 0)
-      :position (v3 0 0 0)
-      :groundColor (c3 1 1 1)}
-     {:scene/component :mesh/ground
-      :name "board"
-      :width 100
-      :height 100
-      :subdivisions 2
-      :position (v3 0 -0.01 0)}
-     (line [(v3 -1 0.01 -2.75) (v3 -1 0.01 2.75)])
-     (line [(v3 1 0.01 -2.75) (v3 1 0.01 2.75)])
-     (line [(v3 -2.75 0.01 -1) (v3 2.75 0.01 -1)])
-     (line [(v3 -2.75 0.01 1) (v3 2.75 0.01 1)])])
+  (with-ids {}
+    {:turn :x :name "state"}
+    {:scene/component :camera/free
+     :name "camera"
+     :set-target (v3 0 0 0)
+     :position (v3 0 9 0.001)
+     :attach-control ["renderCanvas" true]}
+    {:scene/component :light/hemispheric
+     :name "light"
+     :intensity 1 
+     :direction (v3 0 -1 0)
+     :position (v3 0 0 0)
+     :groundColor (c3 1 1 1)}
+    {:scene/component :mesh/ground
+     :name "board"
+     :width 100
+     :height 100
+     :subdivisions 2
+     :position (v3 0 -0.01 0)}
+    (line [(v3 -1 0.01 -2.75) (v3 -1 0.01 2.75)])
+    (line [(v3 1 0.01 -2.75) (v3 1 0.01 2.75)])
+    (line [(v3 -2.75 0.01 -1) (v3 2.75 0.01 -1)])
+    (line [(v3 -2.75 0.01 1) (v3 2.75 0.01 1)]))
   update-fn
   :clearColor (c3 0 1 1))
 

@@ -12,7 +12,12 @@
 (def new-id (second id-fns))
 (defn id-assoc [scene-graph component]
   (assoc scene-graph (new-id) component))
-(defn with-ids [components] (reduce id-assoc {} components))
+(defn with-ids [scene-graph & components]
+  (loop [scene-graph (transient scene-graph)
+         [component & components] components]
+    (if component
+      (recur (assoc! scene-graph (new-id) component) components)
+      (persistent! scene-graph))))
 
 (defn new [scene-graph update-fn & {:as options}]
   (Scene. (new-id) scene-graph update-fn options))
