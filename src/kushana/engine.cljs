@@ -1,61 +1,52 @@
 (ns kushana.engine
-  (:require [cljs.core.async :refer [chan put!]]
-            [clojure.set :refer [difference intersection]]
+  (:require [cljs.core.async :refer [chan]]
             [clojure.data :refer [diff]]
             [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
             [jamesmacaulay.zelkova.mouse :as mouse]
-            [kushana.scene :as scene]
+            [kushana.scene :as scene :refer [update-js!]]
             [kushana.impl.engine :as impl]))
 
-(defrecord Diff [scene new? new-ids edit-ids delete-ids])
+(defrecord Diff [transition new edit delete])
 
-(defn- new-scene-diff [scene]
-  (let [scene-graph (:scene-graph scene)
-        ids (keys scene-graph)]
-    (Diff. scene true ids [] [])))
+(defn e-diff [id old new]
+  [id (second (diff old new))])
 
-(defn- normal-diff [new-scene old-scene]
-  ;; Obscenely slow! Just a sloppy implementation for now.
-  (let [new-scene-graph (:scene-graph new-scene)
-        old-scene-graph (:scene-graph old-scene)
-        new-scene-keys (set (keys new-scene-graph))
-        old-scene-keys (set (keys old-scene-graph))
-        new-keys (difference new-scene-keys old-scene-keys)
-        deleted-keys (difference old-scene-keys new-scene-keys)
-        edited-keys (intersection old-scene-keys new-scene-keys)]
-    (Diff. new-scene false new-keys edited-keys deleted-keys)))
+(defn- δscene
+  [{osg :scene-graph :as old-scene} {nsg :scene-graph :as new-scene}]
+  (let [i-f  (scene/latest-id)
+        transition (when (not= (:id old-scene) (:id new-scene)) new-scene)]
+    (loop [i 0
+           new  (transient [])
+           edit (transient [])
+           del  (transient [])]
+      (if (> i i-f)
+        (Diff. transition (persistent! new) (persistent! edit) (persistent! del))
+        (let [i'      (inc i)
+              new-obj (get nsg i)
+              old-obj (get osg i)
+              old?    (:scene/component old-obj)
+              new?    (:scene/component new-obj)
+              edit?   (and old? new?)]
+          (cond
+            edit? (recur i' new (conj! edit (e-diff i old-obj new-obj)) del)
+            new?  (recur i' (conj! new [i new-obj]) edit del)
+            old?  (recur i' new edit (conj! del i))
+            :else (recur i' new edit del)))))))
 
-(defn- better-diff [{old-scene :scene} new-scene]
-  (let [[del new edit] (diff (keys (:scene-graph old-scene))
-                             (keys (:scene-graph new-scene)))]
-    (println del new edit)
-    (Diff. new-scene false new edit del)))
+(defn act [{:keys [update-fn] :as scene} input] (update-fn scene input))
 
-(defn- diffo [{old-scene :scene} new-scene]
-  (if (= (:id new-scene) (:id old-scene))
-    (normal-diff new-scene old-scene)
-    (new-scene-diff new-scene)))
-
-(defn act [{:keys [update-fn] :as scene} input]
-  (update-fn scene input))
-
-(defn new [scene-atom & { :as options}]
-  (let [js-engine (impl/engine options)
-        object-graph (atom {})
-        scene @scene-atom
-        input (chan)
-        dt (time/fps 25)
-        input-signal
-        (z/merge
-         (z/input [:none] identity input)
-         (z/map vector (z/constant :tick) dt))
-        scene-graph-signal
-        (z/reductions act scene input-signal)
-        diff-signal
-        (z/reductions diffo (Diff. nil nil [] [] []) scene-graph-signal)
-        js-scene-signal
-        (z/reductions (scene/update-js! js-engine object-graph) nil diff-signal)]
-    (z/pipe-to-atom scene-graph-signal scene-atom)
-    (impl/draw js-engine (z/pipe-to-atom js-scene-signal))
-    (when (:debug options) input)))
+(defn new [a-scene & { :as options}]
+  (let [jseng     (impl/engine options)
+        a-jsobj   (atom {})
+        c-input   (chan)
+        Δt     (time/fps (:fps options))
+        Δinput (z/merge
+                (z/input [:none] identity c-input)
+                (z/map vector (z/constant :tick) Δt))
+        Δscene (z/reductions act @a-scene Δinput)
+        Δdiff  (z/reductions δscene {:scene-graph {}} Δscene)
+        Δjs    (z/reductions (update-js! jseng a-jsobj) nil Δdiff)]
+    (impl/draw! jseng (z/pipe-to-atom Δjs))
+    (z/pipe-to-atom Δscene a-scene)
+    (when (:debug options) c-input)))

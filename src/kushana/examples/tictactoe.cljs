@@ -6,7 +6,7 @@
                [kushana.middleware :only [defmiddleware]]))
 
 (defn line [points]
-  {:component :mesh/lines
+  {:scene/component :mesh/lines
    :name "l1"
    :points points
    :color (c3 0 0 0)})
@@ -100,19 +100,19 @@
 
 (defscene scene
   (with-ids
-    [{:component :data :turn :x :name "state"}
-     {:component :camera/free
+    [{:turn :x :name "state"}
+     {:scene/component :camera/free
       :name "camera"
       :set-target (v3 0 0 0)
       :position (v3 0 9 0.001)
       :attach-control ["renderCanvas" true]}
-     {:component :light/hemispheric
+     {:scene/component :light/hemispheric
       :name "light"
       :intensity 1 
       :direction (v3 0 -1 0)
       :position (v3 0 0 0)
       :groundColor (c3 1 1 1)}
-     {:component :mesh/ground
+     {:scene/component :mesh/ground
       :name "board"
       :width 100
       :height 100

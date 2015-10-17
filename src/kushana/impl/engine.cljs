@@ -16,9 +16,9 @@
   (engine-options! (b.Engine. (get-canvas canvas) antialias)
                    (-> options (dissoc :antialias) (dissoc :canvas))))
 
-(defn draw [game-engine js-scene-atom]
+(defn draw! [game-engine js-atom]
   (.runRenderLoop
    game-engine
    (fn []
-     (when-let [scene @js-scene-atom]
+     (when-let [scene @js-atom]
        (.render scene)))))

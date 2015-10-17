@@ -12,7 +12,8 @@
    :canvas    "renderCanvas"
    :debug     true
    :antialias true
-   :resize    true))
+   :resize    true
+   :fps       25))
 
 (defn comm! [arg] (put! engine arg))
 (defn on-jsload []

@@ -60,22 +60,18 @@
   (set-options! (b.Scene. engine) (:options scene)))
 
 (defn ->component
-  ([object-graph id {:keys [component] :as args}]
-   (if (= component :data)
-     nil
-     (set-options! (@object-graph id) args)))
-  ([js-scene object-graph id {:keys [component] :as args}]
-   (if (= component :data)
-     nil
-     (let [obj (-> component
-                   (case
-                       :camera/free        free-camera
-                       :light/hemispheric  hemispheric-light
-                       :mesh/sphere        sphere
-                       :mesh/ground        ground
-                       :mesh/box           box
-                       :mesh/lines         lines)
-                   (apply [js-scene args])
-                   (set-options! args))]
-       (swap! object-graph #(assoc % id obj))
-       obj))))
+  ([object-graph id {component :scene/component :as args}]
+   (set-options! (@object-graph id) args))
+  ([js-scene object-graph id {component :scene/component :as args}]
+   (let [obj (-> component
+                 (case
+                     :camera/free        free-camera
+                     :light/hemispheric  hemispheric-light
+                     :mesh/sphere        sphere
+                     :mesh/ground        ground
+                     :mesh/box           box
+                     :mesh/lines         lines)
+                 (apply [js-scene args])
+                 (set-options! args))]
+     (swap! object-graph #(assoc % id obj))
+     obj)))

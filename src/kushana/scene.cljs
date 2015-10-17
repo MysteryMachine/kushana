@@ -17,23 +17,21 @@
 (defn new [scene-graph update-fn & {:as options}]
   (Scene. (new-id) scene-graph update-fn options))
 
-(defn update-js! [js-engine object-graph]
+(defn update-js! [jseng a-jsobj]
   (fn build-inner
-    [js-scene {:keys [scene new? new-ids
-                      edit-ids delete-ids] :as diff}]
-    (if new?
-      (build-inner
-       (->js-scene js-engine scene)
-       (assoc diff :new? false))
-      (let [scene-graph (:scene-graph scene)]
-        (doseq [id new-ids]
-          (let [args (scene-graph id)]
-            (->component js-scene object-graph id args)))
-        (doseq [id edit-ids]
-          (let [{:keys [component] :as args} (scene-graph id)]
-            (->component object-graph id args)))
-        (doseq [id delete-ids]
-            (dispose (get object-graph id)))
+    [js-scene 
+     {:keys [transition new edit delete] :as diff}]
+    (if transition
+      (let [js-scene' (->js-scene jseng transition)
+            diff'     (assoc diff :transition nil)]
+        (build-inner js-scene' diff'))
+      (do
+        (doseq [[id args] new]
+          (->component js-scene a-jsobj id args))
+        (doseq [[id args] edit]
+          (->component a-jsobj id args))
+        (doseq [id delete]
+          (dispose (get @a-jsobj id)))
         js-scene))))
 
 (defn ->name [scene-* name]
@@ -42,8 +40,6 @@
     (some (fn [[id {next-name :name} :as obj]]
             (when (= name next-name) obj))
           scene-*)))
-
-(defn update [scene-* & args] scene-*)
 
 (defn overview [scene]
   (map (fn [[id obj]] [id (:name obj)]) (:scene-graph scene)))
