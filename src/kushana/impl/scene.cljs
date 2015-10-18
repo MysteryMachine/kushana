@@ -10,6 +10,12 @@
 (defn free-camera [scene {:keys [name position]}]
   (b.FreeCamera. name (v3 position) scene))
 
+(defn camera [scene {:keys [name position]}]
+  (b.Camera. name (v3 position) scene))
+
+(defn target-camera [scene {:keys [name position]}]
+  (b.TargetCamera. name (v3 position) scene))
+
 (defn hemispheric-light [scene {:keys [name direction]}]
   (b.HemisphericLight. name (v3 direction) scene))
 
@@ -59,18 +65,21 @@
 (defn ->js-scene [engine scene]
   (set-options! (b.Scene. engine) (:options scene)))
 
+(def engine-map
+  {:camera/free        free-camera
+   :camera/camera      camera
+   :camera/target      target-camera
+   :light/hemispheric  hemispheric-light
+   :mesh/sphere        sphere
+   :mesh/ground        ground
+   :mesh/box           box
+   :mesh/lines         lines})
+
 (defn ->component
   ([object-graph id {component :scene/component :as args}]
    (set-options! (@object-graph id) args))
   ([js-scene object-graph id {component :scene/component :as args}]
-   (let [obj (-> component
-                 (case
-                     :camera/free        free-camera
-                     :light/hemispheric  hemispheric-light
-                     :mesh/sphere        sphere
-                     :mesh/ground        ground
-                     :mesh/box           box
-                     :mesh/lines         lines)
+   (let [obj (-> (component engine-map)
                  (apply [js-scene args])
                  (set-options! args))]
      (swap! object-graph #(assoc % id obj))

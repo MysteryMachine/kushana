@@ -26,7 +26,6 @@
         (let [new'  (persistent! new)
               edit' (persistent! edit)
               del'  (persistent! del)]
-          (println new' edit' del')
           (Diff. new-scene new? new' edit' del'))
         (let [i'      (inc i)
               new-obj (get nsg i)
