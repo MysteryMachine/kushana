@@ -7,21 +7,27 @@
             [kushana.scene :as scene :refer [update-js!]]
             [kushana.impl.engine :as impl]))
 
-(defrecord Diff [transition new edit delete])
+(defrecord Diff [scene new-scene? new edit delete])
 
-(defn e-diff [id old new]
-  [id (second (diff old new))])
+(defn e-diff [id old new edit]
+  (if-let [change (second (diff old new))]
+    (conj! edit [id change])
+    edit))
 
 (defn- δscene
-  [{osg :scene-graph :as old-scene} {nsg :scene-graph :as new-scene}]
-  (let [i-f        (scene/latest-id)
-        transition (when (not= (:id old-scene) (:id new-scene)) new-scene)]
+  [{{osg :scene-graph :as old-scene} :scene} {nsg :scene-graph :as new-scene}]
+  (let [i-f  (scene/latest-id)
+        new? (not= (:id old-scene) (:id new-scene))]
     (loop [i 0
            new  (transient [])
            edit (transient [])
            del  (transient [])]
       (if (> i i-f)
-        (Diff. transition (persistent! new) (persistent! edit) (persistent! del))
+        (let [new'  (persistent! new)
+              edit' (persistent! edit)
+              del'  (persistent! del)]
+          (println new' edit' del')
+          (Diff. new-scene new? new' edit' del'))
         (let [i'      (inc i)
               new-obj (get nsg i)
               old-obj (get osg i)
@@ -29,7 +35,7 @@
               new?    (:scene/component new-obj)
               edit?   (and old? new?)]
           (cond
-            edit? (recur i' new (conj! edit (e-diff i old-obj new-obj)) del)
+            edit? (recur i' new (e-diff i old-obj new-obj edit) del)
             new?  (recur i' (conj! new [i new-obj]) edit del)
             old?  (recur i' new edit (conj! del i))
             :else (recur i' new edit del)))))))

@@ -108,7 +108,7 @@
      :attach-control ["renderCanvas" true]}
     {:scene/component :light/hemispheric
      :name "light"
-     :intensity 1 
+     :intensity 1
      :direction (v3 0 -1 0)
      :position (v3 0 0 0)
      :groundColor (c3 1 1 1)}
@@ -124,4 +124,3 @@
     (line [(v3 -2.75 0.01 1) (v3 2.75 0.01 1)]))
   update-fn
   :clearColor (c3 0 1 1))
-

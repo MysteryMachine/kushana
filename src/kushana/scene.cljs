@@ -24,11 +24,10 @@
 
 (defn update-js! [jseng a-jsobj]
   (fn build-inner
-    [js-scene 
-     {:keys [transition new edit delete] :as diff}]
-    (if transition
-      (let [js-scene' (->js-scene jseng transition)
-            diff'     (assoc diff :transition nil)]
+    [js-scene {:keys [scene new-scene? new edit delete] :as diff}]
+    (if new-scene?
+      (let [js-scene' (->js-scene jseng scene)
+            diff'     (assoc diff :new-scene? nil)]
         (build-inner js-scene' diff'))
       (do
         (doseq [[id args] new]
