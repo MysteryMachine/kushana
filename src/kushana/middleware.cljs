@@ -18,7 +18,7 @@
     (assoc-in scene path (merge (get-in scene path) changes))))
 
 (defmiddleware reload [scene inputs]
-  (condp get inputs
+  (condp #(%1 %2) inputs
     :reload/scene (:reload/scene inputs)
     :reload/logic (assoc scene :update-fn (:reload/logic inputs))
     :reload/merge (reload-obj scene (:reload/merge inputs))

@@ -52,9 +52,10 @@
     new-scene))
 
 (defn color-board [scene winner]
-  (let [new-color   (cond (= :x winner) (c3 1 0 0)
+  (let [new-color   (cond (= :x winner) (c3 0.5 0.2 0.2)
                           (= :o winner) (c3 0 0 1))
         [lid light] (->name scene "light")]
+    (println (get-in scene [:scene-graph lid]))
     (assoc-in scene [:scene-graph lid :groundColor] new-color)))
 
 (defn three-in-row [key
@@ -74,30 +75,26 @@
         (three-in-row :o board) (assoc board :winner :o)
         :else (assoc board :winner nil)))
 
-(defn handle-win [scene]
+(defmiddleware handle-win [scene _]
   (let [[id board] (->name scene "state")
-        board     (decide-winner board)
+        board      (decide-winner board)
         winner     (:winner board)]
     (if (or (= :x winner) (= :o winner))
-      (-> scene
-          (assoc-in [:scene-graph id] board)
-          (color-board winner)
-          (assoc-in [:scene-graph id :winner] :done))
+      (-> (assoc-in scene [:scene-graph id] board)
+          (color-board winner))
       scene)))
 
-(defmiddleware game-logic [scene inputs]
+(defmiddleware handle-input [scene inputs]
   (let [[id board]    (->name (:scene-graph scene) "state")
-        [x z :as pos] (or ((:turn board) inputs) [-1 -1])
-        scene (if (and
-                   (not (:winner board))
-                   (nil? (get board pos))
-                   (>= x 0) (>= z 0) (< x 3) (< z 3))
-                (take-turn id scene pos)
-                scene)]
-    (println "hi")
-    (handle-win scene)))
+        [x z :as pos] (or ((:turn board) inputs) [-1 -1])]
+    (if (and
+         (not (:winner board))
+         (nil? (get board pos))
+         (>= x 0) (>= z 0) (< x 3) (< z 3))
+      (take-turn id scene pos)
+      scene)))
 
-(def update-fn (lay debug reload game-logic))
+(def update-fn (lay debug reload handle-input handle-win))
 
 (defscene scene
   (with-ids {}
