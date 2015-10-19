@@ -1,5 +1,5 @@
 (ns games.tictactoe
-  (:require [cljs.core.async :refer [put!]]
+  (:require [cljs.core.async :refer [put! chan]]
 		        [kushana.engine :as engine]
 						[kushana.scene :refer [with-ids ->name new-id]]
 						[kushana.helpers :refer [v3 c3 sin cos]]
@@ -8,6 +8,7 @@
                [kushana.middleware :only [defmiddleware]]))
 
 (enable-console-print!)
+
 
 (defn line [points]
   {:scene/component :mesh/lines
@@ -97,7 +98,13 @@
       (take-turn id scene pos)
       scene)))
 
-(def update-fn (m/lay m/debug m/reload handle-input handle-win))
+(defonce repl-chan (chan))
+
+(def update-fn
+  (m/lay m/debug
+         m/reload
+         handle-input
+         handle-win))
 
 (defscene scene
   (with-ids {}
@@ -126,17 +133,20 @@
   update-fn
   :clearColor (c3 0 1 1))
 
-(defonce scene-atom (atom scene))
+(defonce scene-atom  (atom scene))
+
 (defonce engine
   (engine/new
    scene-atom
+   [repl-chan]
    :canvas    "renderCanvas"
    :debug     true
    :antialias true
    :resize    true
    :fps       25))
 
-(defn comm! [arg] (put! engine arg))
+(defn comm! [arg] (put! repl-chan arg))
 (defn reload []
-	(comm! {:debug/overview true
+	(comm! {:debug/overview false
+          :debug/input    false
 	        :reload/logic   update-fn}))

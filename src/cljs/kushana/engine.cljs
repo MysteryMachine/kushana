@@ -39,19 +39,24 @@
             old?  (recur i' new edit (conj! del i))
             :else (recur i' new edit del)))))))
 
-(defn act [{:keys [update-fn] :as scene} input] (update-fn scene input))
+(defn- act [{:keys [update-fn] :as scene} input] (update-fn scene input))
 
-(defn new [a-scene & { :as options}]
+(defn- input-sig [δt]
+  (fn [c]
+    (z/merge
+     (z/input {} identity c)
+     (z/map hash-map (z/constant :dt) δt))))
+
+(defn new [a-scene c-inputs & { :as options}]
   (let [jseng     (impl/engine options)
         a-jsobj   (atom {})
-        c-input   (chan)
-        Δt     (time/fps (:fps options))
-        Δinput (z/merge
-                (z/input [:none] identity c-input)
-                (z/map vector (z/constant :tick) Δt))
+        δt        (time/fps (:fps options))
+        input-signals (map (input-sig δt) c-inputs)
+        Δt     (z/map (fn [δ] {:dt δ}) δt)
+        Δinput (z/map (fn [inputs] (reduce merge inputs))
+                      (apply z/map (concat [vector Δt] input-signals)))
         Δscene (z/reductions act @a-scene Δinput)
         Δdiff  (z/reductions δscene {:scene-graph {}} Δscene)
         Δjs    (z/reductions (update-js! jseng a-jsobj) nil Δdiff)]
     (impl/draw! jseng (z/pipe-to-atom Δjs))
-    (z/pipe-to-atom Δscene a-scene)
-    (when (:debug options) c-input)))
+    (z/pipe-to-atom Δscene a-scene)))

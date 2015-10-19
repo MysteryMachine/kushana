@@ -8,7 +8,7 @@
 (defn middleware [scene-fn input-fn]
   (fn [update-fn]
     (fn [scene inputs]
-      (let [inputs' (input-fn inputs)]
+      (let [inputs' inputs #_(input-fn inputs)]
         (update-fn (scene-fn scene inputs') inputs')))))
 
 (defn lay [& fns]
@@ -26,11 +26,12 @@
         (sente/make-channel-socket! "/chsk" {:type :auto})
         server-results identity
         server-input   identity]
-    (fn [update-fn]
-      (fn [scene inputs]
-        (if false
-          (server-results)
-          (update-fn scene inputs))))))
+    {:middleware (fn [update-fn]
+                   (fn [scene inputs]
+                     (if-let [merge (:server/merge inputs)]
+                       (server-results scene merge)
+                       (update-fn scene inputs))))
+     :channel ch-recv}))
 
 (defmiddleware reload
   [scene inputs]
@@ -40,9 +41,13 @@
     :reload/merge (reload-obj scene (:reload/merge inputs))
     scene))
 
-(defmiddleware debug
-  [scene inputs]
-  (do
-    (when (:debug/ping inputs)     (println (:debug/ping inputs)))
-    (when (:debug/overview inputs) (println (overview scene)))
-    scene))
+(let [debug-state (atom {})]
+  (defmiddleware debug
+    [scene inputs]
+    (let [state @debug-state]
+      (when (not (nil? (:debug/input inputs)))
+        (swap! debug-state #(assoc % :inputs (:debug/input inputs))))
+      (when-let [n (:debug/ping inputs)] (println n))
+      (when (:debug/overview inputs) (println (overview scene)))
+      (when (:inputs state) (println inputs))
+      scene)))
