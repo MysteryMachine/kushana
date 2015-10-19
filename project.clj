@@ -19,7 +19,8 @@
                  [http-kit "2.1.19"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [jamesmacaulay/zelkova "0.4.0"]
-                 [cljsjs/babylon "2.2.0-0"]]
+                 [cljsjs/babylon "2.2.0-0"]
+                 [com.taoensso/sente "1.6.0"]]
 
   :plugins [[lein-cljsbuild "1.0.5"]
             [lein-environ "1.0.0"]]
@@ -69,7 +70,10 @@
 
                    :env {:is-dev true}
 
-                   :cljsbuild {:test-commands { "test" ["phantomjs" "env/test/js/unit-test.js" "env/test/unit-test.html"] }
+                   :cljsbuild {:test-commands { "test" ["phantomjs"
+                                                        "env/test/js/unit-test.js"
+                                                        "env/test/unit-test.html"] }
+
                                :builds {:app {:source-paths ["env/dev/cljs"]}
                                         :test {:source-paths ["src/cljs" "test/cljs"]
                                                :compiler {:output-to     "resources/public/js/app_test.js"
