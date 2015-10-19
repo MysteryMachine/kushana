@@ -55,7 +55,6 @@
   (let [new-color   (cond (= :x winner) (c3 0.5 0.2 0.2)
                           (= :o winner) (c3 0 0 1))
         [lid light] (->name scene "light")]
-    (println (get-in scene [:scene-graph lid]))
     (assoc-in scene [:scene-graph lid :groundColor] new-color)))
 
 (defn three-in-row [key
