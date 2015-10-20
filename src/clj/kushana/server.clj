@@ -1,5 +1,6 @@
 (ns kushana.server
   (:require [clojure.java.io :as io]
+            [clojure.core.async :refer [go-loop <! >!] :as async]
             [kushana.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [resources]]
@@ -46,10 +47,24 @@
   (auto-reload *ns*)
   (start-figwheel))
 
+(defn start-broadcaster! []
+  (go-loop [i 0]
+    (<! (async/timeout 10000))
+    (println (format "Broadcasting server>user: %s" @connected-uids))
+    (doseq [uid (:any @connected-uids)]
+      (chsk-send! uid
+                  [:some/broadcast
+                   {:what-is-this "A broadcast pushed from server"
+                    :how-often    "Every 10 seconds"
+                    :to-whom uid
+                    :i i}]))
+    (recur (inc i))))
+
 (defn run [& [port]]
   (when is-dev?
     (run-auto-reload))
-  (run-web-server port))
+  (run-web-server port)
+  (start-broadcaster!))
 
 (defn -main [& [port]]
   (run port))

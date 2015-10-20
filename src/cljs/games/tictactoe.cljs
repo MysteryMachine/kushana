@@ -3,9 +3,12 @@
 		        [kushana.engine :as engine]
 						[kushana.scene :refer [with-ids ->name new-id]]
 						[kushana.helpers :refer [v3 c3 sin cos]]
-						[kushana.middleware :as m])
+						[kushana.middleware :as m]
+            [cljs.core.async :as async :refer (<! >! put! chan)]
+            [taoensso.sente  :as sente :refer (cb-success?)])
   (:use-macros [kushana.scene :only [defscene]]
-               [kushana.middleware :only [defmiddleware]]))
+               [kushana.middleware :only [defmiddleware]]
+               [cljs.core.async.macros :only (go go-loop)]))
 
 (enable-console-print!)
 
@@ -98,8 +101,6 @@
       (take-turn id scene pos)
       scene)))
 
-(defonce repl-chan (chan))
-
 (def update-fn
   (m/lay m/debug
          m/reload
@@ -135,17 +136,25 @@
 
 (defonce scene-atom  (atom scene))
 
+(sente/set-logging-level! :trace)
+
+(let [{:keys [chsk ch-recv send-fn state] :as sente-info}
+      (sente/make-channel-socket! "/chsk" {:type :auto})]
+  (def recieve  ch-recv)
+  (def send      send-fn))
+
 (defonce engine
   (engine/new
    scene-atom
-   [repl-chan]
    :canvas    "renderCanvas"
+   :server    {:recieve recieve
+               :send    send}
    :debug     true
    :antialias true
    :resize    true
    :fps       25))
 
-(defn comm! [arg] (put! repl-chan arg))
+(defn comm! [arg] (put! engine arg))
 (defn reload []
 	(comm! {:debug/overview false
           :debug/input    false

@@ -1,5 +1,5 @@
 (ns kushana.engine
-  (:require [cljs.core.async :refer [chan]]
+  (:require [cljs.core.async :refer [chan put!]]
             [clojure.data :refer [diff]]
             [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
@@ -39,24 +39,29 @@
             old?  (recur i' new edit (conj! del i))
             :else (recur i' new edit del)))))))
 
-(defn- act [{:keys [update-fn] :as scene} input] (update-fn scene input))
+(defn- act [send!]
+  (fn [{:keys [update-fn] :as scene} input]
+    (let [input' (dissoc input :dt)]
+      (if (not (empty? input')) (send! [:kushana/input input'])))
+    (update-fn scene input)))
 
-(defn- input-sig [δt]
-  (fn [c]
-    (z/merge
-     (z/input {} identity c)
-     (z/map hash-map (z/constant :dt) δt))))
-
-(defn new [a-scene c-inputs & { :as options}]
-  (let [jseng     (impl/engine options)
+(defn new [a-scene & {:as options}]
+  (let [{:keys [recieve send]} (:server options)
+        options   (dissoc options :recive :send)
+        jseng     (impl/engine options)
+        input     (chan)
         a-jsobj   (atom {})
-        δt        (time/fps (:fps options))
-        input-signals (map (input-sig δt) c-inputs)
-        Δt     (z/map (fn [δ] {:dt δ}) δt)
-        Δinput (z/map (fn [inputs] (reduce merge inputs))
-                      (apply z/map (concat [vector Δt] input-signals)))
-        Δscene (z/reductions act @a-scene Δinput)
+        Δt     (z/map (fn [δ] {:dt δ}) (time/fps (:fps options)))
+        δinput (z/merge (z/input {} identity input) Δt)
+        args   (if recieve
+                 [vector Δt δinput #_(z/input recieve)]
+                 [vector Δt δinput])
+        Δinput (z/map (fn [inputs]
+                        (reduce merge inputs))
+                      (apply z/map args))
+        Δscene (z/reductions (act send) @a-scene Δinput)
         Δdiff  (z/reductions δscene {:scene-graph {}} Δscene)
         Δjs    (z/reductions (update-js! jseng a-jsobj) nil Δdiff)]
     (impl/draw! jseng (z/pipe-to-atom Δjs))
-    (z/pipe-to-atom Δscene a-scene)))
+    (z/pipe-to-atom Δscene a-scene)
+    input))
