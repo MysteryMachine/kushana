@@ -1,4 +1,4 @@
-(ns kushana.dev
+(ns server.dev
   (:require [environ.core :refer [env]]
             [net.cgrand.enlive-html :refer [set-attr prepend append html]]
             [cemerick.piggieback :as piggieback]
@@ -14,7 +14,7 @@
   (comp
      (set-attr :class "is-dev")
      (prepend (html [:script {:type "text/javascript" :src "/js/out/goog/base.js"}]))
-     (append  (html [:script {:type "text/javascript"} "goog.require('kushana.main')"]))))
+     (append  (html [:script {:type "text/javascript"} "goog.require('games.main')"]))))
 
 (defn browser-repl []
   (let [repl-env (weasel/repl-env :ip "0.0.0.0" :port 9001)]

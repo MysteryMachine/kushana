@@ -1,4 +1,4 @@
-(ns kushana.main
+(ns games.main
   (:require [games.tictactoe :as game]
             [figwheel.client :as figwheel :include-macros true]
             [cljs.core.async :refer [put!]]

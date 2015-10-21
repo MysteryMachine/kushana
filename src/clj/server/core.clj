@@ -1,7 +1,7 @@
 (ns server.core
   (:require [clojure.java.io :as io]
             [clojure.core.async :refer [go-loop <! >!] :as async]
-            [kushana.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
+            [server.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [resources]]
             [net.cgrand.enlive-html :refer [deftemplate]]
