@@ -1,6 +1,6 @@
 ![kuahana](https://github.com/MysteryMachine/kushana/raw/master/kushanaLogo.png "Kushana")
 
----
+<div style="padding-bottom: 40px;"> </div>
 
 Kushana is a data-driven Clojurescript game engine for building lo-fi 3D games and
 prototypes for networked games. It's built on top of [Babylon.js](https://github.com/BabylonJS/Babylon.js),
