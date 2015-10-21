@@ -1,6 +1,5 @@
 (ns server.core
   (:require [clojure.java.io :as io]
-            [clojure.core.async :refer [go-loop <! >!] :as async]
             [server.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [resources]]
@@ -11,7 +10,9 @@
             [environ.core :refer [env]]
             [org.httpkit.server :refer [run-server]]
             [taoensso.sente :as sente]
-            [taoensso.sente.server-adapters.http-kit :refer (sente-web-server-adapter)])
+            [taoensso.sente.server-adapters.http-kit :refer (sente-web-server-adapter)]
+            [kushana.core :as kushana]
+            [games.tictactoe :refer [logic]])
   (:gen-class))
 
 (let [{:keys [ch-recv send-fn ajax-post-fn
@@ -46,21 +47,15 @@
   (auto-reload *ns*)
   (start-figwheel))
 
-(defn event! [uid]
-  (chsk-send! uid [:server/event {:server/event {:ping true}}]))
-
-(defn start-broadcaster! []
-  (go-loop [i 0]
-    (<! (async/timeout 40))
-    (doseq [uid (:any @connected-uids)]
-      (event! uid))
-    (recur (inc i))))
+(def state (atom {}))
 
 (defn run [& [port]]
   (when is-dev?
     (run-auto-reload))
   (run-web-server port)
-  (start-broadcaster!))
+  (kushana/run-engine ch-chsk        chsk-send!
+                      connected-uids state
+                      logic          10))
 
 (defn -main [& [port]]
   (run port))

@@ -1,4 +1,7 @@
-(ns kushana.middleware)
+(ns kushana.macros)
+
+(defmacro defscene [name scene-graph update-fn & args]
+  `(def ~name (kushana.core/scene ~scene-graph ~update-fn ~@args)))
 
 (defmacro defmiddleware
   ([name scene-args scene-fn]

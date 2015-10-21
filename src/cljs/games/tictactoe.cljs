@@ -1,11 +1,9 @@
 (ns games.tictactoe
-  (:require [kushana.core :refer [server-connection!]]
-            [kushana.engine :as engine]
-						[kushana.scene :refer [with-ids ->name new-id]]
-						[kushana.helpers :refer [v3 c3 sin cos]]
+  (:require [kushana.core :refer [server-connection! engine
+                                  with-ids ->name new-id
+                                  v3 c3 sin cos]]
 						[kushana.middleware :as m])
-  (:use-macros [kushana.scene :only [defscene]]
-               [kushana.middleware :only [defmiddleware]]))
+  (:use-macros [kushana.macros :only [defscene defmiddleware]]))
 
 (enable-console-print!)
 
@@ -135,14 +133,14 @@
 #_(sente/set-logging-level! :trace)
 
 (defonce input
-  (engine/new
+  (engine
    scene-atom
    :canvas    "renderCanvas"
    :server    (server-connection!)
    :debug     true
    :antialias true
    :resize    true
-   :fps       25))
+   :fps       10))
 
 (defn reload []
 	(input {:debug/overview false
