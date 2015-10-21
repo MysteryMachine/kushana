@@ -4,7 +4,6 @@
             [taoensso.sente :as sente]
             [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
-            [jamesmacaulay.zelkova.mouse :as mouse]
             [kushana.impl.engine :as impl]
             [kushana.impl.scene
              :refer [->js-scene ->component dispose]]))
@@ -36,7 +35,7 @@
 (defn scene [scene-graph update-fn & {:as options}]
   (Scene. (new-id) scene-graph update-fn options))
 
-(defn update-js! [jseng a-jsobj]
+(defn- update-js! [jseng a-jsobj]
   (fn build-inner
     [js-scene {:keys [scene new-scene? new edit delete] :as diff}]
     (if new-scene?
@@ -52,16 +51,6 @@
           (dispose (get @a-jsobj id)))
         js-scene))))
 
-(defn ->name [scene-* name]
-  (if (= (type scene-*) Scene)
-    (->name (:scene-graph scene-*) name)
-    (some (fn [[id {next-name :name} :as obj]]
-            (when (= name next-name) obj))
-          scene-*)))
-
-(defn overview [scene]
-  (map (fn [[id obj]] [id (:name obj)]) (:scene-graph scene)))
-
 ;; Engine
 
 (defn server-connection! []
@@ -69,7 +58,7 @@
         (sente/make-channel-socket! "/chsk" {:type :auto})]
     {:recieve ch-recv :send send-fn}))
 
-(defn e-diff [id old new edit]
+(defn- e-diff [id old new edit]
   (if-let [change (second (diff old new))]
     (conj! edit [id change])
     edit))
@@ -118,7 +107,7 @@
 
 (defn- get-event [{[a [b args]] :event}] args)
 
-(defn server-signal [Δt recieve]
+(defn- server-signal [Δt recieve]
   (if recieve
     (let [start {:event [nil [nil {}]]}
           input   (z/input start get-event recieve)
@@ -160,3 +149,13 @@
   arity 1: (cos t) => cos(t)"
   ([t a b] (* a (.cos js/Math (/ t b))))
   ([t] (sin t 1 1)))
+
+(defn ->name [scene-* name]
+  (if (= (type scene-*) Scene)
+    (->name (:scene-graph scene-*) name)
+    (some (fn [[id {next-name :name} :as obj]]
+            (when (= name next-name) obj))
+          scene-*)))
+
+(defn overview [scene]
+  (map (fn [[id obj]] [id (:name obj)]) (:scene-graph scene)))

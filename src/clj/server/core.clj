@@ -53,9 +53,8 @@
   (when is-dev?
     (run-auto-reload))
   (run-web-server port)
-  (kushana/run-engine ch-chsk        chsk-send!
-                      connected-uids state
-                      logic          10))
+  (kushana/engine ch-chsk chsk-send! uids
+                  state   10))
 
 (defn -main [& [port]]
   (run port))
