@@ -1,6 +1,6 @@
-(defproject kushana "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+(defproject kushana "0.1.0"
+  :description ""
+  :url "https://github.com/MysteryMachine/kushana"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
@@ -56,7 +56,7 @@
                                   [weasel "0.6.0"]
                                   [com.keminglabs/cljx "0.6.0" :exclusions [org.clojure/clojure]]]
 
-                   :repl-options {:init-ns kushana.server
+                   :repl-options {:init-ns server.core
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl
                                                      cljx.repl-middleware/wrap-cljx]}
 
@@ -66,7 +66,7 @@
                    :figwheel {:http-server-root "public"
                               :server-port 3449
                               :css-dirs ["resources/public/css"]
-                              :ring-handler kushana.server/http-handler}
+                              :ring-handler server.core/http-handler}
 
                    :env {:is-dev true}
 
@@ -88,7 +88,7 @@
                        :env {:production true}
                        :omit-source true
                        :aot :all
-                       :main kushana.server
+                       :main server.core
                        :cljsbuild {:builds {:app
                                             {:source-paths ["env/prod/cljs"]
                                              :compiler

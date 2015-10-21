@@ -1,17 +1,13 @@
 (ns games.tictactoe
-  (:require [cljs.core.async :refer [put! chan]]
-		        [kushana.engine :as engine]
+  (:require [kushana.core :refer [server-connection!]]
+            [kushana.engine :as engine]
 						[kushana.scene :refer [with-ids ->name new-id]]
 						[kushana.helpers :refer [v3 c3 sin cos]]
-						[kushana.middleware :as m]
-            [cljs.core.async :as async :refer (<! >! put! chan)]
-            [taoensso.sente  :as sente :refer (cb-success?)])
+						[kushana.middleware :as m])
   (:use-macros [kushana.scene :only [defscene]]
-               [kushana.middleware :only [defmiddleware]]
-               [cljs.core.async.macros :only (go go-loop)]))
+               [kushana.middleware :only [defmiddleware]]))
 
 (enable-console-print!)
-
 
 (defn line [points]
   {:scene/component :mesh/lines
@@ -136,26 +132,19 @@
 
 (defonce scene-atom  (atom scene))
 
-(sente/set-logging-level! :trace)
+#_(sente/set-logging-level! :trace)
 
-(let [{:keys [chsk ch-recv send-fn state] :as sente-info}
-      (sente/make-channel-socket! "/chsk" {:type :auto})]
-  (def recieve  ch-recv)
-  (def send      send-fn))
-
-(defonce engine
+(defonce input
   (engine/new
    scene-atom
    :canvas    "renderCanvas"
-   :server    {:recieve recieve
-               :send    send}
+   :server    (server-connection!)
    :debug     true
    :antialias true
    :resize    true
    :fps       25))
 
-(defn comm! [arg] (put! engine arg))
 (defn reload []
-	(comm! {:debug/overview false
+	(input {:debug/overview false
           :debug/input    false
-	        :reload/logic   update-fn}))
+          :reload/logic   update-fn}))

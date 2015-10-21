@@ -41,9 +41,31 @@
 
 (defn- act [send!]
   (fn [{:keys [update-fn] :as scene} input]
-    (let [input' (dissoc input :dt)]
+    (let [input' (dissoc input :dt :server/event :reload/logic :reload/scene)]
       (if (not (empty? input')) (send! [:kushana/input input'])))
     (update-fn scene input)))
+
+; TODO: Fix this monstrosity
+(defn- event? [data]
+  (if-let [event (:event data)]
+    (if-let [chsk-type (first event)]
+      (if-let [e-type (first (second event))]
+        (and (= :chsk/recv chsk-type)
+             (= :server/event e-type))
+        false)
+      false)
+    false))
+
+(defn- get-event [{[a [b args]] :event}] args)
+
+(defn server-signal [Δt recieve]
+  (if recieve
+    (let [start {:event [nil [nil {}]]}
+          input   (z/input start get-event recieve)
+          input'  (z/keep-if event? input)
+          input'' (z/map get-event input')]
+      (z/merge input'' Δt))
+    (z/constant {})))
 
 (defn new [a-scene & {:as options}]
   (let [{:keys [recieve send]} (:server options)
@@ -51,17 +73,13 @@
         jseng     (impl/engine options)
         input     (chan)
         a-jsobj   (atom {})
-        Δt     (z/map (fn [δ] {:dt δ}) (time/fps (:fps options)))
-        δinput (z/merge (z/input {} identity input) Δt)
-        args   (if recieve
-                 [vector Δt δinput #_(z/input recieve)]
-                 [vector Δt δinput])
-        Δinput (z/map (fn [inputs]
-                        (reduce merge inputs))
-                      (apply z/map args))
-        Δscene (z/reductions (act send) @a-scene Δinput)
-        Δdiff  (z/reductions δscene {:scene-graph {}} Δscene)
-        Δjs    (z/reductions (update-js! jseng a-jsobj) nil Δdiff)]
+        Δt      (z/map (fn [δ] {:dt δ}) (time/fps (:fps options)))
+        δinput  (z/merge (z/input {} identity input) Δt)
+        Δserver (server-signal Δt recieve)
+        Δinput  (z/map merge  Δt δinput Δserver)
+        Δscene  (z/reductions (act send) @a-scene Δinput)
+        Δdiff   (z/reductions δscene {:scene-graph {}} Δscene)
+        Δjs     (z/reductions (update-js! jseng a-jsobj) nil Δdiff)]
     (impl/draw! jseng (z/pipe-to-atom Δjs))
     (z/pipe-to-atom Δscene a-scene)
-    input))
+    (fn [a] (put! input a))))
