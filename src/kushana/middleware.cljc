@@ -1,6 +1,6 @@
 (ns kushana.middleware
   (:require-macros [kushana.middleware :refer [defmiddleware]])
-  (:require [kushana.core :refer [overview]]))
+  (:require        [kushana.core :refer [overview]]))
 
 (defn middleware [scene-fn input-fn]
   (fn [update-fn]

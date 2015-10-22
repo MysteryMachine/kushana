@@ -1,3 +1,10 @@
+#?(:clj
+(ns kushana.core
+  (:require [clojure.core.async :refer
+             [go-loop <! >! put!] :as async]
+            #_[jamesmacaulay.zelkova.signal :as z]
+            #_[jamesmacaulay.zelkova.time :as time]))
+   :cljs
 (ns kushana.core
   (:require [cljs.core.async :refer [chan put!]]
             [clojure.data :refer [diff]]
@@ -5,8 +12,7 @@
             [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
             [kushana.impl.engine :as impl]
-            [kushana.impl.scene
-             :refer [->js-scene ->component dispose]]))
+            [kushana.impl.scene :refer [update-js!]])))
 
 ;; Data
 
@@ -35,34 +41,21 @@
 (defn scene [scene-graph update-fn & {:as options}]
   (Scene. (new-id) scene-graph update-fn options))
 
-(defn- update-js! [jseng a-jsobj]
-  (fn build-inner
-    [js-scene {:keys [scene new-scene? new edit delete] :as diff}]
-    (if new-scene?
-      (let [js-scene' (->js-scene jseng scene)
-            diff'     (assoc diff :new-scene? nil)]
-        (build-inner js-scene' diff'))
-      (do
-        (doseq [[id args] new]
-          (->component js-scene a-jsobj id args))
-        (doseq [[id args] edit]
-          (->component a-jsobj id args))
-        (doseq [id delete]
-          (dispose (get @a-jsobj id)))
-        js-scene))))
-
 ;; Engine
 
+#?(:cljs
 (defn server-connection! []
   (let [{:keys [ch-recv send-fn] :as sente-info}
         (sente/make-channel-socket! "/chsk" {:type :auto})]
-    {:recieve ch-recv :send send-fn}))
+    {:recieve ch-recv :send send-fn})))
 
+#?(:cljs
 (defn- e-diff [id old new edit]
   (if-let [change (second (diff old new))]
     (conj! edit [id change])
-    edit))
+    edit)))
 
+#?(:cljs
 (defn- δscene
   [{{osg :scene-graph :as old-scene} :scene} {nsg :scene-graph :as new-scene}]
   (let [i-f  (latest-id)
@@ -86,12 +79,13 @@
             edit? (recur i' new (e-diff i old-obj new-obj edit) del)
             new?  (recur i' (conj! new [i new-obj]) edit del)
             old?  (recur i' new edit (conj! del i))
-            :else (recur i' new edit del)))))))
+            :else (recur i' new edit del))))))))
 
 (defn- act [send!]
   (fn [{:keys [update-fn] :as scene} input]
-    (let [input' (dissoc input :dt :server/event :reload/logic :reload/scene)]
-      (if (not (empty? input')) (send! [:kushana/input input'])))
+    #?(:cljs
+       (let [input' (dissoc input :dt :server/event :reload/logic :reload/scene)]
+        (if (not (empty? input')) (send! [:kushana/input input']))))
     (update-fn scene input)))
 
 ; TODO: Fix this monstrosity
@@ -107,6 +101,7 @@
 
 (defn- get-event [{[a [b args]] :event}] args)
 
+#?(:cljs
 (defn- server-signal [Δt recieve]
   (if recieve
     (let [start {:event [nil [nil {}]]}
@@ -114,8 +109,9 @@
           input'  (z/keep-if event? input)
           input'' (z/map get-event input')]
       (z/merge input'' Δt))
-    (z/constant {})))
+    (z/constant {}))))
 
+#?(:cljs
 (defn engine [a-scene & {:as options}]
   (let [{:keys [recieve send]} (:server options)
         options   (dissoc options :recive :send)
@@ -132,23 +128,33 @@
     (impl/draw! jseng (z/pipe-to-atom Δjs))
     (z/pipe-to-atom Δscene a-scene)
     (fn [a] (put! input a))))
+   :clj
+   (defn engine [recieve send uids state fps]
+     nil
+     #_(let [Δt      (z/map (fn [δ] {:dt δ}) (time/fps fps))
+           Δinput  (z/merge (z/input {} identity recieve) Δt)
+           Δscene  (z/reductions (act send uids) @state Δinput)]
+       (z/pipe-to-atom Δscene state)
+       (fn [a] (put! receive a)))))
 
 ;; Helpers
 
 (defn v3 [x y z] {:x x :y y :z z})
 (defn c3 [r g b] {:r r :g g :b b})
 
+#?(:cljs
 (defn sin
-  "arity 3: (sin t a b) => a*sin(t/b)
-  arity 1: (sin t) => sin(t)"
+"arity 3: (sin t a b) => a*sin(t/b)
+arity 1: (sin t) => sin(t)"
   ([t a b] (* a (.sin js/Math (/ t b))))
-  ([t] (sin t 1 1)))
+  ([t] (sin t 1 1))))
 
+#?(:cljs
 (defn cos
-  "arity 3: (cos t a b) => a*cos(t/b)
-  arity 1: (cos t) => cos(t)"
+"arity 3: (cos t a b) => a*cos(t/b)
+arity 1: (cos t) => cos(t)"
   ([t a b] (* a (.cos js/Math (/ t b))))
-  ([t] (sin t 1 1)))
+  ([t] (sin t 1 1))))
 
 (defn ->name [scene-* name]
   (if (= (type scene-*) Scene)

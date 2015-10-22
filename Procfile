@@ -1,1 +1,1 @@
-web: java $JVM_OPTS -cp target/kushana.jar clojure.main -m server.core
+web: java $JVM_OPTS -cp target/server.jar clojure.main -m server.core

@@ -1,11 +1,13 @@
 (ns games.tictactoe
-  (:require [kushana.core :refer [server-connection! engine
-                                  with-ids ->name new-id
-                                  v3 c3 sin cos]]
-						[kushana.middleware :as m])
-  (:use-macros [kushana.macros :only [defscene defmiddleware]]))
+  (:require [kushana.core :refer
+             #?(:cljs [server-connection! engine with-ids ->name new-id
+                       v3 c3 sin cos]
+                :clj  [engine with-ids ->name new-id v3 c3])]
+						[kushana.middleware :as m]
+            #?(:clj [kushana.macros :refer [defscene defmiddleware]]))
+  #?(:cljs (:use-macros [kushana.macros :only [defscene defmiddleware]])))
 
-(enable-console-print!)
+#?(:cljs (enable-console-print!))
 
 (defn line [points]
   {:scene/component :mesh/lines
@@ -130,19 +132,20 @@
 
 (defonce scene-atom  (atom scene))
 
-#_(sente/set-logging-level! :trace)
+#?@(:cljs
+[(sente/set-logging-level! :trace)
 
-(defonce input
-  (engine
-   scene-atom
-   :canvas    "renderCanvas"
-   :server    (server-connection!)
-   :debug     true
-   :antialias true
-   :resize    true
-   :fps       10))
+ (defonce input
+   (engine
+    scene-atom
+    :canvas    "renderCanvas"
+    :server    (server-connection!)
+    :debug     true
+    :antialias true
+    :resize    true
+    :fps       10))
 
-(defn reload []
-	(input {:debug/overview false
-          :debug/input    false
-          :reload/logic   update-fn}))
+ (defn reload []
+   (input {:debug/overview false
+           :debug/input    false
+           :reload/logic   update-fn}))])

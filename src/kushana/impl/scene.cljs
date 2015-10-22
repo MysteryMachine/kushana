@@ -112,3 +112,19 @@
                  (set-options! args))]
      (swap! object-graph #(assoc % id obj))
      obj)))
+
+(defn- update-js! [jseng a-jsobj]
+  (fn build-inner
+    [js-scene {:keys [scene new-scene? new edit delete] :as diff}]
+    (if new-scene?
+      (let [js-scene' (->js-scene jseng scene)
+            diff'     (assoc diff :new-scene? nil)]
+        (build-inner js-scene' diff'))
+      (do
+        (doseq [[id args] new]
+          (->component js-scene a-jsobj id args))
+        (doseq [[id args] edit]
+          (->component a-jsobj id args))
+        (doseq [id delete]
+          (dispose (get @a-jsobj id)))
+        js-scene))))

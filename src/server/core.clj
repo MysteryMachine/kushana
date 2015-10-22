@@ -11,8 +11,7 @@
             [org.httpkit.server :refer [run-server]]
             [taoensso.sente :as sente]
             [taoensso.sente.server-adapters.http-kit :refer (sente-web-server-adapter)]
-            [kushana.core :as kushana]
-            [games.tictactoe :refer [logic]])
+            [kushana.core :as kushana])
   (:gen-class))
 
 (let [{:keys [ch-recv send-fn ajax-post-fn
@@ -53,7 +52,7 @@
   (when is-dev?
     (run-auto-reload))
   (run-web-server port)
-  (kushana/engine ch-chsk chsk-send! uids
+  #_(kushana/engine ch-chsk chsk-send! uids
                   state   10))
 
 (defn -main [& [port]]
