@@ -9,28 +9,21 @@
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [environ.core :refer [env]]
             [org.httpkit.server :refer [run-server]]
-            [taoensso.sente :as sente]
-            [taoensso.sente.server-adapters.http-kit :refer (sente-web-server-adapter)]
-            [kushana.core :as kushana])
+            [games.tictactoe :refer [engine-connection]])
   (:gen-class))
-
-(let [{:keys [ch-recv send-fn ajax-post-fn
-              ajax-get-or-ws-handshake-fn connected-uids]}
-      (sente/make-channel-socket! sente-web-server-adapter {})]
-  (def ring-ajax-post ajax-post-fn)
-  (def ring-ajax-get  ajax-get-or-ws-handshake-fn)
-  (def ch-chsk        ch-recv)
-  (def chsk-send!     send-fn)
-  (def connected-uids connected-uids))
 
 (deftemplate page (io/resource "index.html") []
   [:body] (if is-dev? inject-devmode-html identity))
 
+(let [{:keys [get post input]} engine-connection]
+  (def eng-get  get)
+  (def eng-post post))
+
 (defroutes routes
   (resources "/")
   (resources "/react" {:root "react"})
-  (GET  "/chsk" req (#'ring-ajax-get  req))
-  (POST "/chsk" req (#'ring-ajax-post req))
+  (GET  "/chsk" req (#'eng-get  req))
+  (POST "/chsk" req (#'eng-post req))
   (GET  "/" req (page)))
 
 (def http-handler
@@ -46,14 +39,9 @@
   (auto-reload *ns*)
   (start-figwheel))
 
-(def state (atom {}))
-
 (defn run [& [port]]
-  (when is-dev?
-    (run-auto-reload))
-  (run-web-server port)
-  #_(kushana/engine ch-chsk chsk-send! uids
-                  state   10))
+  (when is-dev? (run-auto-reload))
+  (run-web-server port))
 
 (defn -main [& [port]]
   (run port))

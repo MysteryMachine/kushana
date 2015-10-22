@@ -1,11 +1,11 @@
 (ns games.tictactoe
-  (:require [kushana.core :refer
-             #?(:cljs [server-connection! engine with-ids ->name new-id
-                       v3 c3 sin cos]
-                :clj  [engine with-ids ->name new-id v3 c3])]
+  (:require [kushana.core
+             :refer [connect! engine with-ids
+                     ->name new-id v3 c3 sin cos]]
 						[kushana.middleware :as m]
             #?(:clj [kushana.macros :refer [defscene defmiddleware]]))
-  #?(:cljs (:use-macros [kushana.macros :only [defscene defmiddleware]])))
+  #?(:cljs
+     (:require-macros [kushana.macros :refer [defscene defmiddleware]])))
 
 #?(:cljs (enable-console-print!))
 
@@ -132,20 +132,22 @@
 
 (defonce scene-atom  (atom scene))
 
-#?@(:cljs
-[(sente/set-logging-level! :trace)
+#?(:cljs
+   (sente/set-logging-level! :trace))
 
- (defonce input
-   (engine
-    scene-atom
-    :canvas    "renderCanvas"
-    :server    (server-connection!)
-    :debug     true
-    :antialias true
-    :resize    true
-    :fps       10))
+(defonce engine-connection
+  (engine
+   scene-atom
+   :fps        10
+   :connection (connect!)
+   #?@(:cljs
+       [:canvas     "renderCanvas"
+        :antialias  true
+        :resize     true])))
 
- (defn reload []
-   (input {:debug/overview false
-           :debug/input    false
-           :reload/logic   update-fn}))])
+#?(:cljs
+   (defn reload []
+     ((:input engine-connection)
+      {:debug/overview false
+       :debug/input    false
+       :reload/logic   update-fn})))

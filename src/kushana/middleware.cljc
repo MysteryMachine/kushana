@@ -1,6 +1,8 @@
 (ns kushana.middleware
-  (:require-macros [kushana.middleware :refer [defmiddleware]])
-  (:require        [kushana.core :refer [overview]]))
+  #?(:cljs
+     (:require-macros [kushana.macros :refer [defmiddleware]]))
+  (:require [kushana.core :refer [overview]]
+    #?(:clj [kushana.macros :refer [defmiddleware]])))
 
 (defn middleware [scene-fn input-fn]
   (fn [update-fn]
@@ -10,7 +12,7 @@
 
 (defn lay [& fns]
   (if (empty? fns)
-    identity
+    (fn [a b] a)
     ((first fns) (apply lay (rest fns)))))
 (def μ lay)
 
