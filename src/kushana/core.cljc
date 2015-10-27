@@ -15,7 +15,6 @@
 (defrecord Scene [id scene-graph update-fn options])
 
 ;; Ids
-
 (defonce id-fns
   (let [counter (atom 0)]
     [(fn latest-id [] @counter)
@@ -44,9 +43,8 @@
 
 (defn- act [send!]
   (fn [{:keys [update-fn] :as scene} input]
-    #?(:cljs
-       (let [input' (dissoc input :dt :server/event :reload/logic :reload/scene)]
-        (if (not (empty? input')) (send! [:kushana/input input']))))
+    (let [input' (dissoc input :dt :server/event :reload/logic :reload/scene)]
+      (if (not (empty? input')) (send! [:kushana/input input'])))
     (update-fn scene input)))
 
 (defn- event? [data]
@@ -57,16 +55,13 @@
 (defn- get-event [{[_ [_ args]] :event}] args)
 
 (defn- socket-signal [Δt recieve]
-  #?(:cljs
-     (if recieve
-       (let [start {:event [nil [nil {}]]}
-             input   (z/input start get-event recieve)
-             input'  (z/keep-if event? input)
-             input'' (z/map get-event input')]
-         (z/merge input'' Δt))
-       (z/constant {}))
-     :clj
-     (z/constant {})))
+  (if recieve
+    (let [start {:event [nil [nil {}]]}
+          input   (z/input start get-event recieve)
+          input'  (z/keep-if event? input)
+          input'' (z/map get-event input')]
+      (z/merge input'' Δt))
+    (z/constant {})))
 
 (defrecord EngineConnection [input get post])
 
@@ -85,7 +80,7 @@
              jseng     (impl/engine options)
              a-jsobj   (atom {})
 
-             Δdiff   (z/reductions δscene {:scene-graph {}} Δscene)
+             Δdiff   (z/reductions (δscene latest-id) {:scene-graph {}} Δscene)
              Δjs     (z/reductions (update-js! jseng a-jsobj) nil Δdiff)]
          (impl/draw! jseng (z/pipe-to-atom Δjs))))
     (z/pipe-to-atom Δscene a-scene)

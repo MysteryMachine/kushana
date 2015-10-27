@@ -97,14 +97,20 @@
       (take-turn id scene pos)
       scene)))
 
+(defmiddleware counter [{sg :scene-graph :as scene} inputs]
+  (let [[id _] (->name sg "counter")]
+    (update-in scene [:scene-graph id #?(:cljs :client :clj :server)] inc)))
+
 (def update-fn
   (m/lay m/debug
          m/reload
          handle-input
-         handle-win))
+         handle-win
+         counter))
 
 (defscene scene
   (with-ids {}
+    {:name "counter" :client 0 :server 0}
     {:turn :x :name "state"}
     {:scene/component :camera/target
      :name "camera"
@@ -132,9 +138,6 @@
 
 (defonce scene-atom  (atom scene))
 
-#?(:cljs
-   (sente/set-logging-level! :trace))
-
 (defonce engine-connection
   (engine
    scene-atom
@@ -145,9 +148,8 @@
         :antialias  true
         :resize     true])))
 
-#?(:cljs
-   (defn reload []
-     ((:input engine-connection)
-      {:debug/overview false
-       :debug/input    false
-       :reload/logic   update-fn})))
+(defn reload []
+  ((:input engine-connection)
+   {:debug/overview true
+    :debug/input    false
+    :reload/logic   update-fn}))

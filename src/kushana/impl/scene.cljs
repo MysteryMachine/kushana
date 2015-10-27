@@ -1,5 +1,6 @@
 (ns kushana.impl.scene
-  (:require cljsjs.babylon))
+  (:require cljsjs.babylon
+            [clojure.data :refer [diff]]))
 (def b js/BABYLON) 
 
 (defn v2
@@ -136,27 +137,27 @@
     (conj! edit [id change])
     edit))
 
-(defn- δscene
-  [{{osg :scene-graph :as old-scene} :scene} {nsg :scene-graph :as new-scene}]
-  (let [i-f  (latest-id)
-        new? (not= (:id old-scene) (:id new-scene))]
-    (loop [i 0
-           new  (transient [])
-           edit (transient [])
-           del  (transient [])]
-      (if (> i i-f)
-        (let [new'  (persistent! new)
-              edit' (persistent! edit)
-              del'  (persistent! del)]
-          (Diff. new-scene new? new' edit' del'))
-        (let [i'      (inc i)
-              new-obj (get nsg i)
-              old-obj (get osg i)
-              old?    (:scene/component old-obj)
-              new?    (:scene/component new-obj)
-              edit?   (and old? new?)]
-          (cond
-            edit? (recur i' new (e-diff i old-obj new-obj edit) del)
-            new?  (recur i' (conj! new [i new-obj]) edit del)
-            old?  (recur i' new edit (conj! del i))
-            :else (recur i' new edit del)))))))
+(defn- δscene [latest-id]
+  (fn [{{osg :scene-graph :as old-scene} :scene} {nsg :scene-graph :as new-scene}]
+   (let [i-f  (latest-id)
+         new? (not= (:id old-scene) (:id new-scene))]
+     (loop [i 0
+            new  (transient [])
+            edit (transient [])
+            del  (transient [])]
+       (if (> i i-f)
+         (let [new'  (persistent! new)
+               edit' (persistent! edit)
+               del'  (persistent! del)]
+           (Diff. new-scene new? new' edit' del'))
+         (let [i'      (inc i)
+               new-obj (get nsg i)
+               old-obj (get osg i)
+               old?    (:scene/component old-obj)
+               new?    (:scene/component new-obj)
+               edit?   (and old? new?)]
+           (cond
+             edit? (recur i' new (e-diff i old-obj new-obj edit) del)
+             new?  (recur i' (conj! new [i new-obj]) edit del)
+             old?  (recur i' new edit (conj! del i))
+             :else (recur i' new edit del))))))))

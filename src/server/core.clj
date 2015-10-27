@@ -37,6 +37,7 @@
 
 (defn run-auto-reload [& [port]]
   (auto-reload *ns*)
+  (browser-repl)
   (start-figwheel))
 
 (defn run [& [port]]

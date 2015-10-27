@@ -19,7 +19,7 @@
                  [jamesmacaulay/zelkova "0.4.0"]
                  [com.taoensso/sente "1.6.0"]
                  [cljsjs/babylon "2.2.0-0"]]
-  :plugins [[lein-cljsbuild "1.0.5"]
+  :plugins [[lein-cljsbuild "1.1.0"]
             [lein-environ "1.0.0"]]
   :min-lein-version "2.5.0"
   :uberjar-name "server.jar"
