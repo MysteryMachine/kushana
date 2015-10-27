@@ -1,15 +1,14 @@
 (ns kushana.core
-  (:require [clojure.core.async :refer
-             [go-loop <! >! put! chan] :as async]
-            [jamesmacaulay.zelkova.signal :as z]
+  (:require [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
             [taoensso.sente :as sente]
+            [#?(:cljs cljs.core.async :clj clojure.core.async)
+             :refer [<! >! put! chan] :as async]
          #?@(:cljs
-           [[clojure.data :refer [diff]]
-            [kushana.impl.engine :as impl]
-            [kushana.impl.scene :refer [update-js! δscene]]]
+             [[kushana.impl.engine :as impl]
+              [kushana.impl.scene :refer [update-js! δscene]]]
              :clj
-           [[taoensso.sente.server-adapters.http-kit
+             [[taoensso.sente.server-adapters.http-kit
              :refer (sente-web-server-adapter)]])))
 
 (defrecord Scene [id scene-graph update-fn options])
@@ -84,7 +83,9 @@
              Δjs     (z/reductions (update-js! jseng a-jsobj) nil Δdiff)]
          (impl/draw! jseng (z/pipe-to-atom Δjs))))
     (z/pipe-to-atom Δscene a-scene)
-    (EngineConnection. input ajax-get-or-ws-handshake-fn ajax-post-fn)))
+    (EngineConnection. (fn [args] (put! input args))
+                       ajax-get-or-ws-handshake-fn
+                       ajax-post-fn)))
 
 ;; Helpers
 
