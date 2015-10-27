@@ -1,12 +1,12 @@
 (ns server.core
   (:require [clojure.java.io :as io]
-            [server.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
+            [server.dev :refer [is-dev? inject-devmode-html cljs-repl start-figwheel]]
             [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [resources]]
             [net.cgrand.enlive-html :refer [deftemplate]]
             [net.cgrand.reload :refer [auto-reload]]
             [ring.middleware.reload :as reload]
-            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [environ.core :refer [env]]
             [org.httpkit.server :refer [run-server]]
             [games.tictactoe :refer [engine-connection]])
@@ -26,10 +26,14 @@
   (POST "/chsk" req (#'eng-post req))
   (GET  "/" req (page)))
 
+(def defaults
+  (-> site-defaults
+      (assoc-in [:security :anti-forgery] {:read-token (fn [req] (-> req :params :csrf-token))})))
+
 (def http-handler
   (if is-dev?
-    (reload/wrap-reload (wrap-defaults #'routes api-defaults))
-    (wrap-defaults routes api-defaults)))
+    (reload/wrap-reload (wrap-defaults #'routes defaults))
+    (wrap-defaults routes defaults)))
 
 (defn run-web-server [& [port]]
   (let [port (Integer. (or port (env :port) 10555))]
@@ -37,11 +41,11 @@
 
 (defn run-auto-reload [& [port]]
   (auto-reload *ns*)
-  (browser-repl)
   (start-figwheel))
 
 (defn run [& [port]]
-  (when is-dev? (run-auto-reload))
+  (when is-dev?
+    (run-auto-reload))
   (run-web-server port))
 
 (defn -main [& [port]]

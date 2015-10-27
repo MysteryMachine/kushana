@@ -10,17 +10,17 @@
                  [org.clojure/clojurescript "1.7.145"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [org.omcljs/om "0.8.8"]
-                 [ring "1.3.2"]
-                 [ring/ring-defaults "0.1.4"]
-                 [compojure "1.3.2"]
+                 [ring "1.4.0"]
+                 [ring/ring-defaults "0.1.5"]
+                 [compojure "1.4.0"]
                  [enlive "1.1.6"]
-                 [environ "1.0.0"]
+                 [environ "1.0.1"]
                  [http-kit "2.1.19"]
                  [jamesmacaulay/zelkova "0.4.0"]
                  [com.taoensso/sente "1.6.0"]
                  [cljsjs/babylon "2.2.0-0"]]
   :plugins [[lein-cljsbuild "1.0.5"]
-            [lein-environ "1.0.0"]]
+            [lein-environ "1.0.1"]]
   :min-lein-version "2.5.0"
   :uberjar-name "server.jar"
   :cljsbuild
@@ -37,13 +37,13 @@
   {:dev
    {:source-paths ["env/dev"]
     :test-paths   ["test"]
-    :dependencies [[figwheel "0.2.5"]
-                   [figwheel-sidecar "0.2.5"]
-                   [com.cemerick/piggieback "0.1.5"]
-                   [weasel "0.6.0"]]
+    :dependencies [[figwheel "0.4.1"]
+                   [figwheel-sidecar "0.4.1"]
+                   [com.cemerick/piggieback "0.2.1"]
+                   [weasel "0.7.0"]]
     :repl-options {:init-ns server.core
                    :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
-    :plugins [[lein-figwheel "0.2.5"]]
+    :plugins [[lein-figwheel "0.4.1"]]
     :figwheel {:http-server-root "public"
                :server-port 3449
                :css-dirs ["resources/public/css"]
