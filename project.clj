@@ -6,6 +6,7 @@
 
   :source-paths ["src"]
   :test-paths   ["test"]
+  :clean-targets ^{:protect false} ["resources/public/js/out"]
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.145"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
@@ -19,7 +20,7 @@
                  [jamesmacaulay/zelkova "0.4.0"]
                  [com.taoensso/sente "1.6.0"]
                  [cljsjs/babylon "2.2.0-0"]]
-  :plugins [[lein-cljsbuild "1.0.5"]
+  :plugins [[lein-cljsbuild "1.1.0"]
             [lein-environ "1.0.1"]]
   :min-lein-version "2.5.0"
   :uberjar-name "server.jar"

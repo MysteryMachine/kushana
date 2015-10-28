@@ -44,8 +44,7 @@
   (start-figwheel))
 
 (defn run [& [port]]
-  (when is-dev?
-    (run-auto-reload))
+  (when is-dev? (run-auto-reload))
   (run-web-server port))
 
 (defn -main [& [port]]
