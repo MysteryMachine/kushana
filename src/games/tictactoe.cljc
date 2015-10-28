@@ -1,9 +1,9 @@
 (ns games.tictactoe
   (:require [kushana.core
-             :refer [connect! engine with-ids
-                     ->name new-id v3 c3 sin cos]]
+             :refer [connect! engine with-ids ->name new-id v3 c3 sin cos]]
 						[kushana.middleware :as m]
-            #?(:clj [kushana.macros :refer [defscene defmiddleware]]))
+            #?(:clj  [kushana.macros :refer [defscene defmiddleware]]
+               :cljs [reagent.core :as r])) 
   #?(:cljs
      (:require-macros [kushana.macros :refer [defscene defmiddleware]])))
 
@@ -136,7 +136,9 @@
   update-fn
   :clearColor (c3 0 1 1))
 
-(defonce scene-atom  (atom scene))
+(defonce scene-atom
+  #?(:clj  (atom scene)
+     :cljs (r/atom scene)))
 
 (defonce engine-connection
   (engine
@@ -150,6 +152,47 @@
 
 (defn reload []
   ((:input engine-connection)
-   {:debug/overview true
+   {:debug/overview false
     :debug/input    false
     :reload/logic   update-fn}))
+
+#?(:cljs (defonce ui-atom (r/atom [0 0])))
+
+#?(:cljs
+(defn ui []
+  (let [[_ scene-state] (->name @scene-atom "state")
+        [x y :as s] @ui-atom
+        turn (:turn scene-state)]
+    [:div {:style
+           {:padding "20px"
+            :margin  "20px"
+            :position "static"
+            :border-color "#929292"
+            :border-width "5px"
+            :border-style "solid"
+            :display "inline-block"}}
+     [:div {:style {:padding-bottom "15px"}}
+      (str "It is currently " turn  "'s turn!")]
+     [:div {:style {:padding-bottom "15px"}}
+      [:div {:style {:display "inline-block" :padding "0 15px 0 0"}} "x"]
+      [:input
+       {:value x
+        :type "text"
+        :on-change
+        (fn [component]
+          (reset! ui-atom [(-> component .-target .-value) y]))}]]
+     [:div {:style {:padding-bottom "15px"}}
+      [:div {:style {:display "inline-block" :padding "0 15px 0 0"}} "y"]
+      [:input
+       {:value y
+        :type "text"
+        :on-change
+        (fn [component]
+          (reset! ui-atom [x (-> component .-target .-value)]))}]]
+     [:div>button
+      {:on-click
+       (fn [] ((:input engine-connection) {turn s}))}
+      "Take Turn"]])))
+
+#?(:cljs
+(r/render [ui] (.getElementById js/document "app")))
