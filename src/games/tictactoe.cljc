@@ -64,7 +64,7 @@
 (defn three-in-row [key
                {tl [0 0] t  [1 0] tr [2 0]
                 l  [0 1] m  [1 1] r  [2 1]
-                bl [0 2] b  [1 2] br [2 2]}]
+                bl [0 2] b  [1 2] br [2 2] :as a}]
   (or (= key tl l bl)
       (= key tl m br)
       (= key tl t tr)
@@ -177,7 +177,7 @@
       [:div {:style {:display "inline-block" :padding "0 15px 0 0"}} "x"]
       [:input
        {:value x
-        :type "text"
+        :type "number"
         :on-change
         (fn [component]
           (reset! ui-atom [(-> component .-target .-value) y]))}]]
@@ -185,13 +185,13 @@
       [:div {:style {:display "inline-block" :padding "0 15px 0 0"}} "y"]
       [:input
        {:value y
-        :type "text"
+        :type "number"
         :on-change
         (fn [component]
           (reset! ui-atom [x (-> component .-target .-value)]))}]]
      [:div>button
       {:on-click
-       (fn [] ((:input engine-connection) {turn s}))}
+       (fn [] ((:input engine-connection) {turn (map int s)}))}
       "Take Turn"]])))
 
 #?(:cljs
