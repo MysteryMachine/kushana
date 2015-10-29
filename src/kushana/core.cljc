@@ -2,14 +2,15 @@
   (:require [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
             [taoensso.sente :as sente]
-            [#?(:cljs cljs.core.async :clj clojure.core.async)
-             :refer [<! >! put! chan] :as async]
          #?@(:cljs
              [[kushana.impl.engine :as impl]
-              [kushana.impl.scene :refer [update-js! δscene]]]
+              [kushana.impl.scene :refer [update-js! δscene]]
+              [cljs.core.async :refer [<! >! put! chan] :as async]]
              :clj
              [[taoensso.sente.server-adapters.http-kit
-             :refer (sente-web-server-adapter)]])))
+               :refer (sente-web-server-adapter)]]
+             [clojure.core.async
+              :refer [<! >! put! chan go-loop] :as async])))
 
 (defrecord Scene [id scene-graph update-fn options])
 
@@ -53,32 +54,26 @@
 
 (defn- get-event [{[_ [_ args]] :event}] args)
 
-(defn- socket-signal [Δt recieve]
-  (if recieve
-    (let [start {:event [nil [nil {}]]}
-          input   (z/input start get-event recieve)
-          input'  (z/keep-if event? input)
-          input'' (z/map get-event input')]
-      (z/merge input'' Δt))
-    (z/constant {})))
-
 (defrecord EngineConnection [input get post])
+(defrecord TimeEvent        [dt])
+(defrecord InputEvent       [event])
+(defrecord SocketEvent      [event])
 
 (defn engine [a-scene & {:as options}]
   (let [{:keys [ch-recv send-fn connected-uids
                 ajax-get-or-ws-handshake-fn
                 ajax-post-fn]} (:connection options)
-        input   (chan)
-        Δt      (z/map (fn [δ] {:dt δ}) (time/fps (:fps options)))
-        δinput  (z/merge (z/input {} identity input) Δt)
-        Δsocket (socket-signal Δt ch-recv)
-        Δinput  (z/map merge  Δt δinput Δsocket)
-        Δscene  (z/reductions (act send-fn) @a-scene Δinput)]
+        input     (chan)
+        ch-t      (async/map #(TimeEvent. %)
+                             [(z/to-chan (time/fps (:fps options)))])
+        ch-input  (async/map #(InputEvent. %) [input])
+        ch-socket (async/map #(SocketEvent. %) [(if ch-recv ch-recv (chan))])
+        Δinput    (z/input nil identity (async/merge [ch-input ch-socket ch-t]))
+        Δscene    (z/reductions (act send-fn) @a-scene Δinput)]
     #?(:cljs
        (let [options   (dissoc options :recive :send)
              jseng     (impl/engine options)
              a-jsobj   (atom {})
-
              Δdiff   (z/reductions (δscene latest-id) {:scene-graph {}} Δscene)
              Δjs     (z/reductions (update-js! jseng a-jsobj) nil Δdiff)]
          (impl/draw! jseng (z/pipe-to-atom Δjs))))

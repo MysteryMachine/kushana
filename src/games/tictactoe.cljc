@@ -88,8 +88,9 @@
       scene)))
 
 (defmiddleware handle-input [scene inputs]
-  (let [[id board]    (->name (:scene-graph scene) "state")
-        [x z :as pos] (or ((:turn board) inputs) [-1 -1])]
+  (let [event (:event inputs)
+        [id board]    (->name (:scene-graph scene) "state")
+        [x z :as pos] (or ((:turn board) event) [-1 -1])]
     (if (and
          (not (:winner board))
          (nil? (get board pos))
