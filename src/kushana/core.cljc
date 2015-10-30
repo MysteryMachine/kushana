@@ -8,11 +8,16 @@
               [cljs.core.async :refer [<! >! put! chan] :as async]]
              :clj
              [[taoensso.sente.server-adapters.http-kit
-               :refer (sente-web-server-adapter)]]
-             [clojure.core.async
-              :refer [<! >! put! chan go-loop] :as async])))
+               :refer (sente-web-server-adapter)]
+              [clojure.core.async :refer [<! >! put! chan go-loop] :as async]]))
+  #?(:cljs (:require-macros [cljs.core.async.macros :refer [go-loop]])))
 
 (defrecord Scene [id scene-graph update-fn options])
+(defrecord EngineConnection [input get post])
+(defrecord TimeEvent   [event])
+(defrecord InputEvent  [event])
+(defrecord ClientEvent [event])
+(defrecord ServerEvent [event])
 
 ;; Ids
 (defonce id-fns
@@ -41,12 +46,6 @@
   (sente/make-channel-socket! #?@(:cljs ["/chsk" {:type :auto}]
                                   :clj  [sente-web-server-adapter {}])))
 
-(defn- act [send!]
-  (fn [{:keys [update-fn] :as scene} input]
-    (let [input' (dissoc input :dt :server/event :reload/logic :reload/scene)]
-      (if (not (empty? input')) (send! [:kushana/input input'])))
-    (update-fn scene input)))
-
 (defn- event? [data]
   (let [event (:event data)]
     (and (some-> event  first (= :chsk/recv))
@@ -54,31 +53,73 @@
 
 (defn- get-event [{[_ [_ args]] :event}] args)
 
-(defrecord EngineConnection [input get post])
-(defrecord TimeEvent        [dt])
-(defrecord InputEvent       [event])
-(defrecord SocketEvent      [event])
+(defn- act [{:keys [update-fn] :as scene} input]
+  (case (type input)
+    TimeEvent   (update-fn scene input)
+    InputEvent  (update-fn scene input)
+    SocketEvent (:event input)
+    scene))
 
-(defn engine [a-scene & {:as options}]
-  (let [{:keys [ch-recv send-fn connected-uids
-                ajax-get-or-ws-handshake-fn
-                ajax-post-fn]} (:connection options)
-        input     (chan)
-        ch-t      (async/map #(TimeEvent. %)
-                             [(z/to-chan (time/fps (:fps options)))])
-        ch-input  (async/map #(InputEvent. %) [input])
-        ch-socket (async/map #(SocketEvent. %) [(if ch-recv ch-recv (chan))])
-        Δinput    (z/input nil identity (async/merge [ch-input ch-socket ch-t]))
-        Δscene    (z/reductions (act send-fn) @a-scene Δinput)]
-    #?(:cljs
-       (let [options   (dissoc options :recive :send)
-             jseng     (impl/engine options)
-             a-jsobj   (atom {})
-             Δdiff   (z/reductions (δscene latest-id) {:scene-graph {}} Δscene)
-             Δjs     (z/reductions (update-js! jseng a-jsobj) nil Δdiff)]
-         (impl/draw! jseng (z/pipe-to-atom Δjs))))
-    (z/pipe-to-atom Δscene a-scene)
-    (EngineConnection. (fn [args] (put! input args))
+(defn time-chan [fps]
+  (async/map #(TimeEvent. %) [(z/to-chan (time/fps fps))]))
+
+(defn driver-chan [options]
+  #?(:cljs (time-chan (:fps options))
+     :clj  (time-chan (:fps options))))
+
+(defn input-chan [in-ch]
+  (async/map #(InputEvent. %) [in-ch]))
+
+(defn event-chan [input-ch options]
+  (async/merge [(input-chan  input-ch)
+                (driver-chan options)]))
+
+(defn scene-chan [scene-atom input-ch send! options]
+  (let [event-ch (event-chan input-ch options)
+        send!   (:send-fn (:connection options))
+        out     (chan)]
+    (go-loop [state @scene-atom]
+      (let [in         (<! event-ch)
+            next-state (act state in)]
+        (reset! scene-atom next-state)
+        #_(when send! (send! [:client/data in]))
+        (>! out next-state)
+        (recur next-state)))
+    out))
+
+#?(:cljs
+  (defn update-js-loop [eng scene-ch]
+    (let [js-scene-atom (atom nil)
+          update  (update-js! eng js-scene-atom)
+          diffn   (δscene latest-id)
+          diff-ch (chan)
+          diff    (go-loop [last-scene {:scene-graph {}}]
+                    (let [next-scene (<! scene-ch)
+                          next-diff  (diffn last-scene next-scene)]
+                      (>! diff-ch next-diff)
+                      (recur next-diff)))]
+      (go-loop [js-obj-graph {}]
+        (let [next-diff (<! diff-ch)
+              next-js-graph (update js-obj-graph next-diff)]
+          (reset! js-scene-atom next-js-graph)
+          (recur next-js-graph)))
+      js-scene-atom)))
+
+#?(:cljs
+   (defn js-eng [scene-ch options]
+     (let [eng (impl/engine options)]
+       (impl/draw! eng (update-js-loop eng scene-ch))))
+   :clj
+   (defn physics-eng [scene-chan] nil))
+
+(defn engine [scene-atom & {:as options}]
+  (let [{:keys [ajax-post-fn ajax-get-or-ws-handshake-fn
+                send-fn]} (:connection options)
+        input-ch   (chan)
+        scene-ch   (scene-chan scene-atom input-ch send-fn options)]
+    #?(:cljs (js-eng scene-ch options)
+       :clj  (physics-eng scene-ch))
+    (EngineConnection. (fn [args] (put! input-ch args))
                        ajax-get-or-ws-handshake-fn
                        ajax-post-fn)))
 
