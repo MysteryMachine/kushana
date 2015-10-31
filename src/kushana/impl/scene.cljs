@@ -123,6 +123,7 @@
         (build-inner js-scene' diff'))
       (do
         (doseq [[id args] new]
+          (println diff)
           (->component js-scene a-jsobj id args))
         (doseq [[id args] edit]
           (->component a-jsobj id args))
@@ -130,7 +131,7 @@
           (dispose (get @a-jsobj id)))
         js-scene))))
 
-(defrecord Diff [scene new-scene? new edit delete])
+(defrecord Diff [new-scene? new edit delete])
 
 (defn- e-diff [id old new edit]
   (if-let [change (second (diff old new))]
@@ -138,7 +139,7 @@
     edit))
 
 (defn- δscene [latest-id]
-  (fn [{{osg :scene-graph :as old-scene} :scene} {nsg :scene-graph :as new-scene}]
+  (fn [{osg :scene-graph :as old-scene} {nsg :scene-graph :as new-scene}]
    (let [i-f  (latest-id)
          new? (not= (:id old-scene) (:id new-scene))]
      (loop [i 0
@@ -149,7 +150,7 @@
          (let [new'  (persistent! new)
                edit' (persistent! edit)
                del'  (persistent! del)]
-           (Diff. new-scene new? new' edit' del'))
+           (Diff. new? new' edit' del'))
          (let [i'      (inc i)
                new-obj (get nsg i)
                old-obj (get osg i)

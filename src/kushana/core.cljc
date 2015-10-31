@@ -14,10 +14,9 @@
 
 (defrecord Scene [id scene-graph update-fn options])
 (defrecord EngineConnection [input get post])
-(defrecord TimeEvent   [event])
-(defrecord InputEvent  [event])
-(defrecord ClientEvent [event])
-(defrecord ServerEvent [event])
+(defrecord TimeEvent    [tick])
+(defrecord InputEvent   [input])
+(defrecord NetworkEvent [event])
 
 ;; Ids
 (defonce id-fns
@@ -53,11 +52,11 @@
 
 (defn- get-event [{[_ [_ args]] :event}] args)
 
-(defn- act [{:keys [update-fn] :as scene} input]
-  (case (type input)
-    TimeEvent   (update-fn scene input)
-    InputEvent  (update-fn scene input)
-    SocketEvent (:event input)
+(defn- act [{:keys [update-fn] :as scene} event]
+  (condp = (type event)
+    TimeEvent    (update-fn scene event)
+    InputEvent   (update-fn scene event)
+    NetworkEvent #?(:cljs (:event event) :clj scene)
     scene))
 
 (defn time-chan [fps]
@@ -89,15 +88,16 @@
 
 #?(:cljs
   (defn update-js-loop [eng scene-ch]
-    (let [js-scene-atom (atom nil)
-          update  (update-js! eng js-scene-atom)
+    (let [js-obj-atom (atom {})
+          js-scene-atom (atom nil)
+          update  (update-js! eng js-obj-atom)
           diffn   (δscene latest-id)
           diff-ch (chan)
           diff    (go-loop [last-scene {:scene-graph {}}]
                     (let [next-scene (<! scene-ch)
                           next-diff  (diffn last-scene next-scene)]
                       (>! diff-ch next-diff)
-                      (recur next-diff)))]
+                      (recur next-scene)))]
       (go-loop [js-obj-graph {}]
         (let [next-diff (<! diff-ch)
               next-js-graph (update js-obj-graph next-diff)]

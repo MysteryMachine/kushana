@@ -2,10 +2,10 @@
   (:require [kushana.core
              :refer [connect! engine with-ids ->name new-id v3 c3 sin cos]]
 						[kushana.middleware :as m]
-            #?(:clj  [kushana.macros :refer [defscene defmiddleware]]
+            #?(:clj  [kushana.macros :refer [defscene defhandler defticker]]
                :cljs [reagent.core :as r])) 
   #?(:cljs
-     (:require-macros [kushana.macros :refer [defscene defmiddleware]])))
+     (:require-macros [kushana.macros :refer [defscene defhandler defticker]])))
 
 #?(:cljs (enable-console-print!))
 
@@ -78,7 +78,8 @@
         (three-in-row :o board) (assoc board :winner :o)
         :else (assoc board :winner nil)))
 
-(defmiddleware handle-win [scene _]
+(defhandler handle-win
+  [scene event]
   (let [[id board] (->name scene "state")
         board      (decide-winner board)
         winner     (:winner board)]
@@ -87,9 +88,9 @@
           (color-board winner))
       scene)))
 
-(defmiddleware handle-input [scene inputs]
-  (let [event (:event inputs)
-        [id board]    (->name (:scene-graph scene) "state")
+(defhandler handle-input
+  [scene event]
+  (let [[id board]    (->name (:scene-graph scene) "state")
         [x z :as pos] (or ((:turn board) event) [-1 -1])]
     (if (and
          (not (:winner board))
@@ -98,7 +99,8 @@
       (take-turn id scene pos)
       scene)))
 
-(defmiddleware counter [{sg :scene-graph :as scene} inputs]
+(defticker counter
+  [{sg :scene-graph :as scene} dt]
   (let [[id _] (->name sg "counter")]
     (update-in scene [:scene-graph id #?(:cljs :client :clj :server)] inc)))
 
