@@ -81,7 +81,17 @@
       (let [in         (<! event-ch)
             next-state (act state in)]
         (reset! scene-atom next-state)
-        #_(when send! (send! [:client/data in]))
+        #?(:cljs
+           (when send!
+             (let [input   (:input in)
+                   cleaned (dissoc input
+                                   :debug/input
+                                   :debug/ping
+                                   :debug/overview
+                                   :reload/logic
+                                   :reload/merge
+                                   :reload/scene)]
+               (send! [:client/data cleaned]))))
         (>! out next-state)
         (recur next-state)))
     out))
