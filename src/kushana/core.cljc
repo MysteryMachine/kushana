@@ -97,28 +97,33 @@
     out))
 
 #?(:cljs
-  (defn update-js-loop [eng scene-ch]
-    (let [js-obj-atom (atom {})
-          js-scene-atom (atom nil)
-          update  (update-js! eng js-obj-atom)
-          diffn   (δscene latest-id)
-          diff-ch (chan)
-          diff    (go-loop [last-scene {:scene-graph {}}]
-                    (let [next-scene (<! scene-ch)
-                          next-diff  (diffn last-scene next-scene)]
-                      (>! diff-ch next-diff)
-                      (recur next-scene)))]
-      (go-loop [js-obj-graph {}]
-        (let [next-diff (<! diff-ch)
-              next-js-graph (update js-obj-graph next-diff)]
-          (reset! js-scene-atom next-js-graph)
-          (recur next-js-graph)))
-      js-scene-atom)))
+   (defn diff-loop [scene-ch]
+     (let [diffn   (δscene latest-id)
+           diff-ch (chan)]
+       (go-loop [last-scene {:scene-graph {}}]
+         (let [next-scene (<! scene-ch)
+               next-diff  (diffn last-scene next-scene)]
+           (>! diff-ch next-diff)
+           (recur next-scene)))
+       diff-ch)))
+
+#?(:cljs
+   (defn update-js-loop [eng diff-ch]
+     (let [js-obj-atom   (atom {})
+           js-scene-atom (atom nil)
+           update        (update-js! eng js-obj-atom)]
+       (go-loop [js-obj-graph {}]
+         (let [next-diff (<! diff-ch)
+               next-js-graph (update js-obj-graph next-diff)]
+           (reset! js-scene-atom next-js-graph)
+           (recur next-js-graph)))
+       js-scene-atom)))
 
 #?(:cljs
    (defn js-eng [scene-ch options]
-     (let [eng (impl/engine options)]
-       (impl/draw! eng (update-js-loop eng scene-ch))))
+     (let [eng     (impl/engine options)
+           diff-ch (diff-loop scene-ch)]
+       (impl/draw! eng (update-js-loop eng diff-ch))))
    :clj
    (defn physics-eng [scene-chan] nil))
 
