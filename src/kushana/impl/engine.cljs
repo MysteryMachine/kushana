@@ -1,5 +1,8 @@
 (ns kushana.impl.engine
-  (:require cljsjs.babylon))
+  (:require cljsjs.babylon
+            [kushana.impl.scene :refer [update-js!]]
+            [cljs.core.async :refer [<! >! put! chan] :as async])
+  (:require-macros [cljs.core.async.macros :refer [go-loop]]))
 (def b js/BABYLON)
 
 (defn get-canvas [name] (.getElementById js/document name))
@@ -17,9 +20,22 @@
         opts (dissoc options :antialias :canvas)]
     (engine-options! eng opts)))
 
-(defn draw! [game-engine js-atom]
-  (.runRenderLoop
-   game-engine
-   (fn []
-     (when-let [scene @js-atom]
-       (.render scene)))))
+(defn update-js-loop [eng diff-ch]
+  (let [js-obj-atom   (atom {})
+        js-scene-atom (atom nil)
+        update        (update-js! eng js-obj-atom)]
+    (go-loop [js-obj-graph {}]
+      (enable-console-print!)
+      (let [next-diff (<! diff-ch)
+            next-js-graph (update js-obj-graph next-diff)]
+        (reset! js-scene-atom next-js-graph)
+        (recur next-js-graph)))
+    js-scene-atom))
+
+(defn draw! [game-engine diff-ch]
+  (let [js-atom (update-js-loop game-engine diff-ch)]
+    (.runRenderLoop
+     game-engine
+     (fn []
+       (when-let [scene @js-atom]
+         (.render scene))))))

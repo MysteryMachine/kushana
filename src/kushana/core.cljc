@@ -1,10 +1,10 @@
 (ns kushana.core
-  (:require [jamesmacaulay.zelkova.signal :as z]
+  (:require [clojure.data :refer [diff]]
+            [jamesmacaulay.zelkova.signal :as z]
             [jamesmacaulay.zelkova.time :as time]
             [taoensso.sente :as sente]
          #?@(:cljs
              [[kushana.impl.engine :as impl]
-              [kushana.impl.scene :refer [update-js! δscene]]
               [cljs.core.async :refer [<! >! put! chan] :as async]]
              :clj
              [[taoensso.sente.server-adapters.http-kit
@@ -52,11 +52,15 @@
 
 (defn- get-event [{[_ [_ args]] :event}] args)
 
+(defn test-network [scene event]
+  scene)
+
 (defn- act [{:keys [update-fn] :as scene} event]
   (condp = (type event)
     TimeEvent    (update-fn scene event)
     InputEvent   (update-fn scene event)
-    NetworkEvent #?(:cljs (:event event) :clj scene)
+    NetworkEvent #?(:cljs (:event event)
+                    :clj  (test-network scene event))
     scene))
 
 (defn time-chan [fps]
@@ -73,67 +77,79 @@
   (async/merge [(input-chan  input-ch)
                 (driver-chan options)]))
 
+(defn send-with! [send! input]
+  (when send!
+    (let [cleaned (dissoc input
+                          :debug/input
+                          :debug/ping
+                          :debug/overview
+                          :reload/logic
+                          :reload/merge
+                          :reload/scene)]
+      (send! [:client/data cleaned]))))
+
 (defn scene-chan [scene-atom input-ch send! options]
   (let [event-ch (event-chan input-ch options)
-        send!   (:send-fn (:connection options))
-        out     (chan)]
+        send!    (:send-fn (:connection options))
+        out      (chan)]
     (go-loop [state @scene-atom]
       (let [in         (<! event-ch)
             next-state (act state in)]
         (reset! scene-atom next-state)
-        #?(:cljs
-           (when send!
-             (let [input   (:input in)
-                   cleaned (dissoc input
-                                   :debug/input
-                                   :debug/ping
-                                   :debug/overview
-                                   :reload/logic
-                                   :reload/merge
-                                   :reload/scene)]
-               (send! [:client/data cleaned]))))
+        (send-with! send! (:input in))
         (>! out next-state)
         (recur next-state)))
     out))
 
-#?(:cljs
-   (defn diff-loop [scene-ch]
-     (let [diffn   (δscene latest-id)
-           diff-ch (chan)]
-       (go-loop [last-scene {:scene-graph {}}]
-         (let [next-scene (<! scene-ch)
-               next-diff  (diffn last-scene next-scene)]
-           (>! diff-ch next-diff)
-           (recur next-scene)))
-       diff-ch)))
+(defn- e-diff [id old new edit]
+  (if-let [change (second (diff old new))]
+    (conj! edit [id change])
+    edit))
 
-#?(:cljs
-   (defn update-js-loop [eng diff-ch]
-     (let [js-obj-atom   (atom {})
-           js-scene-atom (atom nil)
-           update        (update-js! eng js-obj-atom)]
-       (go-loop [js-obj-graph {}]
-         (let [next-diff (<! diff-ch)
-               next-js-graph (update js-obj-graph next-diff)]
-           (reset! js-scene-atom next-js-graph)
-           (recur next-js-graph)))
-       js-scene-atom)))
+(defrecord Diff [new-scene? new edit delete])
+(defn- δscene [latest-id]
+  (fn [{osg :scene-graph :as old-scene} {nsg :scene-graph :as new-scene}]
+   (let [i-f  (latest-id)
+         new? (not= (:id old-scene) (:id new-scene))]
+     (loop [i 0
+            new  (transient [])
+            edit (transient [])
+            del  (transient [])]
+       (if (> i i-f)
+         (let [new'  (persistent! new)
+               edit' (persistent! edit)
+               del'  (persistent! del)]
+           (Diff. new? new' edit' del'))
+         (let [i'      (inc i)
+               new-obj (get nsg i)
+               old-obj (get osg i)
+               old?    (:scene/component old-obj)
+               new?    (:scene/component new-obj)
+               edit?   (and old? new?)]
+           (cond
+             edit? (recur i' new (e-diff i old-obj new-obj edit) del)
+             new?  (recur i' (conj! new [i new-obj]) edit del)
+             old?  (recur i' new edit (conj! del i))
+             :else (recur i' new edit del))))))))
 
-#?(:cljs
-   (defn js-eng [scene-ch options]
-     (let [eng     (impl/engine options)
-           diff-ch (diff-loop scene-ch)]
-       (impl/draw! eng (update-js-loop eng diff-ch))))
-   :clj
-   (defn physics-eng [scene-chan] nil))
+(defn diff-loop [scene-ch]
+  (let [diffn   (δscene latest-id)
+        diff-ch (chan)]
+    (go-loop [last-scene {:scene-graph {}}]
+      #?(:cljs (enable-console-print!))
+      (let [next-scene (<! scene-ch)
+            next-diff  (diffn last-scene next-scene)]
+        (>! diff-ch next-diff)
+        (recur next-scene)))
+    diff-ch))
 
 (defn engine [scene-atom & {:as options}]
   (let [{:keys [ajax-post-fn ajax-get-or-ws-handshake-fn
                 send-fn]} (:connection options)
-        input-ch   (chan)
-        scene-ch   (scene-chan scene-atom input-ch send-fn options)]
-    #?(:cljs (js-eng scene-ch options)
-       :clj  (physics-eng scene-ch))
+        input-ch (chan)
+        scene-ch (scene-chan scene-atom input-ch send-fn options)
+        diff-ch  (diff-loop scene-ch)]
+    #?(:cljs (impl/draw! (impl/engine options) diff-ch))
     (EngineConnection. (fn [args] (put! input-ch args))
                        ajax-get-or-ws-handshake-fn
                        ajax-post-fn)))

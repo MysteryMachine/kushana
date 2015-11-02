@@ -3,7 +3,7 @@
              :refer [connect! engine with-ids ->name new-id v3 c3 sin cos]]
 						[kushana.middleware :as m]
             #?(:clj  [kushana.macros :refer [defscene defhandler defticker]]
-               :cljs [reagent.core :as r])) 
+               :cljs [games.tictactoe.ui :refer [render-ui]]))
   #?(:cljs
      (:require-macros [kushana.macros :refer [defscene defhandler defticker]])))
 
@@ -112,6 +112,7 @@
          counter))
 
 (defscene scene
+  #_{}
   (with-ids {}
     {:name "counter" :client 0 :server 0}
     {:turn :x :name "state"}
@@ -139,15 +140,14 @@
   update-fn
   :clearColor (c3 0 1 1))
 
-(defonce scene-atom
-  #?(:clj  (atom scene)
-     :cljs (r/atom scene)))
+(defonce scene-atom (atom scene))
+(defonce connection (connect!))
 
 (defonce engine-connection
   (engine
    scene-atom
    :fps        10
-   :connection (connect!)
+   :connection connection
    #?@(:cljs
        [:canvas     "renderCanvas"
         :antialias  true
@@ -157,45 +157,6 @@
   ((:input engine-connection)
    {:debug/overview false
     :debug/input    false
-    :reload/logic   update-fn}))
+    :reload/scene   scene}))
 
-#?(:cljs (defonce ui-atom (r/atom [0 0])))
-
-#?(:cljs
-(defn ui []
-  (let [[_ scene-state] (->name @scene-atom "state")
-        [x y :as s] @ui-atom
-        turn (:turn scene-state)]
-    [:div {:style
-           {:padding "20px"
-            :margin  "20px"
-            :position "static"
-            :border-color "#929292"
-            :border-width "5px"
-            :border-style "solid"
-            :display "inline-block"}}
-     [:div {:style {:padding-bottom "15px"}}
-      (str "It is currently " turn  "'s turn!")]
-     [:div {:style {:padding-bottom "15px"}}
-      [:div {:style {:display "inline-block" :padding "0 15px 0 0"}} "x"]
-      [:input
-       {:value x
-        :type "number"
-        :on-change
-        (fn [component]
-          (reset! ui-atom [(-> component .-target .-value) y]))}]]
-     [:div {:style {:padding-bottom "15px"}}
-      [:div {:style {:display "inline-block" :padding "0 15px 0 0"}} "y"]
-      [:input
-       {:value y
-        :type "number"
-        :on-change
-        (fn [component]
-          (reset! ui-atom [x (-> component .-target .-value)]))}]]
-     [:div>button
-      {:on-click
-       (fn [] ((:input engine-connection) {turn (map int s)}))}
-      "Take Turn"]])))
-
-#?(:cljs
-(r/render [ui] (.getElementById js/document "app")))
+#?(:cljs (render-ui scene-atom engine-connection))
