@@ -9,7 +9,7 @@
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [environ.core :refer [env]]
             [org.httpkit.server :refer [run-server]]
-            [games.tictactoe :refer [engine-connection]])
+            [games.tictactoe :refer [engine-connection reload]])
   (:gen-class))
 
 (deftemplate page (io/resource "index.html") []

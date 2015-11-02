@@ -1,9 +1,10 @@
 (ns server.dev
-  (:require [environ.core :refer [env]]
+  (:require [games.tictactoe :as game]
+            [environ.core :refer [env]]
             [net.cgrand.enlive-html :refer [set-attr prepend append html]]
             [cemerick.piggieback :as piggieback]
             [weasel.repl.websocket :as weasel]
-            [figwheel-sidecar.auto-builder :as fig-auto]
+            [figwheel-sidecar.repl-api :as ra]
             [figwheel-sidecar.core :as fig]
             [clojurescript-build.auto :as auto]
             [clojure.java.shell :refer [sh]]))
@@ -20,14 +21,12 @@
   (defn cljs-repl [] (piggieback/cljs-repl repl-env)))
 
 (defn start-figwheel []
-  (let [server (fig/start-server { :css-dirs ["resources/public/css"] })
-        config {:builds [{:id "dev"
-                          :source-paths ["src" "env/dev"]
-                          :compiler {:output-to            "resources/public/js/app.js"
-                                     :output-dir           "resources/public/js/out"
-                                     :source-map           true
-                                     :optimizations        :none
-                                     :source-map-timestamp true
-                                     :preamble             ["react/react.min.js"]}}]
-                :figwheel-server server}]
-    (fig-auto/autobuild* config)))
+  (let [config {:figwheel-options {:css-dirs ["resources/public/css"]}
+                :build-ids ["dev"]
+                :all-builds
+                [{:id "dev"
+                  :source-paths ["src" "env/dev"]
+                  :compiler {:output-to            "resources/public/js/app.js"
+                             :output-dir           "resources/public/js/out"
+                             :preamble             ["react/react.min.js"]}}]}]
+    (ra/start-figwheel! config)))

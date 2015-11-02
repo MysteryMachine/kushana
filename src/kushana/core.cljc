@@ -96,7 +96,7 @@
       (let [in         (<! event-ch)
             next-state (act state in)]
         (reset! scene-atom next-state)
-        (send-with! send! (:input in))
+        #_(send-with! send! (:input in))
         (>! out next-state)
         (recur next-state)))
     out))
