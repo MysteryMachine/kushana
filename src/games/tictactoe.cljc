@@ -150,7 +150,6 @@
 (defonce scene-atom (atom scene))
 
 (defn reload [engine-connection]
-  (println "hi")
   ((:input engine-connection)
    {:debug/overview false
     :debug/input    false

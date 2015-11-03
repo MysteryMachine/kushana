@@ -34,11 +34,6 @@
       (recur (assoc! scene-graph (new-id) component) components)
       (persistent! scene-graph))))
 
-;; Scene
-
-(defn scene [scene-graph update-fn & {:as options}]
-  (Scene. (new-id) scene-graph update-fn options))
-
 ;; Engine
 
 (defn connect! []
@@ -52,30 +47,22 @@
 
 (defn- get-event [{[_ [_ args]] :event}] args)
 
-(defn test-network [scene event]
-  scene)
-
 (defn- act [{:keys [update-fn] :as scene} event]
   (condp = (type event)
     TimeEvent    (update-fn scene event)
     InputEvent   (update-fn scene event)
-    NetworkEvent #?(:cljs (:event event)
-                    :clj  (test-network scene event))
     scene))
 
 (defn time-chan [fps]
   (async/map #(TimeEvent. %) [(z/to-chan (time/fps fps))]))
 
-(defn driver-chan [options]
-  #?(:cljs (time-chan (:fps options))
-     :clj  (time-chan (:fps options))))
 
 (defn input-chan [in-ch]
   (async/map #(InputEvent. %) [in-ch]))
 
-(defn event-chan [input-ch options]
-  (async/merge [(input-chan  input-ch)
-                (driver-chan options)]))
+(defn event-chan [input-ch fps]
+  (async/merge [(input-chan input-ch)
+                (time-chan  fps)]))
 
 (defn send-with! [send! input]
   (when send!
@@ -88,15 +75,18 @@
                           :reload/scene)]
       (send! [:client/data cleaned]))))
 
-(defn scene-chan [scene-atom input-ch send! options]
-  (let [event-ch (event-chan input-ch options)
-        send!    (:send-fn (:connection options))
+;; Scene
+
+(defn scene [scene-graph update-fn & {:as options}]
+  (Scene. (new-id) scene-graph update-fn options))
+
+(defn scene-chan [scene-atom input-ch fps]
+  (let [event-ch (event-chan input-ch fps)
         out      (chan)]
     (go-loop [state @scene-atom]
       (let [in         (<! event-ch)
             next-state (act state in)]
         (reset! scene-atom next-state)
-        #_(send-with! send! (:input in))
         (>! out next-state)
         (recur next-state)))
     out))
@@ -132,54 +122,94 @@
              old?  (recur i' new edit (conj! del i))
              :else (recur i' new edit del))))))))
 
-(defn diff-loop [scene-ch]
-  (let [diffn   (δscene latest-id)
-        diff-ch (chan)]
-    (go-loop [last-scene {:scene-graph {}}]
-      #?(:cljs (enable-console-print!))
-      (let [next-scene (<! scene-ch)
-            next-diff  (diffn last-scene next-scene)]
-        (>! diff-ch next-diff)
-        (recur next-scene)))
-    diff-ch))
+(defn diff-loop [scene-atom input-ch options]
+  (if-let [connection (:connection options)]
+    #?(:clj
+       (let [{:keys [ch-recv]} connection
+             log-ch (async/map (fn [a] (println a) a) [ch-recv])
+             merged-ch (async/merge [log-ch input-ch])
+             scene-ch (scene-chan scene-atom merged-ch (:fps options))
+             diffn   (δscene latest-id)
+             diff-ch (chan)]
+         (go-loop [last-scene {:scene-graph {}}]
+           (let [next-scene (<! scene-ch)
+                 next-diff  (diffn last-scene next-scene)]
+             (>! diff-ch next-diff)
+             (recur next-scene)))
+         diff-ch)
+       :cljs
+       (let [{:keys [send-fn connected-uids ch-recv]} connection]
+         (go-loop []
+           (let [in (<! input-ch)]
+             (when (= (type in) InputEvent)
+               (send-fn in))
+             (recur)))
+         ch-recv))
+    #?(:clj (do
+              (go-loop []
+                (let [in (<! input-ch)]
+                  (recur)))
+              (chan))
+       :cljs
+       (let [scene-ch (scene-chan scene-atom input-ch (:fps options))
+             diffn   (δscene latest-id)
+             diff-ch (chan)]
+         (go-loop [last-scene {:scene-graph {}}]
+           (enable-console-print!)
+           (let [next-scene (<! scene-ch)
+                 next-diff  (diffn last-scene next-scene)]
+             (>! diff-ch next-diff)
+             (recur next-scene)))
+         diff-ch))))
+
+;; Engine
 
 (defn engine [scene-atom & {:as options}]
+  (if-not (:fps options) (throw "Please provide an :fps option"))
   (let [{:keys [ajax-post-fn ajax-get-or-ws-handshake-fn
-                send-fn]} (:connection options)
+                send-fn connected-uids]} (:connection options)
         input-ch (chan)
-        scene-ch (scene-chan scene-atom input-ch send-fn options)
-        diff-ch (diff-loop scene-ch)]
-    #?(:clj (go-loop [] (let [a (<! diff-ch)] (recur))))
+        diff-ch (diff-loop scene-atom input-ch options)]
+    #?(:clj  (go-loop []
+               (let [next-diff (<! diff-ch)]
+                 (doseq [uid @connected-uids]
+                   (send-fn uid [:server/tick next-diff]))
+                 (recur))))
     #?(:cljs (impl/draw! (impl/engine options) diff-ch))
+    ;; TODO: maybe have specific frontend and backend
+    ;; impls for this
     (EngineConnection. (fn [args] (put! input-ch args))
                        ajax-get-or-ws-handshake-fn
                        ajax-post-fn)))
 
 ;; Helpers
 
-(defn v3 [x y z] {:x x :y y :z z})
-(defn c3 [r g b] {:r r :g g :b b})
+(defn v3 "Given an x, y, and z, returns a Vector3"
+  [x y z] {:x x :y y :z z})
+(defn c3 "Given an r, g, and b, returns a Color3"
+  [r g b] {:r r :g g :b b})
 
 (defn sin
-  "arity 3: (sin t a b) => a*sin(t/b)
-  arity 1: (sin t) => sin(t)"
+  "arity 3: (sin t a b) => a*sin(t/b)\narity 1: (sin t) => sin(t)"
   ([t a b] (* a #?(:cljs (.sin js/Math (/ t b))
                    :clj  (Math/sin (/ t b))) (/ t b)))
   ([t] (sin t 1 1)))
 
 (defn cos
-  "arity 3: (cos t a b) => a*cos(t/b)
-  arity 1: (cos t) => cos(t)"
+  "arity 3: (cos t a b) => a*cos(t/b)\narity 1: (cos t) => cos(t)"
   ([t a b] (* a #?(:cljs (.cos js/Math (/ t b))
                    :clj  (Math/cos (/ t b)))))
   ([t] (sin t 1 1)))
 
-(defn ->name [scene-* name]
+(defn ->name
+  "Given a (Scene or Scene Graph) and a name, returns the first entity in the scene-* that matches the name, inside a vector with its id, in the form [id entity]"
+  [scene-* name]
   (if (= (type scene-*) Scene)
     (->name (:scene-graph scene-*) name)
     (some (fn [[id {next-name :name} :as obj]]
             (when (= name next-name) obj))
           scene-*)))
 
-(defn overview [scene]
-  (map (fn [[id obj]] [id (:name obj)]) (:scene-graph scene)))
+(defn overview
+  "Given a scene, return a vector that contains all [id name] pairs for all entities in the scene's scene-graph."
+  [scene] (map (fn [[id obj]] [id (:name obj)]) (:scene-graph scene)))
