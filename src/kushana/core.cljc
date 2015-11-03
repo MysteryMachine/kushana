@@ -148,7 +148,8 @@
                 send-fn]} (:connection options)
         input-ch (chan)
         scene-ch (scene-chan scene-atom input-ch send-fn options)
-        diff-ch  (diff-loop scene-ch)]
+        diff-ch (diff-loop scene-ch)]
+    #?(:clj (go-loop [] (let [a (<! diff-ch)] (recur))))
     #?(:cljs (impl/draw! (impl/engine options) diff-ch))
     (EngineConnection. (fn [args] (put! input-ch args))
                        ajax-get-or-ws-handshake-fn

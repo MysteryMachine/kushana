@@ -1,5 +1,6 @@
 (ns server.dev
   (:require [games.tictactoe :as game]
+            [kushana.core :refer [engine]]
             [environ.core :refer [env]]
             [net.cgrand.enlive-html :refer [set-attr prepend append html]]
             [cemerick.piggieback :as piggieback]
@@ -30,3 +31,9 @@
                              :output-dir           "resources/public/js/out"
                              :preamble             ["react/react.min.js"]}}]}]
     (ra/start-figwheel! config)))
+
+(defn start-engine [connection]
+  (engine
+   game/scene-atom
+   :fps        10
+   :connection connection))

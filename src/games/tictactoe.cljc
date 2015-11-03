@@ -148,22 +148,10 @@
   :clearColor (c3 0 1 1))
 
 (defonce scene-atom (atom scene))
-(defonce connection (connect!))
 
-(defonce engine-connection
-  (engine
-   scene-atom
-   :fps        10
-   :connection connection
-   #?@(:cljs
-       [:canvas     "renderCanvas"
-        :antialias  true
-        :resize     true])))
-
-(defn reload []
+(defn reload [engine-connection]
+  (println "hi")
   ((:input engine-connection)
    {:debug/overview false
     :debug/input    false
     :reload/scene   scene}))
-
-#?(:cljs (render-ui scene-atom engine-connection))

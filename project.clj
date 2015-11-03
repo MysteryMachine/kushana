@@ -19,7 +19,8 @@
                  [http-kit "2.1.19"]
                  [jamesmacaulay/zelkova "0.4.0"]
                  [com.taoensso/sente "1.6.0"]
-                 [cljsjs/babylon "2.2.0-0"]]
+                 [cljsjs/babylon "2.2.0-0"]
+                 [ns-tracker "0.3.0"]]
   :plugins [[lein-cljsbuild "1.1.0"]
             [lein-environ "1.0.1"]]
   :min-lein-version "2.5.0"
