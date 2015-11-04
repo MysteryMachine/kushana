@@ -43,7 +43,11 @@
 (defn- event? [data]
   (let [event (:event data)]
     (and (some-> event  first (= :chsk/recv))
-         (some-> event second first (= :server/event)))))
+         (some-> event
+                 second
+                 first
+                 (or (= :server/reset)
+                     (= :server/tick))))))
 
 (defn- get-event-inner [{[_ [_ args]] :event}] args)
 
@@ -180,17 +184,16 @@
         diff-ch (diff-loop scene-atom input-ch options)]
     #?(:clj  (go-loop [old-uids #{}]
                (let [next-diff (<! diff-ch)
-                     curr-uids  (into #{} (:any @connected-uids))
+                     curr-uids  (into #{} (:ws @connected-uids))
                      [new-uids _ uids] (diff curr-uids old-uids)]
                  (doseq [uid uids]
-                   (send-fn uid [:server/tick next-diff]))
-                 (println new-uids)
+                   (send-fn uid [:server/tick (into {} next-diff)]))
                  (when new-uids
-                   (let [fresh (fresh-diff @scene-atom)]
+                   (let [fresh (into {} (fresh-diff @scene-atom))]
                      (doseq [uid new-uids]
-                       (send-fn uid [:server/reset fresh-diff]))))
-                 (recur new-uids))))
-    #?(:cljs (impl/draw! (impl/engine options) diff-ch))
+                       (send-fn uid [:server/reset fresh]))))
+                 (recur curr-uids))))
+    #?(:cljs (impl/draw! diff-ch options))
     ;; TODO: maybe have specific frontend and backend
     ;; impls for this
     (EngineConnection. (fn [args] (put! input-ch args))

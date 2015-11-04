@@ -20,20 +20,24 @@
         opts (dissoc options :antialias :canvas)]
     (engine-options! eng opts)))
 
-(defn update-js-loop [eng diff-ch]
+(defn update-js-loop [eng diff-ch options]
   (let [js-scene-atom (atom nil)
-        update        (update-js! eng js-scene-atom)]
+        ;; TODO: options can come from diffs
+        update        (update-js! eng js-scene-atom options)]
     (go-loop [js-obj-graph {}]
       (enable-console-print!)
       (let [next-diff (<! diff-ch)
+            _ (println next-diff)
             next-js-graph (update js-obj-graph next-diff)]
         (recur next-js-graph)))
     js-scene-atom)) 
 
-(defn draw! [game-engine diff-ch]
-  (let [js-atom (update-js-loop game-engine diff-ch)]
+(defn draw! [diff-ch options]
+  (let [game-engine (engine options)
+        js-atom (update-js-loop game-engine diff-ch)]
     (.runRenderLoop
      game-engine
      (fn []
+       (println "in render" @js-atom)
        (when-let [scene @js-atom]
          (.render scene))))))
