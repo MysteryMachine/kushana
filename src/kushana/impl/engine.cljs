@@ -28,7 +28,7 @@
       (let [next-diff (<! diff-ch)
             next-js-graph (update js-obj-graph next-diff)]
         (recur next-js-graph)))
-    js-scene-atom))
+    js-scene-atom)) 
 
 (defn draw! [game-engine diff-ch]
   (let [js-atom (update-js-loop game-engine diff-ch)]

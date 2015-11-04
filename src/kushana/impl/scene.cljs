@@ -141,8 +141,8 @@
     (if new-scene?
       (let [new-scene (->js-scene jseng scene)]
         (reset! scene-atom new-scene)
-        (build-inner new-scene (assoc diff :new-scene? nil)))
+        (build-inner obj-graph (assoc diff :new-scene? nil)))
       (-> obj-graph
-          (new-reduce  new @scene-atom)
+          (new-reduce  @scene-atom new)
           (edit-reduce edit)
           (del-reduce  delete)))))

@@ -147,7 +147,7 @@
          (go-loop []
            (let [in (<! input-ch)]
              (when (= (type in) InputEvent)
-               (send-fn in))
+               (send-fn [:user/input in]))
              (recur)))
          (async/map get-event [ch-recv])))
     #?(:clj (do
@@ -169,17 +169,27 @@
 
 ;; Engine
 
+(defn- fresh-diff [scene]
+  (Diff. true (into [] (:scene-graph scene)) [] []))
+
 (defn engine [scene-atom & {:as options}]
   (if-not (:fps options) (throw "Please provide an :fps option"))
   (let [{:keys [ajax-post-fn ajax-get-or-ws-handshake-fn
                 send-fn connected-uids]} (:connection options)
         input-ch (chan)
         diff-ch (diff-loop scene-atom input-ch options)]
-    #?(:clj  (go-loop []
-               (let [next-diff (<! diff-ch)]
-                 (doseq [uid @connected-uids]
+    #?(:clj  (go-loop [old-uids #{}]
+               (let [next-diff (<! diff-ch)
+                     curr-uids  (into #{} (:any @connected-uids))
+                     [new-uids _ uids] (diff curr-uids old-uids)]
+                 (doseq [uid uids]
                    (send-fn uid [:server/tick next-diff]))
-                 (recur))))
+                 (println new-uids)
+                 (when new-uids
+                   (let [fresh (fresh-diff @scene-atom)]
+                     (doseq [uid new-uids]
+                       (send-fn uid [:server/reset fresh-diff]))))
+                 (recur new-uids))))
     #?(:cljs (impl/draw! (impl/engine options) diff-ch))
     ;; TODO: maybe have specific frontend and backend
     ;; impls for this
