@@ -43,9 +43,14 @@
 (defn- event? [data]
   (let [event (:event data)]
     (and (some-> event  first (= :chsk/recv))
-         (some-> event second first (= :server-event)))))
+         (some-> event second first (= :server/event)))))
 
-(defn- get-event [{[_ [_ args]] :event}] args)
+(defn- get-event-inner [{[_ [_ args]] :event}] args)
+
+(defn- get-event [data]
+  (if (event? data)
+    (get-event-inner data)
+    {}))
 
 (defn- act [{:keys [update-fn] :as scene} event]
   (condp = (type event)
@@ -126,11 +131,11 @@
   (if-let [connection (:connection options)]
     #?(:clj
        (let [{:keys [ch-recv]} connection
-             log-ch (async/map (fn [a] (println a) a) [ch-recv])
+             log-ch    (async/map (fn [a] (get-event a)) [ch-recv])
              merged-ch (async/merge [log-ch input-ch])
-             scene-ch (scene-chan scene-atom merged-ch (:fps options))
-             diffn   (δscene latest-id)
-             diff-ch (chan)]
+             scene-ch  (scene-chan scene-atom merged-ch (:fps options))
+             diffn     (δscene latest-id)
+             diff-ch   (chan)]
          (go-loop [last-scene {:scene-graph {}}]
            (let [next-scene (<! scene-ch)
                  next-diff  (diffn last-scene next-scene)]
@@ -144,7 +149,7 @@
              (when (= (type in) InputEvent)
                (send-fn in))
              (recur)))
-         ch-recv))
+         (async/map get-event [ch-recv])))
     #?(:clj (do
               (go-loop []
                 (let [in (<! input-ch)]
@@ -152,8 +157,8 @@
               (chan))
        :cljs
        (let [scene-ch (scene-chan scene-atom input-ch (:fps options))
-             diffn   (δscene latest-id)
-             diff-ch (chan)]
+             diffn    (δscene latest-id)
+             diff-ch  (chan)]
          (go-loop [last-scene {:scene-graph {}}]
            (enable-console-print!)
            (let [next-scene (<! scene-ch)

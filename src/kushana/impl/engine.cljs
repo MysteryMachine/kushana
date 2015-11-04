@@ -21,14 +21,12 @@
     (engine-options! eng opts)))
 
 (defn update-js-loop [eng diff-ch]
-  (let [js-obj-atom   (atom {})
-        js-scene-atom (atom nil)
-        update        (update-js! eng js-obj-atom)]
+  (let [js-scene-atom (atom nil)
+        update        (update-js! eng js-scene-atom)]
     (go-loop [js-obj-graph {}]
       (enable-console-print!)
       (let [next-diff (<! diff-ch)
             next-js-graph (update js-obj-graph next-diff)]
-        (reset! js-scene-atom next-js-graph)
         (recur next-js-graph)))
     js-scene-atom))
 

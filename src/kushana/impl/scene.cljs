@@ -56,7 +56,9 @@
                        (apply array (map v3 points))
                        scene))
 
-(defn dispose [obj] (.dispose obj))
+(defn dispose [obj-graph id]
+  (.dispose (get obj-graph id))
+  (dissoc obj-graph id))
 
 (defn attach-control [object [canvas-name arg]]
   (.attachControl object (.getElementById js/document canvas-name) arg))
@@ -105,26 +107,42 @@
 
 (defn ->component
   ([object-graph id {component :scene/component :as args}]
-   (set-options! (@object-graph id) args))
+   (set-options! (get object-graph id) args))
   ([js-scene object-graph id {component :scene/component :as args}]
    (let [obj (-> (component engine-map)
                  (apply [js-scene args])
                  (set-options! args))]
-     (swap! object-graph #(assoc % id obj))
-     obj)))
+     (assoc object-graph id obj))))
 
-(defn- update-js! [jseng a-jsobj]
+(defn- new-reduce [obj-graph js-scene new]
+  (reduce
+   (fn [obj-graph [id args]]
+     (->component js-scene obj-graph id args))
+   obj-graph
+   new))
+
+(defn- edit-reduce [obj-graph edit]
+  (reduce
+   (fn [obj-graph [id args]]
+     (->component obj-graph id args))
+   obj-graph
+   edit))
+
+(defn- del-reduce [obj-graph del]
+  (reduce
+   (fn [obj-graph id]
+     (dispose obj-graph id))
+   obj-graph
+   del))
+
+(defn- update-js! [jseng scene-atom]
   (fn build-inner
-    [js-scene {:keys [scene new-scene? new edit delete] :as diff}]
+    [obj-graph {:keys [scene new-scene? new edit delete] :as diff}]
     (if new-scene?
-      (let [js-scene' (->js-scene jseng scene)
-            diff'     (assoc diff :new-scene? nil)]
-        (build-inner js-scene' diff'))
-      (do
-        (doseq [[id args] new]
-          (->component js-scene a-jsobj id args))
-        (doseq [[id args] edit]
-          (->component a-jsobj id args))
-        (doseq [id delete]
-          (dispose (get @a-jsobj id)))
-        js-scene))))
+      (let [new-scene (->js-scene jseng scene)]
+        (reset! scene-atom new-scene)
+        (build-inner new-scene (assoc diff :new-scene? nil)))
+      (-> obj-graph
+          (new-reduce  new @scene-atom)
+          (edit-reduce edit)
+          (del-reduce  delete)))))
