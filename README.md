@@ -7,6 +7,13 @@ prototypes for networked games. It's built on top of [Babylon.js](https://github
 core.async, [Zelkova](https://github.com/jamesmacaulay/zelkova),
 and [Sente](https://github.com/ptaoussanis/sente).
 
+Kushana is largely complete as a proof of concept. Most remaining work exists in
+wrapping the underlying Bablyon.js abstractions, and finding functional ways to
+represent things inside Babylon. As I was mostly intersted in the proof of
+concept (and considering [Arcadia's](https://github.com/arcadia-unity/Arcadia)
+components branch has filled a lot of my functional needs), this work is largely
+considered complete.
+
 ## Motivation
 
 There are very few engines out there built specifically for building art games.

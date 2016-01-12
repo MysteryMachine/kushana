@@ -27,17 +27,15 @@
     (go-loop [js-obj-graph {}]
       (enable-console-print!)
       (let [next-diff (<! diff-ch)
-            _ (println next-diff)
             next-js-graph (update js-obj-graph next-diff)]
         (recur next-js-graph)))
     js-scene-atom)) 
 
 (defn draw! [diff-ch options]
   (let [game-engine (engine options)
-        js-atom (update-js-loop game-engine diff-ch)]
+        js-atom (update-js-loop game-engine diff-ch options)]
     (.runRenderLoop
      game-engine
      (fn []
-       (println "in render" @js-atom)
        (when-let [scene @js-atom]
          (.render scene))))))

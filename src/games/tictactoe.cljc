@@ -112,14 +112,6 @@
          counter))
 
 (defscene scene
-  #_(with-ids {}
-    {:name "counter" :client 0 :server 0}
-    {:turn :x :name "state"}
-    {:scene/component :camera/target
-     :name "camera"
-     :set-target (v3 0 0 0)
-     :position (v3 0 9 0.001)
-     :attach-control ["renderCanvas" true]})
   (with-ids {}
     {:name "counter" :client 0 :server 0}
     {:turn :x :name "state"}

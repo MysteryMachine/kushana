@@ -116,10 +116,8 @@
      (assoc object-graph id obj))))
 
 (defn- new-reduce [obj-graph js-scene new]
-  (println "new reduce" new)
   (reduce
    (fn [obj-graph [id args]]
-     (println "obj graph" id args)
      (->component js-scene obj-graph id args))
    obj-graph
    new))
@@ -132,7 +130,6 @@
    edit))
 
 (defn- del-reduce [obj-graph del]
-  (println "del reduce")
   (reduce
    (fn [obj-graph id]
      (dispose obj-graph id))
@@ -144,11 +141,9 @@
     [obj-graph {:keys [new-scene? new edit delete] :as diff}]
     (if new-scene?
       (let [new-scene (->js-scene jseng options)]
-        (println "new scene" new-scene)
         (reset! scene-atom new-scene)
         (build-inner obj-graph (assoc diff :new-scene? nil)))
-      (do (println "update-js objgraph")
-        (-> obj-graph
-            (new-reduce  @scene-atom (filter #(:scene/component (second %)) new))
-            (edit-reduce (filter #(:scene/component (second %)) edit))
-            (del-reduce  (filter #(:scene/component (second %)) delete)))))))
+      (-> obj-graph
+          (new-reduce  @scene-atom (filter #(:scene/component (second %)) new))
+          (edit-reduce (filter #(:scene/component (second %)) edit))
+          (del-reduce  (filter #(:scene/component (second %)) delete))))))
